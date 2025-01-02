@@ -286,11 +286,12 @@ export default async function Page({params}) {
       </div>
 
 <LearningObjectives/>
+<Dates/>
+
       <Certificate />
       <CourseRecommendations/>
-      <Dates/>
       <div>
-        <h1 className="text-primary font-bold text-2xl px-10 pt-10">Recommended Courses</h1>
+        <h1 className="text-primary font-bold text-xl md:px-10 px-4 pt-10">Recommended Courses</h1>
       <CarasoulCourse data={course_carasoul} carasoul={true}/>
       </div>
     </>

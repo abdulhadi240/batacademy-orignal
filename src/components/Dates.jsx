@@ -31,7 +31,7 @@ const Dates = () => {
   };
 
   return (
-    <><div className="border-[1px] border-dashed mt-10 mb-5 " /><div className=" flex justify-center">
+    <><div className="flex justify-center max-w-[840px] my-6">
 
           <div className="flex md:justify-start justify-center">
               <div className="flex flex-wrap md:justify-start justify-center gap-4 mr-4 mt-6">
