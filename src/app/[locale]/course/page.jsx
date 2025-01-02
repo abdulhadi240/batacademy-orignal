@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { Clock, Monitor } from "lucide-react";
+import { Clock, Monitor , CalendarMinus , MapPinned  , CircleDollarSign } from "lucide-react";
 import HeaderSection from "@/components/HeaderSection";
 import { MdFacebook } from "react-icons/md";
 import { SiGmail } from "react-icons/si";
@@ -34,7 +34,7 @@ export default async function Page({params}) {
               }}
             />
           </div>
-          <div className="container relative h-full flex flex-col justify-center gap-6 text-white">
+          <div className="container relative h-full flex flex-col justify-center  gap-6 text-white">
             <div className="grid sm:grid-cols-[1fr,auto] gap-8 items-start mx-10 ">
               <div className="space-y-5">
                 <h1 className="text-4xl text-center  md:mt-10 md:text-start md:text-4xl lg:text-4xl font-bold">
@@ -48,32 +48,45 @@ export default async function Page({params}) {
                     variant="secondary"
                     className="bg-primary flex justify-center hover:bg-primary/80 text-white"
                   >
-                    Also Available Online
+                    Download Brochure
                   </Button>
                 </div>
               </div>
 
               {/* Course Info Card - Now overlaid on the hero image */}
-              <div className="bg-white shadow-lg rounded-xl p-6 space-y-6 border border-gray-200 w-full   z-50">
-                <h2 className="text-2xl font-bold text-gray-800">
+              <div className="bg-white shadow-lg rounded-xl px-6 py-3 space-y-3 border border-gray-200 w-full z-50">
+                <h2 className="text-lg text-center font-bold text-gray-800">
                   Course Information
                 </h2>
-                <div className="space-y-5">
+                <div className="space-y-2">
                   {/* Course Duration */}
                   <div className="flex items-center gap-4">
-                    <Clock className="h-6 w-6 text-primary flex-shrink-0" />
+                    <Clock className="h-5 w-5 text-primary flex-shrink-0" />
                     <div className="flex justify-between items-center w-full gap-4">
-                      <p className="text-sm text-gray-600">Duration:</p>
-                      <p className="font-medium text-gray-800">7 Days</p>
+                      <p className="text-xs text-gray-600">Duration:</p>
+                      <p className="font-medium text-xs text-gray-800">7 Days</p>
                     </div>
                   </div>
 
                   {/* Course Type */}
                   <div className="flex items-center gap-4">
-                    <Monitor className="h-6 w-6 text-primary flex-shrink-0" />
+                    <CalendarMinus className="h-5 w-5 text-primary flex-shrink-0" />
                     <div className="flex justify-between items-center w-full gap-4">
-                      <p className="text-sm text-gray-600">Mode:</p>
-                      <p className="font-medium text-gray-800">In Classroom</p>
+                      <p className="text-xs text-gray-600">Date</p>
+                      <p className="font-medium text-xs text-gray-800">Jan 06 2025</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <MapPinned className="h-5 w-5 text-primary flex-shrink-0" />
+                    <div className="flex justify-between items-center w-full gap-4">
+                      <p className="text-xs text-gray-600">City</p>
+                      <p className="font-medium text-xs text-gray-800">London</p>
+                    </div>
+                  </div><div className="flex items-center gap-4">
+                    <CircleDollarSign  className="h-5 w-5 text-primary flex-shrink-0" />
+                    <div className="flex justify-between items-center w-full gap-4">
+                      <p className="text-xs text-gray-600">Fees</p>
+                      <p className="font-medium text-xs text-gray-800">$1400</p>
                     </div>
                   </div>
 
@@ -82,7 +95,10 @@ export default async function Page({params}) {
                  
 
                   {/* CTA Button */}
-                  <Button className="w-full bg-primary text-white hover:bg-primary/80 rounded-md py-2 text-lg font-medium">
+                  <Button className="w-full bg-secondary text-white hover:bg-secondary/80 rounded-md py-2 text-sm font-medium">
+                    Get In Touch
+                  </Button>
+                  <Button className="w-full bg-primary text-white hover:bg-primary/80 rounded-md py-2 text-sm font-medium">
                     Register Now
                   </Button>
                 </div>
@@ -269,6 +285,7 @@ export default async function Page({params}) {
         </main>
       </div>
 
+<LearningObjectives/>
       <Certificate />
       <CourseRecommendations/>
       <Dates/>

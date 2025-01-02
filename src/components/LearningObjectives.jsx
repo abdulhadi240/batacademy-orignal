@@ -21,11 +21,11 @@ export default function LearningObjectives() {
   ]
 
   return (
-    <div className="p-6 max-w-[850px] mx-auto border-[1px]">
-      <h2 className="text-3xl font-bold mb-8">What you'll learn</h2>
-      <div className="grid md:grid-cols-2 gap-x-12 gap-y-4">
+    <div className="p-6 max-w-[840px] m-4 border-[1px] rounded-lg">
+      <h2 className="text-xl font-bold mb-8">What you'll learn</h2>
+      <div className="grid md:grid-cols-2 gap-x-10 gap-y-2">
         {objectives.map((column, columnIndex) => (
-          <div key={columnIndex} className="space-y-4">
+          <div key={columnIndex} className="space-y-3">
             {column.map((objective, index) => (
               <div key={index} className="flex items-start gap-3">
                 <Check className="w-5 h-5 text-primary flex-shrink-0" />
