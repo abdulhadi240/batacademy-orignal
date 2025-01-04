@@ -51,7 +51,7 @@ export default function CourseRecommendations() {
         {courses.map((course, index) => (
           <Card key={index} className="p-3">
             <div className="flex gap-3">
-              <div className="w-20 h-20 md:h-28 md:w-28 relative flex-shrink-0">
+              <div className="w-20 h-20 md:h-20 md:w-20 relative flex-shrink-0">
                 <img
                   src={course.image}
                   alt=""
@@ -61,10 +61,10 @@ export default function CourseRecommendations() {
               <div className="flex-grow min-w-0">
                 <div className="flex flex-col md:flex-row justify-between gap-2">
                   <div className="space-y-1 min-w-0">
-                    <h3 className="font-medium text-sm md:text-lg leading-tight line-clamp-2">
+                    <h3 className="font-medium text-xs md:text-sm leading-tight line-clamp-2">
                       {course.title}
                     </h3>
-                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs md:text-sm text-muted-foreground">
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs md:text-xs text-muted-foreground">
                       {course.isBestseller && (
                         <span className="bg-yellow-100 text-yellow-800 px-1.5 py-0.5 rounded text-xs font-medium">
                           Bestseller
@@ -74,7 +74,7 @@ export default function CourseRecommendations() {
                       <span className="hidden md:inline">•</span>
                       <span>Updated {course.lastUpdated}</span>
                     </div>
-                    <div className="flex items-center gap-3 text-xs md:text-sm">
+                    <div className="flex items-center gap-3 text-xs md:text-xs">
                       <div className="flex items-center gap-1">
                         <span className="font-medium">{course.rating}</span>
                         <span className="text-yellow-400">★</span>
@@ -89,7 +89,7 @@ export default function CourseRecommendations() {
                       <Heart className="h-5 w-5" />
                       <span className="sr-only">Add to wishlist</span>
                     </Button>
-                    <span className="font-bold text-base md:text-lg">${course.price}</span>
+                    <span className="font-bold text-base md:text-sm">${course.price}</span>
                   </div>
                 </div>
               </div>

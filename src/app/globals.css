@@ -375,3 +375,9 @@ body {
 .container {
   position: relative; /* Required for the sticky element */
 }
+
+.sticky-card {
+  position: sticky;
+  top: 4rem; /* Adjust based on where you want the card to stop */
+  z-index: 50; /* Ensure the card is on top */
+}
