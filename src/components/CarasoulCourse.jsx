@@ -39,7 +39,7 @@ const CarasoulCourse = ({ data , carasoul}) => {
 
   return (
     <section className="my-2" ref={ref}>
-      <div className="relative overflow-hidden md:p-4">
+      <div className="relative overflow-hidden p-4">
         <div className="mx-auto max-w-6xl">
           <motion.div
             animate={{
