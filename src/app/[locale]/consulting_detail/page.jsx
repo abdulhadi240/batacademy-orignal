@@ -8,7 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Shield, Lock, Server, Database } from 'lucide-react'
+import { Shield, Lock, Server, Database, Plus } from 'lucide-react'
 import HeaderSection from "@/components/HeaderSection"
 import CarasoulCourse from "@/components/CarasoulCourse"
 import fetchData, { GetSpecialization } from "@/actions/server"
@@ -88,9 +88,12 @@ export default async function ConsultingPage() {
         <h2 className="mb-12 text-3xl font-bold text-gray-900">Frequently Asked Questions</h2>
         <Accordion type="single" collapsible className="w-full">
           {faqs.map((faq, index) => (
-            <AccordionItem key={index} value={`item-${index}`} className="border-gray-200">
-              <AccordionTrigger className="text-left text-gray-900 text-xl">
+            <AccordionItem key={index} value={`item-${index}`} className="border-gray-200 group">
+              <AccordionTrigger className="text-left md:text-xl text-gray-900 [&[data-state=open]>div>svg]:rotate-45 [&>svg]:hidden">
                 {faq.question}
+                <div className="relative flex h-6 w-6 items-center justify-center">
+                  <Plus className="h-4 w-4 shrink-0 text-primary transition-transform duration-200" />
+                </div>
               </AccordionTrigger>
               <AccordionContent className="text-gray-600">
                 {faq.answer}

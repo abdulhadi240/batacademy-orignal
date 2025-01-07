@@ -35,7 +35,7 @@ const Dates = () => {
   };
 
   return (
-    <><div className="flex justify-center max-w-[840px] my-6">
+    <><div className="flex justify-center md:max-w-[840px]  my-6">
 
           <div className="flex md:justify-start justify-center">
               <div className="flex flex-wrap md:justify-start justify-center gap-4  mt-6">
@@ -54,7 +54,7 @@ const Dates = () => {
                                       <select
                                           name="place"
                                           id=""
-                                          className="px-2 text-sm max-w-20 md:max-w-32 rounded-md h-9"
+                                          className="px-2 md:text-sm max-w-24 text-xs md:max-w-32 rounded-md h-9 bg-white"
                                           value={selectedCities[index]}
                                           onChange={(e) => handleCityChange(index, e.target.value)}
                                       >

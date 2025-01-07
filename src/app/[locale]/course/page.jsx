@@ -140,10 +140,10 @@ export default async function Page({ params }) {
                     Course Content
                   </TabsTrigger>
                   <TabsTrigger value="date" className="text-base">
-                    Course Date
+                    Dates
                   </TabsTrigger>
                   <TabsTrigger value="cost" className="text-base">
-                    Course Cost
+                    Cost
                   </TabsTrigger>
                 </div>
                 <div className=" md:justify-between hidden md:flex gap-4">

@@ -46,7 +46,7 @@ export default function CourseRecommendations() {
 
   return (
     <div className="p-4 max-w-[870px] my-10">
-      <h2 className="text-lg md:text-xl font-bold mb-4">Students also bought</h2>
+      <h2 className="text-lg md:text-xl font-bold mb-4">Customers also bought</h2>
       <div className="space-y-3">
         {courses.map((course, index) => (
           <Card key={index} className="p-3">
