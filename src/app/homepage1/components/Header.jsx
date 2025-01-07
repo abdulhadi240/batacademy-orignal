@@ -33,14 +33,16 @@ const menus = {
   ],
 };
 
-const Header = ({ locale = "en" }) => {
+const Header = ({locale}) => {
   const currentMenu = menus[locale] || menus["en"]; // Fallback to 'en' if locale is invalid or missing
+  const isArabic = locale === "ar";
+  const languageToggleText = isArabic ? "English" : "العربية";
 
   return (
     <>
       {/* Mobile Navigation */}
       <header className="md:hidden">
-        <MobileMenu color={"white"} locale={locale}/>
+        <MobileMenu color={"white"} locale={locale} languageToggleText={languageToggleText}/>
       </header>
 
       {/* Desktop Navigation */}

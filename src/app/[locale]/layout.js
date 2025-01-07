@@ -2,7 +2,7 @@ import Footer from "@/components/Footer";
 import "./globals.css";
 
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children , params }) {
 
   return (
     <html lang="en">
@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
         className={`antialiased text-black dark:text-white`}
       >
         {children}
-        <Footer/>
+        <Footer params={params.locale}/>
       </body>
     </html>
   );

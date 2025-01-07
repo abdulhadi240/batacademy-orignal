@@ -12,10 +12,10 @@ import {
 import Image from "next/image";
 import HeaderSection from "@/components/HeaderSection";
 
-export default function JobDetailsPage() {
+export default function JobDetailsPage({params}) {
   return (
     <>
-      <HeaderSection />
+      <HeaderSection params={params.locale}/>
       <div className="min-h-screen bg-gray-50">
         {/* Header Section */}
         <div className="bg-white border-b">

@@ -4,8 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaHamburger, FaLock } from "react-icons/fa";
 import { MdMenu } from "react-icons/md";
+import Language from "./Language";
 
-export default function MobileMenu({color , locale}) {
+export default function MobileMenu({ color, locale, languageToggleText }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -20,11 +21,17 @@ export default function MobileMenu({color , locale}) {
           <div>
             <Image src={"/logobat.png"} width={80} height={80} alt="logo" />
           </div>
-          <div
-            className="flex justify-center items-center text-center"
-            onClick={toggleMenu}
-          >
-            <MdMenu size={28} color={color || 'black'}/>
+          <div className="flex items-center gap-4">
+            <div className="px-2 bg-primary text-white rounded-md">
+              {/* Could link to a route toggling locale, or just display the text */}
+              <Language languageToggleText={languageToggleText} />
+            </div>
+            <div
+              className="flex justify-center items-center text-center"
+              onClick={toggleMenu}
+            >
+              <MdMenu size={28} color={color || "black"} />
+            </div>
           </div>
         </div>
       </div>
@@ -98,7 +105,6 @@ export default function MobileMenu({color , locale}) {
               onClick={toggleMenu}
             >
               {""}
-              
             </Link>
             <Link
               href={`${locale}/`}

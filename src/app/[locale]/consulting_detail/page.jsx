@@ -13,14 +13,14 @@ import HeaderSection from "@/components/HeaderSection"
 import CarasoulCourse from "@/components/CarasoulCourse"
 import fetchData, { GetSpecialization } from "@/actions/server"
 
-export default async function ConsultingPage() {
+export default async function ConsultingPage({params}) {
    const course_carasoul = await fetchData(
        `${process.env.BACKEND_URL}/courses`,
        'en'
      );
 
   return (
-    <><HeaderSection /><div className="min-h-screen bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <><HeaderSection params={params.locale}/><div className="min-h-screen bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-24">
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">

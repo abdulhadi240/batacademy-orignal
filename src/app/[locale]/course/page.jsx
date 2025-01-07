@@ -32,7 +32,7 @@ export default async function Page({ params }) {
 
   return (
     <>
-      <HeaderSection />
+      <HeaderSection params={params.locale}/>
       <div className="min-h-screen">
         {/* Hero Section with Course Info */}
         <section className="relative h-[500px] md:h-[300px]">

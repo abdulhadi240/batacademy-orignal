@@ -163,11 +163,11 @@ const Page = async ({ params }) => {
         </div>
       </div>
 
-      <div className="mt-32 overflow-hidden customer">
+      <div className="mt-32 overflow-hidden customer mb-10">
         <SectionTitle title={locale === 'en' ? "Most Of" : "أغلب"} highlight={locale === 'en' ? "Our Customers" : "عملائنا"} />
         <CustomerCarasoul locale={locale} />
       </div>
-    </section><Footer /></>
+    </section></>
   );
 };
 

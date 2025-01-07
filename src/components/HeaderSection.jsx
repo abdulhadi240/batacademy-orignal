@@ -1,10 +1,16 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { menu } from "./Menu";
+
+// Import both English and Arabic menus
+import { menuEn, menuAr } from "./Menu";
 import MobileMenu from "./MobileMenu";
-// Dynamic imports for better performance
+import Language from "./Language";
+
+// Dynamic icon imports
 const FaFacebookF = dynamic(() =>
   import("react-icons/fa").then((mod) => mod.FaFacebookF)
 );
@@ -53,92 +59,114 @@ export const metadata = {
   },
 };
 
-const HeaderSection = () => {
+function HeaderSection({ params }) {
+  // 1) Determine if the current language is Arabic
+  const isArabic = params === "ar";
+  console.log(isArabic);
+  
+
+  // 2) Pick the correct menu
+  const activeMenu = isArabic ? menuAr : menuEn;
+
+  // 3) Localized text
+  const specialRequest = isArabic ? "طلب خاص" : "Special Request";
+  const blog = isArabic ? "مدونة" : "Blog";
+  const faq = isArabic ? "الأسئلة الشائعة" : "FAQ";
+  const login = isArabic ? "تسجيل الدخول" : "Login";
+  const signUp = isArabic ? "تسجيل" : "Sign up";
+  const languageToggleText = isArabic ? "English" : "العربية";
+  // ... Add more translations as needed
+
+  // 4) Optional: set direction to RTL if Arabic
+  const direction = isArabic ? "rtl" : "ltr";
+
   return (
-    <>
-    <header className="md:hidden">
-      <MobileMenu/>
-    </header>
+    <div >
+      {/* Mobile Header */}
+      <header className="md:hidden">
+        <MobileMenu languageToggleText={languageToggleText}/>
+      </header>
+
       <section className="hidden sm:block">
         {/* Top Bar */}
         <div
           className="items-center justify-between hidden p-2 text-white sm:flex sm:flex-row"
           style={{
-            background: "linear-gradient(55deg, rgb(30, 58, 138) 40%, rgb(185, 28, 28) 30%)",
+            background:
+              "linear-gradient(55deg, rgb(30, 58, 138) 40%, rgb(185, 28, 28) 30%)",
           }}
-          
-          
         >
           {/* Social Media & Contact Info */}
           <div className="flex items-center gap-16 text-sm">
             <div className="flex gap-2">
-            <Link
-              href="https://www.facebook.com"
-              target="_blank"
-              aria-label="Facebook"
-              rel="noopener noreferrer"
-            >
-              <FaFacebookF />
-            </Link>
-            <Link
-              href="https://www.instagram.com"
-              target="_blank"
-              aria-label="Instagram"
-              rel="noopener noreferrer"
-            >
-              <FaInstagram />
-            </Link>
-            <Link
-              href="https://www.skype.com"
-              target="_blank"
-              aria-label="Skype"
-              rel="noopener noreferrer"
-            >
-              <FaSkype />
-            </Link>
-            <Link
-              href="https://www.twitter.com"
-              target="_blank"
-              aria-label="Twitter"
-              rel="noopener noreferrer"
-            >
-              <FaTwitter />
-            </Link>
-            <Link
-              href="https://www.youtube.com"
-              target="_blank"
-              aria-label="YouTube"
-              rel="noopener noreferrer"
-            >
-              <FaYoutube />
-            </Link>
+              <Link
+                href="https://www.facebook.com"
+                target="_blank"
+                aria-label="Facebook"
+                rel="noopener noreferrer"
+              >
+                <FaFacebookF />
+              </Link>
+              <Link
+                href="https://www.instagram.com"
+                target="_blank"
+                aria-label="Instagram"
+                rel="noopener noreferrer"
+              >
+                <FaInstagram />
+              </Link>
+              <Link
+                href="https://www.skype.com"
+                target="_blank"
+                aria-label="Skype"
+                rel="noopener noreferrer"
+              >
+                <FaSkype />
+              </Link>
+              <Link
+                href="https://www.twitter.com"
+                target="_blank"
+                aria-label="Twitter"
+                rel="noopener noreferrer"
+              >
+                <FaTwitter />
+              </Link>
+              <Link
+                href="https://www.youtube.com"
+                target="_blank"
+                aria-label="YouTube"
+                rel="noopener noreferrer"
+              >
+                <FaYoutube />
+              </Link>
             </div>
             {/* Contact Info */}
             <div className="flex items-center gap-5 text-sm">
-            <div className="flex items-center gap-2">
-              <FaPhoneAlt />
-              <span>(406) 555-0120</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <FaEnvelope />
-              <span>info@btadacademy.org.uk</span>
-            </div>
+              <div className="flex items-center gap-2">
+                <FaPhoneAlt />
+                <span>(406) 555-0120</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <FaEnvelope />
+                <span>info@btadacademy.org.uk</span>
+              </div>
             </div>
           </div>
 
           {/* Quick Links */}
           <div className="flex items-center gap-2 text-sm">
             <Link href="/special-request" className="hover:underline">
-              Special Request |
+              {specialRequest} |
             </Link>
             <Link href="/Blog/articles" className="hover:underline">
-              Blog |
+              {blog} |
             </Link>
             <Link href="/FAQ" className="hover:underline">
-              FAQ
+              {faq}
             </Link>
-            <div className="px-4 py-2 text-blue-900 bg-white rounded">
-              <span>العربية</span>
+            <div className="border-[1px] border-slate-500">
+              {/* Could link to a route toggling locale, or just display the text */}
+              <Language languageToggleText={languageToggleText} params={params}/>
             </div>
           </div>
         </div>
@@ -147,7 +175,7 @@ const HeaderSection = () => {
         <nav className="flex items-center justify-between p-4 shadow-md bg-gray-50">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href="/">
+            <Link href={isArabic ? "/ar" : "/"}>
               <Image
                 src="/logobat.png"
                 alt="British Academy logo"
@@ -160,7 +188,7 @@ const HeaderSection = () => {
 
           {/* Navigation Links */}
           <div className="hidden space-x-6 sm:flex sm:gap-4">
-            {menu.map((item, index) => (
+            {activeMenu.map((item, index) => (
               <Link
                 key={index}
                 href={item.link}
@@ -174,19 +202,23 @@ const HeaderSection = () => {
           {/* Login and Sign Up */}
           <div className="flex items-center space-x-4">
             <Link
-              href="/sign-in"
+              href={isArabic ? "/ar/sign-in" : "/sign-in"}
               className="flex items-center text-gray-500 hover:text-blue-900"
             >
-              <FaLock className="mr-1" /> Login
+              <FaLock className="mr-1" />
+              {login}
             </Link>
-            <Link href={'/sign-in'} className="px-4 py-2 text-white bg-blue-900 rounded hover:bg-blue-700">
-              Sign up
+            <Link
+              href={isArabic ? "/ar/sign-in" : "/sign-in"}
+              className="px-4 py-2 text-white bg-blue-900 rounded hover:bg-blue-700"
+            >
+              {signUp}
             </Link>
           </div>
         </nav>
       </section>
-    </>
+    </div>
   );
-};
+}
 
 export default HeaderSection;

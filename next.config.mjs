@@ -7,6 +7,11 @@ const nextConfig = {
             hostname: 'backendbatd.clinstitute.co.uk',
             port: '',
           },
+          {
+            protocol: 'https',
+            hostname: 'batdacademy.com',
+            port: '',
+          },
         ],
       },
       redirects: async () => {
