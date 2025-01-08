@@ -63,7 +63,6 @@ function HeaderSection({ params }) {
   // 1) Determine if the current language is Arabic
   const isArabic = params === "ar";
   console.log(isArabic);
-  
 
   // 2) Pick the correct menu
   const activeMenu = isArabic ? menuAr : menuEn;
@@ -75,19 +74,19 @@ function HeaderSection({ params }) {
   const login = isArabic ? "تسجيل الدخول" : "Login";
   const signUp = isArabic ? "تسجيل" : "Sign up";
   const languageToggleText = isArabic ? "English" : "العربية";
-  // ... Add more translations as needed
 
   // 4) Optional: set direction to RTL if Arabic
   const direction = isArabic ? "rtl" : "ltr";
 
   return (
-    <div >
+    <div className="mb-32">
       {/* Mobile Header */}
       <header className="md:hidden">
-        <MobileMenu languageToggleText={languageToggleText}/>
+        <MobileMenu languageToggleText={languageToggleText} />
       </header>
 
-      <section className="hidden sm:block">
+      {/* Sticky Header for sm screens and above */}
+      <section className="hidden sm:block fixed w-screen  top-0 z-50">
         {/* Top Bar */}
         <div
           className="items-center justify-between hidden p-2 text-white sm:flex sm:flex-row"
@@ -165,8 +164,7 @@ function HeaderSection({ params }) {
               {faq}
             </Link>
             <div className="border-[1px] border-slate-500">
-              {/* Could link to a route toggling locale, or just display the text */}
-              <Language languageToggleText={languageToggleText} params={params}/>
+              <Language languageToggleText={languageToggleText} params={params} />
             </div>
           </div>
         </div>

@@ -15,7 +15,7 @@ export default function MobileMenu({ color, locale, languageToggleText }) {
 
   return (
     <div>
-      <div className="py-4 mx-4 md:hidden">
+      <div className="py-4 md:hidden fixed top-0 z-50 w-screen bg-white">
         {/* Menu Button */}
         <div className="flex justify-between mx-2">
           <div>

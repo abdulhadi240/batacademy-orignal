@@ -12,6 +12,11 @@ const nextConfig = {
             hostname: 'batdacademy.com',
             port: '',
           },
+          {
+            protocol: 'https',
+            hostname: 'img.freepik.com',
+            port: '',
+          },
         ],
       },
       redirects: async () => {
