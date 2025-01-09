@@ -79,7 +79,7 @@ function HeaderSection({ params }) {
   const direction = isArabic ? "rtl" : "ltr";
 
   return (
-    <div className="mb-32">
+    <div className="md:mb-28 mb-16">
       {/* Mobile Header */}
       <header className="md:hidden">
         <MobileMenu languageToggleText={languageToggleText} />

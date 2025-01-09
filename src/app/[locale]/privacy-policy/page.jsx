@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { cn } from "@/lib/utils"
 import HeaderSection from '@/components/HeaderSection'
+import Banner from '@/components/Banner'
 
 const sections = [
     {
@@ -265,14 +266,17 @@ export default function PrivacyPolicy({params}) {
   }
 
   return (
-    <><HeaderSection params={params.locale} /><div className="flex min-h-screen flex-col lg:flex-row">
+    <><HeaderSection params={params.locale} />
+        <Banner customerServiceHeading={'Privacy Policy'}/>
+
+    <div className="flex min-h-screen flex-col lg:flex-row">
           <nav className="lg:w-64 lg:min-h-screen border-r mt-2 bg-background">
               <div className="sticky top-0 p-4 lg:p-6 mt-2">
                   <button
                       className="lg:hidden mb-4 p-2 bg-accent rounded"
                       onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                   >
-                      {isMobileMenuOpen ? 'Close Menu' : 'Open Menu'}
+                      {isMobileMenuOpen ? 'Hide Filter' : 'Show Filter'}
                   </button>
                   <div className={cn("space-y-1", isMobileMenuOpen ? "block" : "hidden lg:block")}>
                       {sections.map((section) => (

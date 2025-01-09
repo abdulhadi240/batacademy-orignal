@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import HeaderSection from '@/components/HeaderSection'
+import Banner from '@/components/Banner'
 
 const teamMembers = [
   { name: 'John Doe', role: 'Principal', image: '/placeholder.svg?height=200&width=200', bio: 'Dr. John Doe has over 20 years of experience in education leadership. He holds a Ph.D. in Educational Administration and is committed to fostering a culture of excellence and innovation.' },
@@ -15,7 +16,9 @@ const teamMembers = [
 
 export default function TeamStaff({params}) {
   return (
-    <><HeaderSection params={params.locale} /><div className="container mx-auto px-2 sm:px-4 py-6 sm:py-8">
+    <><HeaderSection params={params.locale} />
+        <Banner customerServiceHeading={'Team'}/>
+        <div className="container mx-auto px-2 sm:px-4 py-6 sm:py-8">
           <h1 className="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8">Our Team Staff</h1>
 
           <Tabs defaultValue="all" className="mb-6 sm:mb-8">

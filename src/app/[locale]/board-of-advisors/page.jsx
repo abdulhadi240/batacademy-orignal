@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import HeaderSection from "@/components/HeaderSection";
+import Banner from "@/components/Banner";
 
 const advisers = [
   {
@@ -58,11 +59,10 @@ export default function BoardOfAdvisers({ params }) {
   return (
     <>
       <HeaderSection params={params.locale} />
-      <div className="container mx-auto px-2 sm:px-4 py-6 sm:py-8">
-        <h1 className="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8">
-          Board of Advisors
-        </h1>
+      <Banner customerServiceHeading={'Board Of Advisor'}/>
 
+      <div className="container mx-auto px-2 sm:px-4 py-6 sm:py-8">
+        
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
           {advisers.map((adviser, index) => (
             <Card key={index} className="flex flex-col h-full">

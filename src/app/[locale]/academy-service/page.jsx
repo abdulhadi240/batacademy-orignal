@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import HeaderSection from '@/components/HeaderSection'
+import Banner from '@/components/Banner'
 
 const services = [
   {
@@ -69,12 +70,10 @@ const services = [
 
 export default function AcademyService({params}) {
   return (
-    <><HeaderSection params={params.locale}/><div className="container mx-auto px-4 py-8">
-          <h1 className="text-4xl font-bold text-center mb-8">Academy Services</h1>
-
-          <p className="text-xl text-center mb-12 max-w-3xl mx-auto">
-              At Education Academy, we offer a comprehensive range of services designed to nurture academic excellence, personal growth, and future success. Explore our offerings below to see how we can support your educational journey.
-          </p>
+    <><HeaderSection params={params.locale}/>
+    <Banner customerServiceHeading={'Academy Services'}/>
+    <div className="container mx-auto px-4 py-8">
+          
 
           <Tabs defaultValue="all" className="mb-12">
               <TabsList className="grid w-full grid-cols-3 mb-8">

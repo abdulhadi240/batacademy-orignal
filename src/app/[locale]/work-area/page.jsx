@@ -1,3 +1,4 @@
+import Banner from '@/components/Banner'
 import HeaderSection from '@/components/HeaderSection'
 import Image from 'next/image'
 
@@ -12,7 +13,9 @@ const workAreas = [
 
 export default function WorkArea({params}) {
   return (
-    <><HeaderSection params={params.locale} /><div className="container mx-auto px-4 py-12">
+    <><HeaderSection params={params.locale} />
+        <Banner customerServiceHeading={'Work Area'}/>
+        <div className="container mx-auto px-4 py-12">
           <h1 className="text-4xl font-bold text-center mb-12">Our Work Areas</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {workAreas.map((area, index) => (
