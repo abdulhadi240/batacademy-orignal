@@ -1,10 +1,11 @@
 "use client";
 
-import Courses_Card from '@/app/account/components/Courses_Card';
-import Content_extend from '@/app/course_detail/components/Content_extend';
+import Courses_List from './Courses_List';
+
 import Image from 'next/image';
 import { useSearchParams, useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
+import Content_extend from './Content_extend';
 
 const Programs = ({ SpecializationCategory, params, data, category, city, specialization }) => {
   const searchParams = useSearchParams();
@@ -231,11 +232,9 @@ const Programs = ({ SpecializationCategory, params, data, category, city, specia
           </div>
         </div>
       </div>
-      <Content_extend categories={SpecializationCategory.data} params={slug}>
-        <div className="grid grid-cols-1 gap-4 mt-3 sm:grid-cols-2 md:grid-cols-3 ">
-          {filteredCourses?.map((course) => (
-            <Courses_Card data={course} params={params} key={course.id} />
-          ))}
+      <Content_extend categories={SpecializationCategory?.data}>
+        <div className="px-5 mt-4">
+        <Courses_List/>
         </div>
         <div className="flex flex-col gap-2 mt-10">
           <h1 className="flex items-center justify-center p-1 text-2xl font-bold text-center md:p-0">

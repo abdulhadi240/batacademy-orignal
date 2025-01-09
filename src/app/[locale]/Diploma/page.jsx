@@ -1,31 +1,19 @@
-"use client";
-
-import React from 'react';
-
-import Sarch from '@/commme/sarch/sarch';
-import Diplomacatagery from '@/commme/cardcetagery/Diplomacetogory/page';
-import Diplomacard from '@/commme/diplomacard/page';
+import fetchData from '@/actions/server';
 import HeaderSection from '@/components/HeaderSection';
+import Programs from '@/components/Programs'
+import React from 'react'
 
-const Diplomacourse = () => {
+const page = async ({params}) => {
+  const category_special = await fetchData(`${process.env.BACKEND_URL}/specializations_categories`,`${params.locale}`);
+  console.log(category_special);
+  
   return (
-    <div className='bg-gray-200'>
-      <HeaderSection />
-      <div className='flex flex-col md:flex-row'>
-        <div className='rounded md:w-1/4 hidden md:block'>
-          <Diplomacatagery />
-        </div>
-        <div className='bg-gray-200 md:w-3/4'>
-          <div className='bg-white mt-4 rounded mx-4 md:mx-6 mb-2 p-4'>
-            <Sarch />
-          </div>
-          <div className='bg-white mt-4 rounded mx-4 md:mx-6 mb-2 p-4'>
-            <Diplomacard />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+    <div>
+      <HeaderSection params={params.locale}/>
+      <Programs params={null} data={null} city={null} specialization={null} SpecializationCategory={category_special} category={null}/>
 
-export default Diplomacourse;
+    </div>
+  )
+}
+
+export default page
