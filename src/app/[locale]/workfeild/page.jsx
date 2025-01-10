@@ -14,8 +14,7 @@ export default function Workfield({params}) {
   return (
     <><HeaderSection params={params.locale} />
         <Banner customerServiceHeading={'Work Feild'}/>
-        <div className="container mx-auto px-4 py-12">
-          <h1 className="text-4xl font-bold text-center mb-12">Our Workfields</h1>
+        <div className="container mx-auto px-4 py-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {workfields.map((field, index) => (
                   <div key={index} className="bg-white rounded-lg shadow-lg p-6 border-l-4 border-primary">

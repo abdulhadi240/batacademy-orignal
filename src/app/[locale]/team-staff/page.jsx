@@ -19,8 +19,7 @@ export default function TeamStaff({params}) {
   return (
     <><HeaderSection params={params.locale} />
         <Banner customerServiceHeading={'Team'}/>
-        <div className="container mx-auto px-2 sm:px-4 py-6 sm:py-8">
-          <h1 className="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8">Our Team Staff</h1>
+        <div className="container mx-auto px-2 sm:px-4 py-6 sm:py-4">
 
           <Tabs defaultValue="all" className="mb-6 sm:mb-8">
               <TabsList className="grid w-full grid-cols-3">

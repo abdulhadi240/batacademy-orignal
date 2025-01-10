@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import HeaderSection from "@/components/HeaderSection";
+import Link from "next/link";
 
 export default function JobDetailsPage({params}) {
   return (
@@ -29,9 +30,9 @@ export default function JobDetailsPage({params}) {
                   height={80}
                   className="rounded-lg border p-2"
                 />
-                <Button size="lg" className="md:hidden text-white">
+                <Link href={`/${params.locale}/apply?type=job`} size="lg" className="md:hidden text-white bg-primary p-2">
                   Apply Now
-                </Button>
+                </Link>
               </div>
               <div className="flex-grow">
                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-2">
