@@ -106,7 +106,7 @@ const Page = async ({ params }) => {
       </div>
 
       {/* Training Section */}
-      <div className="hidden mt-32 sm:block">
+      <div className="mt-32 block">
         <SectionTitle title={locale === 'en' ? "British Academy" : "الأكاديمية البريطانية"} highlight={locale === 'en' ? "For Training" : "للتدريب"} />
         <Training locale={locale} />
       </div>
@@ -124,7 +124,7 @@ const Page = async ({ params }) => {
       </div>
 
       {/* Team Section */}
-      <div className="mt-32 team">
+      <div className="mt-10 md:mt-32 team">
         <SectionTitle title={locale === 'en' ? "Team" : "الفريق"} highlight={locale === 'en' ? "Work" : "العمل"} />
         <div className="flex justify-center">
           <div className="grid grid-cols-2 gap-4 mt-10 overflow-hidden sm:grid-cols-3">
@@ -163,7 +163,7 @@ const Page = async ({ params }) => {
         </div>
       </div>
 
-      <div className="mt-32 overflow-hidden customer mb-10">
+      <div className="mt-10 md:mt-32 overflow-hidden customer mb-10">
         <SectionTitle title={locale === 'en' ? "Most Of" : "أغلب"} highlight={locale === 'en' ? "Our Customers" : "عملائنا"} />
         <CustomerCarasoul locale={locale} />
       </div>

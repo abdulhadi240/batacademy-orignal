@@ -1,225 +1,129 @@
 'use client';
-import Image from 'next/image';
-import React, { useState } from 'react';
-const tabsData = {
-  en: [
+
+import React, { useState, useEffect } from 'react';
+
+const publicationsData = {
+  blog: [
     {
-      id: 'videos',
-      label: 'Videos',
-      title: 'What Is Marketing?',
-      description: 'Marketing is one of the most important administrative sciences in all countries and economic fields. Marketing activities have witnessed many notable developments over the years, and the marketing function has become a means of ensuring that businesses achieve career success and sustainability in the business environment.',
-      image: '/g1.webp',
-    },
-    {
-      id: 'careers',
-      label: 'Careers',
-      title: 'Career Opportunities in Marketing',
-      description: 'Marketing is one of the most important administrative sciences in all countries and economic fields. Marketing activities have witnessed many notable developments over the years, and the marketing function has become a means of ensuring that businesses achieve career success and sustainability in the business environment.',
-      image: '/g1.webp',
-    },
-    {
-      id: 'blogs',
-      label: 'Blogs',
-      title: 'Marketing Blogs',
-      description: 'Explore various blogs on marketing strategies, trends, and insights.',
-      image: '/g1.webp',
-    },
-    {
-      id: 'consultancy',
-      label: 'Consultancy',
-      title: 'Marketing Consultancy Services',
-      description: 'Marketing is one of the most important administrative sciences in all countries and economic fields. Marketing activities have witnessed many notable developments over the years, and the marketing function has become a means of ensuring that businesses achieve career success and sustainability in the business environment.',
-      image: '/g1.webp',
-    },
-    {
-      id: 'workwithus',
-      label: 'Work With Us',
-      title: 'Join Our Marketing Team',
-      description: 'Marketing is one of the most important administrative sciences in all countries and economic fields. Marketing activities have witnessed many notable developments over the years, and the marketing function has become a means of ensuring that businesses achieve career success and sustainability in the business environment.',
-      image: '/g1.webp',
+      title: 'Innovation in Business: Importance, Benefits, and Skills',
+      content:
+        'In the contemporary market scenario, which is highly competitive, developing a thoughtful strategy is only part of the challenge. The distinguishing factor is the capacity to assess and modify that strategy over time. Even in the context of achieving set objectives and promoting steady growth, the assessment of business strategies is crucial. Hence, the focus of this article will be on the primary techniques and tools that are used for the efficient evaluation of business strategies. Understanding Business Strategy Evaluation The evaluation of business strategy is the evaluative...',
+      image: '/123.png',
     },
   ],
-  ar: [
+  'academy news': [
     {
-      id: 'videos',
-      label: 'الفيديوهات',
-      title: 'ما هو التسويق؟',
-      description: 'التسويق هو أحد العلوم الإدارية الأكثر أهمية في جميع البلدان والمجالات الاقتصادية. شهدت أنشطة التسويق العديد من التطورات الملحوظة على مر السنين، وأصبح وظيفة التسويق وسيلة لضمان نجاح الأعمال واستدامتها في بيئة العمل.',
-      image: '/g1.webp',
+      title: 'Certified Accounting and Finance Courses in Riyadh',
+      content:
+        'The British Academy for Training is thrilled to bring its prestigious certified accounting and finance courses to Riyadh, one of the Middle East’s thriving business hubs. Through these courses, the British Academy seeks to contribute to the national transformation initiatives...',
+      image: '/123.png',
     },
+  ],
+  advertisement: [
     {
-      id: 'careers',
-      label: 'وظائف',
-      title: 'فرص العمل في التسويق',
-      description: 'التسويق هو أحد العلوم الإدارية الأكثر أهمية في جميع البلدان والمجالات الاقتصادية. شهدت أنشطة التسويق العديد من التطورات الملحوظة على مر السنين، وأصبح وظيفة التسويق وسيلة لضمان نجاح الأعمال واستدامتها في بيئة العمل.',
-      image: '/g1.webp',
+      title: 'Contract Management, Legal Disputes Courses in London',
+      content:
+        'The British Academy for Training is thrilled to bring its prestigious certified accounting and finance courses to Riyadh, one of the Middle East’s thriving business hubs. Through these courses, the British Academy seeks to contribute to the national transformation initiatives...',
+      image: '/123.png',
     },
+  ],
+  careers: [
     {
-      id: 'blogs',
-      label: 'مدونات',
-      title: 'مدونات التسويق',
-      description: 'استكشف مختلف المدونات حول استراتيجيات التسويق والاتجاهات والرؤى.',
-      image: '/g1.webp',
+      title: 'Remote Administrative and Customer Service Job Opportunity',
+      content:
+        'The British Academy for Training is thrilled to bring its prestigious certified accounting and finance courses to Riyadh, one of the Middle East’s thriving business hubs. Through these courses, the British Academy seeks to contribute to the national transformation initiatives... In today\'s digital age, remote work has become an increasingly popular option for companies looking to expand their teams. Among the many roles that are highly suited for remote work is the Administrative and Customer Service position...',
+      image: '/123.png',
     },
+  ],
+  video: [
     {
-      id: 'consultancy',
-      label: 'استشارات',
-      title: 'خدمات استشارات التسويق',
-      description: 'التسويق هو أحد العلوم الإدارية الأكثر أهمية في جميع البلدان والمجالات الاقتصادية. شهدت أنشطة التسويق العديد من التطورات الملحوظة على مر السنين، وأصبح وظيفة التسويق وسيلة لضمان نجاح الأعمال واستدامتها في بيئة العمل.',
-      image: '/g1.webp',
-    },
-    {
-      id: 'workwithus',
-      label: 'اعمل معنا',
-      title: 'انضم إلى فريق التسويق لدينا',
-      description: 'التسويق هو أحد العلوم الإدارية الأكثر أهمية في جميع البلدان والمجالات الاقتصادية. شهدت أنشطة التسويق العديد من التطورات الملحوظة على مر السنين، وأصبح وظيفة التسويق وسيلة لضمان نجاح الأعمال واستدامتها في بيئة العمل.',
-      image: '/g1.webp',
+      video: 'https://www.youtube.com/embed/dQw4w9WgXcQ', // Replace with your actual YouTube video URL
     },
   ],
 };
-const WorkWithUsForm = ({ locale }) => {
-  const [name, setName] = useState('');
-  const [degree, setDegree] = useState('');
-  const [residence, setResidence] = useState('');
-  const [specialization, setSpecialization] = useState('');
-  const [file, setFile] = useState(null);
 
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-  };
+const Publications = () => {
+  const [selectedCategory, setSelectedCategory] = useState('blog');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    const categories = Object.keys(publicationsData);
+    let index = categories.indexOf(selectedCategory);
 
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('degree', degree);
-    formData.append('residence', residence);
-    formData.append('specialization', specialization);
-    if (file) {
-      formData.append('cv', file);
-    }
+    const interval = setInterval(() => {
+      index = (index + 1) % categories.length; // Loop through the sections
+      setSelectedCategory(categories[index]);
+    }, 5000); // Slide every 5 seconds
 
-    console.log('Form submitted with data:', formData);
-  };
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, [selectedCategory]);
 
   return (
-    <div className="container sm:mx-auto sm:p-6">
-      <form onSubmit={handleSubmit} className="w-full bg-white dark:bg-black sm:p-6">
-        <div className="w-full mb-4">
-          <label className="block text-gray-700 dark:text-white" htmlFor="name">
-            {locale === 'ar' ? 'الاسم' : 'Name'}
-          </label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="block w-full p-2 mt-1 border border-gray-300 dark:text-black"
-            required
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 dark:text-white" htmlFor="degree">
-            {locale === 'ar' ? 'أعلى درجة علمية' : 'The highest scientific degree'}
-          </label>
-          <input
-            type="text"
-            id="degree"
-            value={degree}
-            onChange={(e) => setDegree(e.target.value)}
-            className="block w-full p-2 mt-1 border border-gray-300 dark:text-black"
-            required
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 dark:text-white" htmlFor="residence">
-            {locale === 'ar' ? 'مكان الإقامة' : 'Place of residence'}
-          </label>
-          <input
-            type="text"
-            id="residence"
-            value={residence}
-            onChange={(e) => setResidence(e.target.value)}
-            className="block w-full p-2 mt-1 border border-gray-300 dark:text-black"
-            required
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 dark:text-white" htmlFor="specialization">
-            {locale === 'ar' ? 'التخصص' : 'Specialization'}
-          </label>
-          <input
-            type="text"
-            id="specialization"
-            value={specialization}
-            onChange={(e) => setSpecialization(e.target.value)}
-            className="block w-full p-2 mt-1 border border-gray-300 dark:text-black"
-            required
-          />
-        </div>
-
-        <div className="flex justify-between mt-6">
-          <button type="submit" className="bg-[#152765] text-white text-sm font-light py-2 px-4 rounded-lg">
-            {locale === 'ar' ? 'قبول' : 'Accept'}
+    <div className="md:px-32 px-4 mt-4">
+      <div className="flex flex-wrap justify-center gap-4 md:mb-8">
+        {Object.keys(publicationsData).map((category) => (
+          <button
+            key={category}
+            className={`px-4 py-1 text-sm md:text-sm rounded-md ${
+              selectedCategory === category
+                ? 'bg-primary text-white'
+                : 'bg-gray-200 text-gray-700'
+            }`}
+            onClick={() => setSelectedCategory(category)}
+          >
+            {category.toUpperCase()}
           </button>
-          <button type="button" className="bg-[#152765] text-white text-sm font-light py-2 px-4 rounded-lg">
-            {locale === 'ar' ? 'تحميل السيرة الذاتية' : 'Upload CV'}
-          </button>
+        ))}
+      </div>
+      <div className="relative">
+        <div className="overflow-hidden">
+          <div
+            className="flex transition-transform duration-300 mt-10"
+            style={{
+              transform: `translateX(-${
+                Object.keys(publicationsData).indexOf(selectedCategory) * 100
+              }%)`,
+            }}
+          >
+            {Object.entries(publicationsData).map(([category, items]) => (
+              <div key={category} className="flex flex-col min-w-full space-y-6">
+                {items.map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col md:flex-row bg-white  rounded-lg gap-6"
+                  >
+                    {item.image && (
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full md:w-2/5 rounded-md object-cover"
+                      />
+                    )}
+                    {item.video && (
+                      <iframe
+                        src={item.video}
+                        className="w-full md:w-full rounded-md"
+                        height="315"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                    )}
+                    <div className="flex-1">
+                      <h2 className="text-xl font-bold mb-4">{item.title}</h2>
+                      {item.content && (
+                        <p className="text-gray-600 tracking-wider">{item.content}</p>
+                      )}
+                     
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 };
 
-const DynamicTabs = ({ locale }) => {
-  const [activeTab, setActiveTab] = useState('videos');
-
-  const activeContent = tabsData[locale].find((tab) => tab.id === activeTab);
-
-  return (
-    <section className="py-6 overflow-hidden">
-      <div className="container">
-        <nav className="rounded-xl flex justify-center text-center w-auto">
-          <div className="flex justify-center text-center shadow-md p-3 sm:p-3">
-            <div className="flex flex-wrap gap-6 justify-center">
-              {tabsData[locale].map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`py-2 px-6 text-center rounded-lg text-sm ${
-                    activeTab === tab.id ? 'bg-[#B12E33] text-white' : 'bg-[#152765] text-white'
-                  }`}
-                  role="tab"
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </nav>
-
-        {activeContent ? (
-          <div className="p-8 text-gray-900 dark:text-white">
-            <h2 className="text-3xl text-center md:text-start">{activeContent.title}</h2>
-            <div className="flex flex-wrap">
-              <div className="w-full mt-4 sm:w-1/2">
-                <p className="text-lg mt-4 mr-4 ">{activeContent.description}</p>
-              </div>
-              <div className="w-full sm:w-1/2 mt-4 sm:mt-0">
-                <Image src={activeContent.image} alt="Marketing" width={480} height={360} />
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="p-8 text-white">Content not found</div>
-        )}
-      </div>
-    </section>
-  );
-};
-
-export default DynamicTabs;
+export default Publications;
