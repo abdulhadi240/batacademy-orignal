@@ -38,7 +38,7 @@ export default function MobileMenu({ color, locale, languageToggleText, main }) 
                 main
                   ? isScrolled
                     ? "/logobat.webp"
-                    : "/logo.webp"
+                    : "/logos.webp"
                   : "/logobat.webp"
               }
               width={isScrolled ? 60 : 80}
