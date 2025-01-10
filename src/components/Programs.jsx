@@ -101,21 +101,21 @@ const Programs = ({ SpecializationCategory, params, data, category, city, specia
 
   return (
     <div>
-      <div className="relative flex items-center justify-center min-h-screen bg-white">
+      <div className="relative flex items-center justify-center bg-white">
         {/* Background Image */}
-        <div className="absolute inset-0">
+        <div className=" inset-0 h-72 md:h-96">
           <Image
             src="/search_course.webp" // Replace with your image path
             alt="Background"
             layout="fill"
             priority
             objectFit="cover"
-            className="opacity-70"
+            className="opacity-70 "
           />
         </div>
 
         {/* Overlay Content */}
-        <div className="absolute flex items-center justify-center w-full max-w-4xl p-6 rounded-lg">
+        <div className="z-30 flex items-center justify-center w-full max-w-4xl p-6 rounded-lg">
           <div className="flex flex-col justify-center gap-2 text-black bg-transparent">
             {/* Non-functional Search Input */}
             <div className="flex justify-between p-1 bg-white rounded-md md:p-3">

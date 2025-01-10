@@ -1,179 +1,188 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { FaHamburger, FaLock } from "react-icons/fa";
 import { MdMenu } from "react-icons/md";
 import Language from "./Language";
 
-export default function MobileMenu({ color, locale, languageToggleText }) {
+export default function MobileMenu({ color, locale, languageToggleText, main }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div>
-      <div className="py-4 md:hidden fixed top-0 z-50 w-screen bg-white">
-        {/* Menu Button */}
-        <div className="flex justify-between mx-2">
-          <div>
-            <Image src={"/logobat.png"} width={80} height={80} alt="logo" />
+    <div className="mb-16">
+      {/* Top Navigation Bar */}
+      <div
+        className={`${main ? (isScrolled ? "py-4" : "") : "py-2"} md:hidden fixed top-0 z-50 w-screen transition-all duration-300 ${
+          isScrolled ? "bg-white shadow-md" : main ? "bg-transparent" : "bg-white"
+        }`}
+      >
+        <div className="flex justify-between items-center mx-4">
+          {/* Logo */}
+          <div className="transition-all duration-300">
+            <Image
+              src={
+                main
+                  ? isScrolled
+                    ? "/logobat.webp"
+                    : "/logo.webp"
+                  : "/logobat.webp"
+              }
+              width={isScrolled ? 60 : 80}
+              height={isScrolled ? 60 : 80}
+              alt="logo"
+              priority
+            />
           </div>
+          {/* Language Toggle and Menu Icon */}
           <div className="flex items-center gap-4">
             <div className="px-2 bg-primary text-white rounded-md">
-              {/* Could link to a route toggling locale, or just display the text */}
               <Language languageToggleText={languageToggleText} />
             </div>
-            <div
-              className="flex justify-center items-center text-center"
+            <button
               onClick={toggleMenu}
+              aria-label="Toggle menu"
+              className="flex justify-center items-center text-center"
             >
-              <MdMenu size={28} color={color || "black"} />
-            </div>
+              <MdMenu size={28} color={color || (isScrolled ? "black" : "white")} />
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Slide-Out Menu */}
       <div
         className={`fixed top-0 right-0 w-64 bg-white shadow-md h-full z-50 transform ${
           isOpen ? "translate-x-0" : "translate-x-full"
         } transition-transform duration-300 ease-in-out`}
       >
-        <div className="">
-          {/* Logo */}
-
-          <div
-            aria-label="Close menu"
-            onClick={toggleMenu}
-            className="flex justify-end py-2 px-2 bg-[#DEEEFD] w-full text-[#111F51] hover:text-gray-800 "
+        {/* Close Button */}
+        <div
+          aria-label="Close menu"
+          onClick={toggleMenu}
+          className="flex justify-end py-2 px-2 bg-gray-100 text-gray-700 hover:text-gray-900 cursor-pointer"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </div>
-          <div className="bg-[#DEEEFD] p-4">
-            <div className="flex flex-col ">
-              <div className="flex justify-center">
-                <Image
-                  src="/logobat.png" // Optimized image usage
-                  alt="Logo"
-                  width={100}
-                  height={100}
-                  className=""
-                  priority // To load the image faster
-                />
-              </div>
-              <div className="flex justify-between gap-10">
-                <Link
-                  href="/login"
-                  className="flex items-center w-full h-8 px-4 mt-4 text-xs  border-[#111F51] border-[1px] text-[#111F51] rounded hover:bg-blue-700"
-                  onClick={toggleMenu}
-                >
-                  <FaLock className="mr-2 " /> Login
-                </Link>
-                <Link
-                  href="/login"
-                  className="flex items-center w-full h-8 px-4 mt-4 text-xs text-white rounded bg-primary "
-                  onClick={toggleMenu}
-                >
-                  <FaLock className="mr-2 " /> Signup
-                </Link>
-              </div>
-            </div>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </div>
+
+        {/* Slide-Out Menu Content */}
+        <div className="px-4">
+          {/* Logo */}
+          <div className="flex justify-center my-6">
+            <Image
+              src="/logobat.webp"
+              alt="Logo"
+              width={100}
+              height={100}
+              priority
+            />
           </div>
 
-          {/* Menu Links */}
-          <nav className="mt-8 space-y-4 text-sm space-x-7">
+          {/* Login/Signup Buttons */}
+          <div className="flex justify-around mb-6">
             <Link
-              href="/"
-              passHref
-              className="block text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              href="/login"
+              className="flex items-center px-4 py-2 border border-gray-300 text-gray-700 text-sm rounded hover:bg-gray-200"
               onClick={toggleMenu}
             >
-              {""}
+              Login
             </Link>
             <Link
+              href="/signup"
+              className="flex items-center px-4 py-2 bg-primary text-white text-sm rounded hover:bg-primary-dark"
+              onClick={toggleMenu}
+            >
+              Sign Up
+            </Link>
+          </div>
+
+          {/* Navigation Links */}
+          <nav className="space-y-4 text-sm">
+            <Link
               href={`${locale}/`}
-              passHref
-              className="block text-[#111F51] font-semibold hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >
               {locale === "ar" ? "الرئيسية" : "Home"}
             </Link>
             <Link
               href={`${locale}/search_course/training-courses/`}
-              passHref
-              className="block text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >
               {locale === "ar" ? "دورات تدريبية" : "Training Courses"}
             </Link>
             <Link
               href={`${locale}/search_course/diploma/`}
-              passHref
-              className="block text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >
               {locale === "ar" ? "الدبلومة" : "Diploma"}
             </Link>
             <Link
               href={`${locale}/search_course/masters`}
-              passHref
-              className="block text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >
               {locale === "ar" ? "الماجستير" : "Masters"}
             </Link>
             <Link
               href={`${locale}/cities`}
-              passHref
-              className="block text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >
               {locale === "ar" ? "المدن" : "Cities"}
             </Link>
             <Link
               href={`${locale}/consulting-services`}
-              passHref
-              className="block text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >
               {locale === "ar" ? "الاستشارات" : "Consulting"}
             </Link>
             <Link
               href={`${locale}/Academy-Vision`}
-              passHref
-              className="block text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >
               {locale === "ar" ? "من نحن" : "How We Are"}
             </Link>
             <Link
               href={`${locale}/plan`}
-              passHref
-              className="block text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >
               {locale === "ar" ? "الخطة" : "Plan"}
             </Link>
             <Link
               href={`${locale}/contact`}
-              passHref
-              className="block text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >
               {locale === "ar" ? "تواصل معنا" : "Contact Us"}

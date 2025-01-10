@@ -128,7 +128,7 @@ export default function CourseTable() {
                     <Link href={`/courses/${courseLink}`}>Details</Link>
                   </Button>
                   <Button asChild className="w-full sm:w-auto">
-                    <Link href="/register">Register</Link>
+                    <Link href="/register" className='text-white'>Register</Link>
                   </Button>
                 </div>
               </CardContent>

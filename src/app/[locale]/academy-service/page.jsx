@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import HeaderSection from '@/components/HeaderSection'
 import Banner from '@/components/Banner'
+import Link from 'next/link'
 
 const services = [
   {
@@ -184,8 +185,7 @@ export default function AcademyService({params}) {
               <p className="mb-8 max-w-2xl mx-auto">
                   Take the first step towards unlocking your full potential. Contact us today to learn more about our services and how we can tailor them to your unique needs.
               </p>
-              <Button size="lg" className='text-white'>Schedule a Consultation</Button>
-          </section>
+              <Link href={`/${params.locale}/apply?type=consultation`} className='text-white bg-primary p-2 rounded-sm'>Schedule A Consultation</Link>          </section>
       </div></>
   )
 }

@@ -51,7 +51,7 @@ const Content_extend = ({ children, categories, params }) => {
                     )}
                   >
                     {openIndex === index && (
-                      <div className="mt-2 ml-5">
+                      <div className="mt-2 ml-8">
                         {item.categories?.map((data, i) => {
                           return (
                             <div

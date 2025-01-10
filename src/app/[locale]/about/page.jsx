@@ -272,7 +272,7 @@ export default function ConsultingPage({params}) {
           </div>
 
           <div className="text-center mt-8">
-            <Link href={'/consulting-services'} className="bg-primary text-white px-6 py-2 rounded-full">
+            <Link href={`/${params.locale}/consulting_detail`} className="bg-primary text-white px-6 py-2 rounded-full">
               View all service
             </Link>
           </div>

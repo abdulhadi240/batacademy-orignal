@@ -19,6 +19,7 @@ import CarasoulCourse from "@/components/CarasoulCourse";
 import fetchData, { GetSpecialization } from "@/actions/server";
 import Content_extend from "@/components/Content_extend";
 import { Suspense } from "react";
+import CourseVideoCard from "@/components/CourseVideoCard";
 
 export default async function Page({ params }) {
   const { locale } = await params;
@@ -66,7 +67,7 @@ export default async function Page({ params }) {
               </div>
 
               {/* Course Info Card - Now overlaid on the hero image */}
-              <div className="bg-white shadow-lg rounded-xl px-6 py-3 space-y-3 border border-gray-200 md:sticky md:top-10 z-50">
+              <div className="bg-white shadow-lg rounded-xl px-6 py-3 space-y-3 border border-gray-200 md:sticky md:top-10 z-20">
                 <h2 className="text-lg text-center font-bold text-gray-800">
                   Course Information
                 </h2>
@@ -203,7 +204,7 @@ export default async function Page({ params }) {
         <LearningObjectives />
       <Certificate />
       <CourseRecommendations />
-
+      <CourseVideoCard/>
         </Suspense>
         </Content_extend>
       </div>

@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import HeaderSection from '@/components/HeaderSection'
 import Banner from '@/components/Banner'
+import Link from 'next/link'
 
 const teamMembers = [
   { name: 'John Doe', role: 'Principal', image: '/placeholder.svg?height=200&width=200', bio: 'Dr. John Doe has over 20 years of experience in education leadership. He holds a Ph.D. in Educational Administration and is committed to fostering a culture of excellence and innovation.' },
@@ -98,7 +99,7 @@ export default function TeamStaff({params}) {
               <Card>
                   <CardContent className="text-center py-4 sm:py-6">
                       <p className="mb-4">We're always looking for passionate educators to join our team. If you're committed to making a difference in students' lives, we want to hear from you!. </p>
-                      <Button className='text-white'>View Open Positions</Button>
+                      <Link href={`/${params.locale}/apply?type=team`} className='text-white bg-primary p-2 rounded-sm'>Join Our Team</Link>
                   </CardContent>
               </Card>
           </section>

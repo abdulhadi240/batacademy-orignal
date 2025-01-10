@@ -97,7 +97,7 @@ const Page = async ({ params }) => {
       </div>
 
       {/* Specialization Section */}
-      <SpecializationSection data={specialization.data} locale={locale} />
+      <SpecializationSection data={specialization?.data} locale={locale} />
 
       {/* Courses by Cities Carousel */}
       <div className="sm:mt-16">

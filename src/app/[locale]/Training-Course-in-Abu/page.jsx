@@ -19,6 +19,11 @@ export default function Abudhabi() {
           </p>
         </ContentSection>
 
+
+        <div className="mt-6">
+          <CourseTable />
+        </div>
+        
         <ContentSection title="Our Partnerships">
           <p className="text-gray-700 leading-relaxed">
             The British Academy takes pride in hosting leading institutions and companies, particularly from the Middle East. We have established strategic partnerships with major research institutions, including the Kuwait Public Investment Authority, the Kuwait Institute for Scientific Research, and many others.
@@ -31,10 +36,6 @@ export default function Abudhabi() {
           </p>
           <CourseList />
         </ContentSection>
-
-        <div className="mt-6">
-          <CourseTable />
-        </div>
 
         <ContentSection title="Our Training Staff">
           <p className="text-gray-700 leading-relaxed">

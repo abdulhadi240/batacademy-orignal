@@ -12,7 +12,7 @@ export default function ToggleLangButton({ languageToggleText }) {
   const isArabic = pathname === "/ar" || pathname.startsWith("/ar/");
 
   // Conditionally choose which image to display
-  const imageSrc = isArabic ? "/english.png" : "/arabic.png";
+  const imageSrc = isArabic ? "/english.png" : "/saudia.webp";
 
   const handleLocaleToggle = () => {
     let newPath = pathname;
@@ -38,20 +38,20 @@ export default function ToggleLangButton({ languageToggleText }) {
   };
 
   return (
-    <div className="flex items-center group bg-primary px-2 ">
+    <div className="flex items-center group bg-primary px-2 py-1">
       {/* Conditionally rendered image */}
       <div className="">
         <Image
           src={imageSrc}       // Different image based on `isArabic`
           alt="Localized Image" // Provide an appropriate alt text
-          width={30}           // Example width
-          height={30}          // Example height
+          width={40}           // Example width
+          height={40}          // Example height
           priority
         />
       </div>
 
       {/* Language toggle button */}
-      <button onClick={handleLocaleToggle} className=" px-2 text-sm text-white rounded ">
+      <button onClick={handleLocaleToggle} className=" px-2 text-xs text-white rounded ">
         {languageToggleText}
       </button>
     </div>

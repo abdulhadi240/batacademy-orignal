@@ -44,8 +44,8 @@ const Design = ({ locale }) => {
   
         {/* Overlay Content */}
         <div className="relative z-10">
-          <Header locale={locale}/>
-          <div className="flex flex-col items-center justify-center h-full px-4">
+          <Header locale={locale} main={true}/>
+          <div className="flex flex-col mt-16 items-center justify-center h-full px-4">
             {/* Heading and Subheading */}
             <div className="text-center">
               <h1 className="max-w-3xl mt-5 text-3xl font-semibold text-white md:text-6xl">{t.heading}</h1>

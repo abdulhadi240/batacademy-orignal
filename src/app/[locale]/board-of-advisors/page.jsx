@@ -15,6 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import HeaderSection from "@/components/HeaderSection";
 import Banner from "@/components/Banner";
+import Link from "next/link";
 
 const advisers = [
   {
@@ -158,8 +159,7 @@ export default function BoardOfAdvisers({ params }) {
                 passionate about shaping the future of education and have
                 expertise to share, we'd love to hear from you.
               </p>
-              <Button className="text-white">Apply to Join</Button>
-            </CardContent>
+              <Link href={`/${params.locale}/apply?type=board`} className='text-white bg-primary p-2 rounded-sm'>Apply To Join</Link>            </CardContent>
           </Card>
         </section>
       </div>
