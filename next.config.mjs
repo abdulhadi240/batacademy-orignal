@@ -17,6 +17,11 @@ const nextConfig = {
             hostname: 'img.freepik.com',
             port: '',
           },
+          {
+            protocol: 'https',
+            hostname: 'res.cloudinary.com',
+            port: '',
+          },
         ],
       },
       redirects: async () => {

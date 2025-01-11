@@ -38,7 +38,7 @@ export default function MobileMenu({ color, locale, languageToggleText, main }) 
                 main
                   ? isScrolled
                     ? "/logobat.webp"
-                    : "/logos.webp"
+                    : "https://res.cloudinary.com/dfkn6xcg4/image/upload/v1736589005/logo_in_white_akltwu.png"
                   : "/logobat.webp"
               }
               width={isScrolled ? 60 : 80}

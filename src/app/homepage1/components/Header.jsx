@@ -72,7 +72,7 @@ const Header = ({ locale, main }) => {
             <div className={`${isScrolled ? "w-20" : "w-28"}`}>
               <Link href="/">
                 <Image
-                  src={isScrolled || !main ? "/logobat.webp" : "/logo_in_white.png"}
+                  src={isScrolled || !main ? "/logobat.webp" : "https://res.cloudinary.com/dfkn6xcg4/image/upload/v1736589005/logo_in_white_akltwu.png"}
                   alt="British Academy logo"
                   width={isScrolled ? 80 : 100}
                   height={isScrolled ? 40 : 50}
