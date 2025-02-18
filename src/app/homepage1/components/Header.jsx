@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -53,7 +53,7 @@ const Header = ({ locale, main }) => {
       {/* Mobile Navigation */}
       <header className="md:hidden">
         <MobileMenu
-        main={true}
+          main={true}
           color={isScrolled ? "black" : "white"}
           locale={locale}
           languageToggleText={languageToggleText}
@@ -61,15 +61,15 @@ const Header = ({ locale, main }) => {
       </header>
 
       {/* Desktop Navigation */}
-      <section className=" hidden md:block">
+      <section className={`${isArabic ? 'rtl' : 'ltr'} hidden md:block`}>
         <nav
-          className={`fixed top-0 z-50 w-full transition-all duration-300 ${
+          className={`fixed top-0 z-50 w-full ${isArabic ? 'rtl' : 'ltr'} transition-all duration-300 ${
             isScrolled ? "bg-white shadow-md" : "bg-transparent"
           }`}
         >
-          <div className="flex items-center justify-between px-4 py-2 md:px-8">
+          <div className={ `flex items-center justify-between px-4 md:px-8 ${isArabic ? 'flex-row-reverse' : 'flex-row'}`}>
             {/* Logo */}
-            <div className={`${isScrolled ? "w-20" : "w-28"}`}>
+            <div className={`${isScrolled ? "w-20 py-2" : "w-28"}`}>
               <Link href="/">
                 <Image
                   src={isScrolled || !main ? "/logobat.webp" : "https://res.cloudinary.com/dfkn6xcg4/image/upload/v1736589005/logo_in_white_akltwu.png"}
@@ -82,7 +82,7 @@ const Header = ({ locale, main }) => {
             </div>
 
             {/* Navigation Links */}
-            <div className="hidden space-x-6 sm:flex sm:gap-4">
+            <div className={`hidden space-x-6 sm:flex sm:gap-4 ${isArabic ? 'text-right' : 'text-left'}`}>
               {currentMenu.map((item, index) => (
                 <Link
                   key={index}

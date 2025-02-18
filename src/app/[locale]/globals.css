@@ -5,9 +5,37 @@
 .html{
   overflow-x: hidden;
 }
+/* Global styles for RTL */
+html[dir="rtl"] {
+  text-align: right;
+}
+
+/* Adjustments for icons (if needed) */
+html[dir="rtl"] .icon {
+  transform: rotate(180deg); /* Flip icons or other elements */
+}
+
+/* Example: Adjust padding/margins for RTL */
+html[dir="rtl"] .some-class {
+  padding-right: 20px; /* Adjust padding based on RTL */
+  padding-left: 0; /* Reset left padding */
+}
+
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@media (min-width: 1440px) {
+  html {
+      zoom: 1.2;
+  }
+}
+
+@media (min-width: 1920px) {
+  html {
+    zoom: 1.5;
+  }
 }
 
 @layer utilities {

@@ -6,19 +6,6 @@ import { useState } from "react";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import useMeasure from "react-use-measure";
 
-const cities = [
-  { image: "/img.webp", name: "Manchester", country: "UK" },
-  { image: "/img.webp", name: "London", country: "UK" },
-  { image: "/img.webp", name: "Paris", country: "France" },
-  { image: "/img.webp", name: "New York", country: "USA" },
-  { image: "/img.webp", name: "Berlin", country: "Germany" },
-  { image: "/img.webp", name: "Tokyo", country: "Japan" },
-  { image: "/img.webp", name: "Sydney", country: "Australia" },
-  { image: "/img.webp", name: "Los Angeles", country: "USA" },
-  { image: "/img.webp", name: "Bangkok", country: "Thailand" },
-  { image: "/img.webp", name: "Dubai", country: "UAE" },
-];
-
 const CARD_WIDTH = 140; // Width of each card
 const MARGIN = 20; // Margin between cards
 const CARD_SIZE = CARD_WIDTH + MARGIN;
@@ -29,7 +16,7 @@ const BlogPostCarousel = ({data}) => {
   const [offset, setOffset] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const totalDots = Math.ceil(data.length / CARDS_PER_DOT);
+  const totalDots = Math.ceil(data.data.length / CARDS_PER_DOT);
 
   const shiftLeft = () => {
     if (currentIndex > 0) {
@@ -53,7 +40,7 @@ const BlogPostCarousel = ({data}) => {
   return (
     <section className="py-8" ref={ref}>
       <div className="relative overflow-hidden p-4">
-        <div className="mx-auto max-w-6xl">
+        <div className=" max-w-6xl">
           <motion.div
             animate={{
               x: offset,
@@ -77,9 +64,8 @@ const BlogPostCarousel = ({data}) => {
                   alt={post.name}
                   className="rounded-t-lg"
                 />
-                <div className="py-4 text-start">
+                <div className="py-4 text-center">
                   <h3 className="font-bold">{post.name}</h3>
-                  <p className="text-sm text-gray-600">{post.country}</p>
                 </div>
               </Link>
             ))}

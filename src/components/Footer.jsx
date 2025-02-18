@@ -68,21 +68,23 @@ export default function Footer({ params }) {
 
       {/* Desktop Footer */}
       <div className="hidden px-4 pt-32 bg-white sm:px-16 md:block">
-        <div className="container flex flex-col items-start justify-between mx-auto space-y-10 sm:flex-row sm:space-y-0">
+        <div className={`container flex flex-col items-start justify-between mx-auto space-y-10  ${isArabic ? 'sm:flex-row-reverse' : 'sm:flex-row'} sm:space-y-0`}>
           {/* Logo + Description */}
-          <div className="w-full sm:w-auto">
+          <div className={`w-full sm:w-auto ${isArabic ? 'text-end' : 'text-start'} `}>
+            <div className={`${isArabic ? 'flex justify-end text-end items-end' : 'flex justify-start text-start items-start'} `}>
             <Image
               src="/logobat.png"
               alt="British Academy Logo"
               width={80}
               height={50}
-              className="mb-4"
+              className="mb-4 "
             />
+            </div>
             <p className="w-full text-sm text-gray-600 sm:w-80">
               {introText}
             </p>
             {/* Social Media Links */}
-            <div className="flex mt-4 space-x-4">
+            <div className={`${isArabic ? 'justify-end text-right' : ''} flex mt-4 space-x-4 `}>
               <Link href="https://www.youtube.com" aria-label="YouTube" target="_blank">
                 <FaYoutube size={24} className="text-red-600" />
               </Link>

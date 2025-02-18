@@ -68,7 +68,7 @@ function HeaderSection({ params, main }) {
         />
       </header>
 
-      {/* Top Bar (Non-Fixed) */}
+      {/* Top Bar (Non-Fixed, Always LTR) */}
       <div
         className="hidden sm:flex md:mb-20 items-center justify-between p-2 text-white"
         style={{
@@ -150,11 +150,11 @@ function HeaderSection({ params, main }) {
         </div>
       </div>
 
-      {/* Main Navigation (Fixed for Desktop) */}
+      {/* Main Navigation (RTL for Arabic, LTR for English) */}
       <nav
-        className={`hidden sm:flex items-center justify-between p-4 shadow-md bg-gray-50 fixed z-50 w-full transition-all duration-300 ${
+        className={`hidden  p-4 shadow-md bg-gray-50 fixed z-50 w-full transition-all duration-300 ${
           isScrolled ? "top-0 shadow-lg" : "top-[44px]"
-        }`}
+        } ${isArabic ? "rtl text-right sm:flex flex-row-reverse items-center justify-between" : "ltr text-left sm:flex items-center justify-between"}`}
       >
         {/* Logo */}
         <div className="flex items-center">
@@ -170,12 +170,16 @@ function HeaderSection({ params, main }) {
         </div>
 
         {/* Navigation Links */}
-        <div className="hidden space-x-6 sm:flex sm:gap-4">
+        <div
+          className={`hidden sm:flex gap-4 ${
+            isArabic ? "flex-row-reverse" : "flex-row"
+          }`}
+        >
           {activeMenu.map((item, index) => (
             <Link
               key={index}
               href={item.link}
-              className="hover:text-[#152765] text-[#6D737A]"
+              className={`hover:text-[#152765] text-[#6D737A]`}
             >
               {item.name}
             </Link>
@@ -183,17 +187,21 @@ function HeaderSection({ params, main }) {
         </div>
 
         {/* Login and Sign Up */}
-        <div className="flex items-center space-x-4">
+        <div
+          className={`flex items-center ${
+            isArabic ? "flex-row-reverse space-x-reverse" : "space-x-4"
+          }`}
+        >
           <Link
             href={isArabic ? "/ar/sign-in" : "/sign-in"}
             className="flex items-center text-gray-500 hover:text-blue-900"
           >
-            <FaLock className="mr-1" />
+            <FaLock className={`${isArabic ? "ml-1" : "mr-1"}`} />
             {login}
           </Link>
           <Link
             href={isArabic ? "/ar/sign-in" : "/sign-in"}
-            className="px-4 py-2 text-white bg-blue-900 rounded hover:bg-blue-700"
+            className={` ${isArabic ? 'mr-3' : 'ml-0'} px-4 py-2 text-white bg-blue-900 rounded hover:bg-blue-700`}
           >
             {signUp}
           </Link>

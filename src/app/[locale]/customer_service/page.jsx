@@ -13,31 +13,34 @@ export default function Page({ params }) {
   // 1. Get locale from route params, default to "en"
   const locale = params?.locale || "en";
 
-  // 2. Conditionally render text
+  // 2. Check if Arabic
+  const isArabic = locale === "ar";
+
+  // 3. Conditionally render text
   const customerServiceHeading =
-    locale === "ar" ? "خدمة العملاء" : "CUSTOMER SERVICE";
+    isArabic ? "خدمة العملاء" : "CUSTOMER SERVICE";
   const homeCSPath =
-    locale === "ar" ? "الرئيسية / خدمة العملاء" : "Home / Customer Service";
+    isArabic ? "الرئيسية / خدمة العملاء" : "Home / Customer Service";
 
   const createTicketTitle =
-    locale === "ar" ? "أنشئ تذكرتك الآن" : "CREATE YOUR TICKET NOW";
+    isArabic ? "أنشئ تذكرتك الآن" : "CREATE YOUR TICKET NOW";
   const aboutTicket =
-    locale === "ar"
+    isArabic
       ? "هذا نص تجريبي باللغة العربية لتوضيح كيف يمكن للمستخدم إنشاء التذكرة وكتابة تفاصيل المشكلة."
       : "In diam consequat nec eu. Eu sem nec vel, sollicitudin ipsum viverra sed nibh amet. Nunc, et pharetra, duis tortor dictum nisl. Id vestibulum tincidunt adipiscing gravida risus.";
 
-  const namePlaceholder = locale === "ar" ? "الاسم" : "Name";
-  const emailPlaceholder = locale === "ar" ? "البريد الإلكتروني" : "Email";
-  const phonePlaceholder = locale === "ar" ? "رقم الهاتف" : "Phone";
-  const problemPlaceholder = locale === "ar" ? "المشكلة" : "Problem";
-  const createTicketButton = locale === "ar" ? "إنشاء التذكرة" : "Create Ticket";
+  const namePlaceholder = isArabic ? "الاسم" : "Name";
+  const emailPlaceholder = isArabic ? "البريد الإلكتروني" : "Email";
+  const phonePlaceholder = isArabic ? "رقم الهاتف" : "Phone";
+  const problemPlaceholder = isArabic ? "المشكلة" : "Problem";
+  const createTicketButton = isArabic ? "إنشاء التذكرة" : "Create Ticket";
 
   return (
     <>
-      <HeaderSection params={params.locale}/>
+      <HeaderSection params={params.locale} />
 
       {/* Banner */}
-      <div className="banner-container">
+      <div className={`banner-container ${isArabic ? "rtl text-right" : "ltr text-left"}`}>
         <div className="relative h-32 banner sm:h-64">
           <Image
             src="/plan.webp"
@@ -69,7 +72,7 @@ export default function Page({ params }) {
       </div>
 
       {/* Form Section */}
-      <div className="flex justify-center">
+      <div className={`flex justify-center ${isArabic ? "rtl text-right" : "ltr text-left"}`}>
         <div className="w-full sm:w-[450px] bg-white dark:text-black shadow-lg p-6 h-auto sm:h-[490px]">
           <h1 className="mb-4 text-2xl font-bold text-center">
             {createTicketTitle}
@@ -81,7 +84,9 @@ export default function Page({ params }) {
               <input
                 type="text"
                 placeholder={namePlaceholder}
-                className="w-full py-2 border-b border-gray-300 focus:outline-none focus:border-primary"
+                className={`w-full py-2 border-b border-gray-300 focus:outline-none focus:border-primary ${
+                  isArabic ? "text-right" : ""
+                }`}
                 required
               />
             </div>
@@ -90,7 +95,9 @@ export default function Page({ params }) {
               <input
                 type="email"
                 placeholder={emailPlaceholder}
-                className="w-full py-2 border-b border-gray-300 focus:outline-none focus:border-primary"
+                className={`w-full py-2 border-b border-gray-300 focus:outline-none focus:border-primary ${
+                  isArabic ? "text-right" : ""
+                }`}
                 required
               />
             </div>
@@ -99,7 +106,9 @@ export default function Page({ params }) {
               <input
                 type="tel"
                 placeholder={phonePlaceholder}
-                className="w-full py-2 border-b border-gray-300 focus:outline-none focus:border-primary"
+                className={`w-full py-2 border-b border-gray-300 focus:outline-none focus:border-primary ${
+                  isArabic ? "text-right" : ""
+                }`}
                 required
               />
             </div>
@@ -107,7 +116,9 @@ export default function Page({ params }) {
             <div className="mb-4">
               <textarea
                 placeholder={problemPlaceholder}
-                className="w-full h-24 py-2 border-b border-gray-300 resize-none focus:outline-none focus:border-primary"
+                className={`w-full h-24 py-2 border-b border-gray-300 resize-none focus:outline-none focus:border-primary ${
+                  isArabic ? "text-right" : ""
+                }`}
                 required
               />
             </div>

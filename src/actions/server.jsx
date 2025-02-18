@@ -111,19 +111,35 @@ export async function GetCities() {
 }
 
 
-export default async function fetchData(url , locale) {
+export default async function fetchData(url, locale) {
   try {
-    const res = await fetch(url, {
+    const res = await fetch(`${process.env.BACKEND_URL}${url}`, {
       next: { revalidate: 60 },
       headers: {
         "Content-Type": "application/json",
-        "Accept-Language": `${locale}`,
+        "Accept-Language": locale,
       },
     });
-    if (!res.ok) throw new Error(`Failed to fetch: ${url}`);
-    return res.json();
+
+    // Check if the response is successful
+    if (!res.ok) {
+      throw new Error(`Failed to fetch: ${url}, Status: ${res.status}`);
+    }
+
+    const result = await res.json();
+
+    // Check if response contains a successful status code and valid data structure
+    if (result.code !== 200) {
+      throw new Error(`API returned an error. Status Code: ${result.code}, Message: ${result.message}`);
+    }
+
+    if (!result || !result.data) {
+      throw new Error('Invalid response structure, missing "data" field');
+    }
+
+    return result.data; // Return the full response (including pagination details)
   } catch (error) {
-    console.error(error.message);
+    console.error('Error fetching data:', error.message);
     return null; // Return null on error
   }
 }

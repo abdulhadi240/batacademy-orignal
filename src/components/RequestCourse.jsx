@@ -19,44 +19,40 @@ const RequestCourse = ({ locale }) => {
           {/* Form */}
           <form className="mt-6">
             <div className="flex flex-col lg:flex-row lg:space-x-4">
-              <div className="flex items-center w-full mb-2 border-b-2">
+              <div className={` items-center w-full mb-2 border-b-2 ${locale === 'ar' ? 'flex flex-row-reverse gap-4' : 'flex'}`}>
                 <AiOutlineUser className="mr-2 text-white " size={24} />
                 <input 
                   type="text" 
                   placeholder={locale === "en" ? "Full Name" : "الاسم الكامل"} 
-                  className="w-full py-2 bg-transparent border-0 border-white placeholder:text-white focus:outline-none"
+                  className={`w-full py-2 bg-transparent border-0 border-white placeholder:text-white focus:outline-none ${locale === 'ar' ? 'text-right' : ''}`}
                 />
               </div>
-              <div className="flex items-center w-full mb-2 border-b-2">
+              <div className={` items-center w-full mb-2 border-b-2 ${locale === 'ar' ? 'flex flex-row-reverse gap-4' : 'flex'}`}>
                 <AiOutlineMail className="mr-2 text-white" size={24} />
                 <input 
                   type="email" 
                   placeholder={locale === "en" ? "Email" : "البريد الإلكتروني"} 
-                  className="w-full py-2 bg-transparent border-white placeholder:text-white focus:outline-none"
+                  className={`w-full py-2 bg-transparent border-white placeholder:text-white focus:outline-none ${locale === 'ar' ? 'text-right' : ''}`}
                 />
               </div>
             </div>
 
             <div className="flex flex-col lg:flex-row lg:space-x-4">
-              <div className="flex items-center w-full mb-2 border-b-2">
-                <AiOutlinePhone className="mr-2 text-white" size={24} />
+            <div className={` items-center w-full mb-2 border-b-2 ${locale === 'ar' ? 'flex flex-row-reverse gap-4' : 'flex'}`}>
+            <AiOutlinePhone className="mr-2 text-white" size={24} />
                 <input 
                   type="text" 
                   placeholder={locale === "en" ? "Mobile" : "رقم الهاتف"} 
-                  className="w-full py-2 bg-transparent border-white placeholder:text-white focus:outline-none"
+                  className={`w-full py-2 bg-transparent border-white placeholder:text-white focus:outline-none ${locale === 'ar' ? 'text-right' : ''}`}
                 />
               </div>
-              <div className="flex items-center w-full mb-2 border-b-2">
+              <div className={` items-center w-full mb-2 border-b-2 ${locale === 'ar' ? 'flex flex-row-reverse gap-4' : 'flex'}`}>
                 <AiOutlineBook className="mr-2 text-gray-300" size={24} />
-                <select 
-                  className="w-full py-2 text-white bg-primary border-white focus:outline-none "
-                >
-                  <option value="request_course text-black">
-                    {locale === "en" ? "Request Course" : "طلب دورة"}
-                  </option>
-                  <option value="course_1 text-black">{locale === "en" ? "Course 1" : "دورة 1"}</option>
-                  <option value="course_2 text-black">{locale === "en" ? "Course 2" : "دورة 2"}</option>
-                </select>
+                <input 
+                  type="text" 
+                  placeholder={locale === "en" ? "Course Name" : "رقم الهاتف"} 
+                  className={`w-full py-2 bg-transparent border-white placeholder:text-white focus:outline-none ${locale === 'ar' ? 'text-right' : ''}`}
+                />
               </div>
             </div>
 
@@ -83,66 +79,7 @@ const RequestCourse = ({ locale }) => {
           </div>
         </div>
 
-        {/* Circular Profile Images */}
-        <div className="absolute top-32 left-32 lg:top-48 lg:left-8">
-          <Image
-            src="/1.png" 
-            alt={locale === "en" ? "Profile" : "صورة"}
-            height={50}
-            width={50} 
-            className="hidden rounded-full sm:block"
-          />
-        </div>
-
-        <div className="absolute top-32 left-32 lg:bottom-32">
-          <Image
-            src="/1.png" 
-            alt={locale === "en" ? "Profile" : "صورة"}
-            height={50}
-            width={50} 
-            className="hidden rounded-full sm:block"
-          />
-        </div>
-
-        <div className="absolute top-48 right-32">
-          <Image
-            src="/1.png" 
-            alt={locale === "en" ? "Profile" : "صورة"}
-            height={50}
-            width={50} 
-            className="hidden rounded-full sm:block"
-          />
-        </div>
-
-        <div className="absolute bottom-32 right-8">
-          <Image
-            src="/1.png" 
-            alt={locale === "en" ? "Profile" : "صورة"}
-            height={50}
-            width={50} 
-            className="hidden rounded-full sm:block"
-          />
-        </div>
-
-        <div className="absolute top-64 left-32">
-          <Image
-            src="/1.png" 
-            alt={locale === "en" ? "Profile" : "صورة"}
-            height={50}
-            width={50} 
-            className="hidden rounded-full sm:block"
-          />
-        </div>
-
-        <div className="absolute bottom-64 right-8">
-          <Image
-            src="/1.png" 
-            alt={locale === "en" ? "Profile" : "صورة"}
-            height={50}
-            width={50} 
-            className="hidden rounded-full sm:block"
-          />
-        </div>
+       
       </div>
     </section>
   );

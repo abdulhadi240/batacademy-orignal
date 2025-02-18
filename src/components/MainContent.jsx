@@ -6,7 +6,7 @@ const MainContent = ({ locale }) => {
   return (
     <div className="flex justify-between gap-8 mx-20 mt-8">
       {/* Left Column */}
-      <div className="flex flex-col items-start">
+      <div className={`flex flex-col ${locale === 'ar' ? 'items-end' : 'items-start'}`}>
         <Image
           src="/group401.webp"
           width={600}
@@ -14,8 +14,8 @@ const MainContent = ({ locale }) => {
           alt="Laptop meeting"
           className="rounded-lg shadow-lg"
         />
-        <div className="w-[600px]">
-          <h3 className="text-xl font-semibold tracking-wide text-gray-800 mt-14">
+        <div className={` ${locale === 'ar' ? 'text-right' : 'text-left'} w-[600px]`}>
+          <h3 className={`text-xl font-semibold tracking-wide text-gray-800 mt-14 `}>
             {locale === "en"
               ? "The annual training plan for the courses and programs of the British Academy"
               : "الخطة التدريبية السنوية لدورات وبرامج الأكاديمية البريطانية"}
@@ -45,6 +45,7 @@ const MainContent = ({ locale }) => {
               : "نقدم أحدث الدورات الدولية بأسعار مناسبة"
           }
           icon="/icon9.png"
+          locale={locale}
         />
         <ServiceCard
           title={
@@ -58,6 +59,8 @@ const MainContent = ({ locale }) => {
               : "يتمتع المشارك بالدورات التي نقدمها بالعديد من الخدمات والميزات"
           }
           icon="/icon9.png"
+          locale={locale}
+
         />
         <ServiceCard
           title={
@@ -71,6 +74,8 @@ const MainContent = ({ locale }) => {
               : "نحدث قائمة الدورات وفقاً لاحتياجات سوق العمل"
           }
           icon="/icon8.png"
+          locale={locale}
+
         />
         <ServiceCard
           title={
@@ -84,6 +89,8 @@ const MainContent = ({ locale }) => {
               : "أكثر من 20 تخصصاً في مجالات متعددة"
           }
           icon="/icon7.png"
+          locale={locale}
+
         />
         <ServiceCard
           title={
@@ -97,6 +104,8 @@ const MainContent = ({ locale }) => {
               : "مدننا المفضلة ذات المعالم الجذابة"
           }
           icon="/icon6.png"
+          locale={locale}
+
         />
       </div>
     </div>

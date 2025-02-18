@@ -12,11 +12,11 @@ export default function ToggleLangButton({ languageToggleText }) {
   const isArabic = pathname === "/ar" || pathname.startsWith("/ar/");
 
   // Conditionally choose which image to display
-  const imageSrc = isArabic ? "/english.png" : "/saudia.webp";
+  const imageSrc = isArabic ? "/english1.png" : "/saudia.webp";
 
   const handleLocaleToggle = () => {
     let newPath = pathname;
-
+  
     if (pathname === "/en") {
       // If the URL is exactly /en, switch to /ar
       newPath = "/ar";
@@ -33,27 +33,36 @@ export default function ToggleLangButton({ languageToggleText }) {
       // If there's no /en or /ar at all, default to /en + the existing path
       newPath = "/en" + pathname;
     }
-
-    router.push(newPath);
+  
+    router.push(newPath, undefined, { scroll: false });
   };
+  
 
   return (
     <div className="flex items-center group bg-primary px-2 py-1">
       {/* Conditionally rendered image */}
-      <div className="">
+      <div
+        className={`${
+          isArabic ? "w-[30px] h-[30px] -mb-2" : "h-auto w-auto"
+        } flex-shrink-0`}
+      >
         <Image
           src={imageSrc}       // Different image based on `isArabic`
           alt="Localized Image" // Provide an appropriate alt text
-          width={40}           // Example width
-          height={40}          // Example height
+          width={30}           // Example width
+          height={30}          // Example height
           priority
+          className={`flex items-start text-start justify-start `} // Different object fit for Arabic and English
         />
       </div>
 
       {/* Language toggle button */}
-      <button onClick={handleLocaleToggle} className=" px-2 text-xs text-white rounded ">
+      <div
+        onClick={handleLocaleToggle}
+        className="px-2  text-xs text-white rounded cursor-pointer"
+      >
         {languageToggleText}
-      </button>
+      </div>
     </div>
   );
 }

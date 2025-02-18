@@ -75,7 +75,7 @@ const Page = async ({ params }) => {
   const { locale } = await params;
 
   // Fetch data based on the locale
-  const cities = await fetchData('https://backendbatd.clinstitute.co.uk/api/cities', locale);
+  const cities = await fetchData(`/city`, locale);
   const specialization = await fetchData('https://backendbatd.clinstitute.co.uk/api/specializations_courses', locale);
 
 
@@ -83,21 +83,20 @@ const Page = async ({ params }) => {
     <><section>
       {/* Hero Section */}
       <Design locale={locale} />
-      <div className="block sm:hidden">
-        <MobileFilter locale={locale} />
-      </div>
+        <div className="block sm:hidden">
+          <MobileFilter locale={locale} />
+        </div>
 
       {/* Search and Main Content */}
-      <div className="container hidden mt-10 sm:block sm:px-4 sm:mt-0 sm:py-16">
-        <div className="flex justify-center">
-          <SearchFilters locale={locale} />
-        </div>
+      <div className="container hidden mt-10 sm:block sm:px-4  sm:py-16">
+
         <SectionTitle title={locale === 'en' ? "What is" : "ما هو"} highlight={locale === 'en' ? "BRITISH ACADEMY?" : "الأكاديمية البريطانية؟"} />
         <MainContent locale={locale} />
       </div>
 
-      {/* Specialization Section */}
+      {/* Specialization Section 
       <SpecializationSection data={specialization?.data} locale={locale} />
+      */}
 
       {/* Courses by Cities Carousel */}
       <div className="sm:mt-16">
@@ -110,18 +109,21 @@ const Page = async ({ params }) => {
         <SectionTitle title={locale === 'en' ? "British Academy" : "الأكاديمية البريطانية"} highlight={locale === 'en' ? "For Training" : "للتدريب"} />
         <Training locale={locale} />
       </div>
+      
 
       {/* Request Course Section */}
       <div className="mt-32">
         <SectionTitle title={locale === 'en' ? "Request A" : "طلب"} highlight={locale === 'en' ? "Course" : "دورة"} />
         <RequestCourse locale={locale} />
       </div>
+      
 
       {/* Latest Publications Section */}
       <div className="mt-32">
         <SectionTitle title={locale === 'en' ? "Latest" : "أحدث"} highlight={locale === 'en' ? "Publication" : "النشر"} />
         <DynamicTabs locale={locale} />
       </div>
+      
 
       {/* Team Section */}
       <div className="mt-10 md:mt-32 team">
@@ -162,6 +164,7 @@ const Page = async ({ params }) => {
           </div>
         </div>
       </div>
+      
 
       <div className="mt-10 md:mt-32 overflow-hidden customer mb-10">
         <SectionTitle title={locale === 'en' ? "Most Of" : "أغلب"} highlight={locale === 'en' ? "Our Customers" : "عملائنا"} />

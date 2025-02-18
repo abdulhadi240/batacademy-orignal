@@ -9,45 +9,59 @@ export default function Page({ params }) {
   // Locale handling for bilingual support
   const locale = params?.locale || "en";
 
-  const callUsText = locale === "ar" ? "اتصل بنا" : "Call us";
-  const locationText = locale === "ar" ? "الموقع" : "Location";
-  const phoneText = locale === "ar" ? "الهاتف" : "Phone";
-  const emailText = locale === "ar" ? "البريد الإلكتروني" : "Email";
-  const contactNow = locale === "ar" ? "تواصل الآن" : "CONTACT NOW";
+  const isArabic = locale === "ar";
+  const callUsText = isArabic ? "اتصل بنا" : "Call us";
+  const locationText = isArabic ? "الموقع" : "Location";
+  const phoneText = isArabic ? "الهاتف" : "Phone";
+  const emailText = isArabic ? "البريد الإلكتروني" : "Email";
+  const contactNow = isArabic ? "تواصل الآن" : "CONTACT NOW";
   const formDescription =
-    locale === "ar"
+    isArabic
       ? "هذا نص تجريبي باللغة العربية لتوضيح وصف مختصر."
       : "Feel free to reach out to us using the form below or visit our locations.";
-  const namePlaceholder = locale === "ar" ? "الاسم" : "Name";
-  const emailPlaceholder = locale === "ar" ? "البريد الإلكتروني" : "Email";
-  const phonePlaceholder = locale === "ar" ? "رقم الهاتف" : "Phone";
-  const messagePlaceholder = locale === "ar" ? "رسالة" : "Message";
-  const submitButton = locale === "ar" ? "إرسال" : "Submit";
+  const namePlaceholder = isArabic ? "الاسم" : "Name";
+  const emailPlaceholder = isArabic ? "البريد الإلكتروني" : "Email";
+  const phonePlaceholder = isArabic ? "رقم الهاتف" : "Phone";
+  const messagePlaceholder = isArabic ? "رسالة" : "Message";
+  const submitButton = isArabic ? "إرسال" : "Submit";
 
   return (
     <>
       <HeaderSection params={params.locale} />
-      <div className="mt-20">
+      <div className={`mt-20 ${isArabic ? "rtl text-right" : "ltr text-left"}`}>
         <div className="bg-[#DEEEFF] px-4 sm:px-10 flex flex-col sm:gap-56 gap-24 sm:flex-row w-full h-auto sm:h-auto">
           {/* Left Column */}
-          <div className="flex flex-col">
+          <div className={`flex flex-col ${isArabic ? "items-end" : "items-start"}`}>
             <Block
               title={callUsText}
               Icon={FaWhatsapp}
-              text={"WhatsApp (EN): +447443269723 WhatsApp (AR): +44 7724022466"}
-            />
+              text={
+                isArabic
+                  ? "واتساب (EN): +447443269723 واتساب (AR): +44 7724022466"
+                  : "WhatsApp (EN): +447443269723 WhatsApp (AR): +44 7724022466"
+              }
+              isArabic={isArabic ? true : false}
+              />
             <Block
               title={locationText}
               Icon={FaMapMarkerAlt}
               text={
-                "Address 1: 6th Floor, FC200, 2 Lakeside Dr, London NW10 7FQ Address 2: Suite 702 Crown House, North Circular Road, London, NW10 7PN"
+                isArabic
+                  ? "العنوان 1: الطابق السادس، FC200، 2 Lakeside Dr، لندن NW10 7FQ العنوان 2: جناح 702 Crown House، North Circular Road، لندن NW10 7PN"
+                  : "Address 1: 6th Floor, FC200, 2 Lakeside Dr, London NW10 7FQ Address 2: Suite 702 Crown House, North Circular Road, London, NW10 7PN"
               }
+              isArabic={isArabic ? true : false}
+
             />
-            <Block title={phoneText} Icon={FaPhoneAlt} text={"+442035827999"} />
+            <Block title={phoneText} Icon={FaPhoneAlt} 
+            isArabic={isArabic ? true : false}
+            text={"+442035827999"} />
             <Block
               title={emailText}
               Icon={MdOutlineEmail}
               text={"info@batdacademy.org.uk"}
+              isArabic={isArabic ? true : false}
+
             />
           </div>
 
@@ -61,7 +75,9 @@ export default function Page({ params }) {
                 <input
                   type="text"
                   placeholder={namePlaceholder}
-                  className="w-full py-2 border-b border-gray-300 focus:outline-none focus:border-blue-500"
+                  className={`w-full py-2 border-b border-gray-300 focus:outline-none focus:border-blue-500 ${
+                    isArabic ? "text-right" : ""
+                  }`}
                   required
                 />
               </div>
@@ -70,7 +86,9 @@ export default function Page({ params }) {
                 <input
                   type="email"
                   placeholder={emailPlaceholder}
-                  className="w-full py-2 border-b border-gray-300 focus:outline-none focus:border-blue-500"
+                  className={`w-full py-2 border-b border-gray-300 focus:outline-none focus:border-blue-500 ${
+                    isArabic ? "text-right" : ""
+                  }`}
                   required
                 />
               </div>
@@ -79,7 +97,9 @@ export default function Page({ params }) {
                 <input
                   type="tel"
                   placeholder={phonePlaceholder}
-                  className="w-full py-2 border-b border-gray-300 focus:outline-none focus:border-blue-500"
+                  className={`w-full py-2 border-b border-gray-300 focus:outline-none focus:border-blue-500 ${
+                    isArabic ? "text-right" : ""
+                  }`}
                   required
                 />
               </div>
@@ -87,7 +107,9 @@ export default function Page({ params }) {
               <div className="mb-4">
                 <textarea
                   placeholder={messagePlaceholder}
-                  className="w-full h-24 py-2 border-b border-gray-300 resize-none focus:outline-none focus:border-blue-500"
+                  className={`w-full h-24 py-2 border-b border-gray-300 resize-none focus:outline-none focus:border-blue-500 ${
+                    isArabic ? "text-right" : ""
+                  }`}
                   required
                 />
               </div>
@@ -105,7 +127,7 @@ export default function Page({ params }) {
         {/* Map Section */}
         <div className="mt-10 w-full px-4 sm:px-10">
           <h2 className="text-2xl font-bold mb-4 text-center">
-            {locale === "ar" ? "موقعنا" : "Our Location"}
+            {isArabic ? "موقعنا" : "Our Location"}
           </h2>
           <div className="w-full h-[400px]">
             <iframe
