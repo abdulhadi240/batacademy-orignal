@@ -16,7 +16,7 @@ const BlogPostCarousel = ({data}) => {
   const [offset, setOffset] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const totalDots = Math.ceil(data.data.length / CARDS_PER_DOT);
+  const totalDots = Math.ceil(data?.data?.length / CARDS_PER_DOT);
 
   const shiftLeft = () => {
     if (currentIndex > 0) {

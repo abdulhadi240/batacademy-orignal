@@ -76,7 +76,6 @@ const Page = async ({ params }) => {
 
   // Fetch data based on the locale
   const cities = await fetchData(`/city`, locale);
-  const specialization = await fetchData('https://backendbatd.clinstitute.co.uk/api/specializations_courses', locale);
 
 
   return (
