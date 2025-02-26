@@ -1,5 +1,4 @@
 "use client";
-import CourseCard from "@/components/course-card";
 import {
   Carousel,
   CarouselContent,
@@ -9,6 +8,7 @@ import {
 } from "@/components/ui/carousel";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import SectionTitle from "./SectionTitle";
+import CourseCard from "./Course-Card";
 
 export default function Home({ locale }) {
   const courses = [
