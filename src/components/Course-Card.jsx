@@ -11,7 +11,7 @@ export default function CourseCard({ course }) {
       transition={{ type: "spring", stiffness: 300 }}
       className="bg-white rounded-lg overflow-hidden shadow-sm h-full transform-gpu"
     >
-      <div className="relative h-40 w-64 group">
+      <div className="relative h-40  group">
         <div className="absolute  top-2 right-2 bg-white/80 text-xs font-medium px-2 py-1 rounded z-10">
           {course.location}
         </div>
@@ -21,7 +21,7 @@ export default function CourseCard({ course }) {
             alt={course.title}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-110"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+           
           />
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
         </div>
