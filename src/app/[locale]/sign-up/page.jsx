@@ -1,5 +1,5 @@
 import Design from "@/app/homepage1/components/Design";
-import AuthFormSignup from "@/components/AuthFormSignup";
+import AuthForm from "@/components/AuthForm";
 import Image from "next/image";
 
 const Page = () => {
@@ -20,7 +20,7 @@ const Page = () => {
             <Image src="/logocrown.webp" width={200} height={200} alt="logo" />
           </div>
           <div className="flex justify-center mb-10">
-            <AuthFormSignup />
+            <AuthForm />
           </div>
         </div>
       </section>

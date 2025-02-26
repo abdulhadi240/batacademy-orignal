@@ -1,9 +1,9 @@
 "use client"
-import CourseCard from "@/components/course-card"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { Button } from "@/components/ui/button"
 import SectionTitle from "./SectionTitle"
+import CourseCard from "./Course-Card"
 
 export default function HomepageCourse({locale}) {
   const courses = [
