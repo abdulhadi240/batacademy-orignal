@@ -9,7 +9,7 @@ export default function CourseCard({ course }) {
     <motion.div
       whileHover={{ scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300 }}
-      className="bg-white rounded-lg overflow-hidden shadow-sm h-full transform-gpu"
+      className="bg-white rounded-lg overflow-hidden shadow-sm h-full  transform-gpu"
     >
       <div className="relative h-40  group">
         <div className="absolute  top-2 right-2 bg-white/80 text-xs font-medium px-2 py-1 rounded z-10">
@@ -27,8 +27,8 @@ export default function CourseCard({ course }) {
         </div>
       </div>
 
-      <div className="p-4">
-        <h3 className="text-sm font-medium text-slate-800 mb-4  line-clamp-3 group-hover:text-slate-600 transition-colors duration-200">
+      <div className="p-2 md:p-4">
+        <h3 className="text-sm font-medium text-slate-800 mb-4  group-hover:text-slate-600 transition-colors duration-200">
           {course.title}
         </h3>
 

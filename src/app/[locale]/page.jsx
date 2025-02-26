@@ -76,6 +76,13 @@ export const generateMetadata = async ({ params }) => {
 const Page = async ({ params }) => {
   const { locale } = await params;
   const client = await fetchData('/client')
+  const specialization = await fetch('https://backendbatd.clinstitute.co.uk/api/specializations_courses',{
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept-Language': locale
+    }
+  }).then((res) => res.json());
 
   // Fetch data based on the locale
   const cities = await fetchData(`/city`, locale);
@@ -97,9 +104,9 @@ const Page = async ({ params }) => {
         <MainContent locale={locale} />
       </div>
 
-      {/* Specialization Section 
+      {/* Specialization Section */}
       <SpecializationSection data={specialization?.data} locale={locale} />
-      */}
+      
 
       {/* Courses by Cities Carousel */}
       <div className="mt-16">
