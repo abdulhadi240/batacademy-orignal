@@ -76,7 +76,7 @@ export default function Home({ locale }) {
                   }
                 />
               </div>
-              <div className="md:relative hidden mb-6">
+              <div className="md:relative md:block hidden mb-6">
               <SectionTitle title={locale === 'en' ? "Register" : "ما هو"} highlight={locale === 'en' ? "Now !" : "الأكاديمية البريطانية؟"} start/>
 
                 {/* Decorative underline */}
