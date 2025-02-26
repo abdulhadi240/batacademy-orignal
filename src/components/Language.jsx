@@ -59,7 +59,7 @@ export default function ToggleLangButton({ languageToggleText }) {
       {/* Language toggle button */}
       <div
         onClick={handleLocaleToggle}
-        className="px-2  text-xs text-white rounded cursor-pointer"
+        className="px-2  text-xs  rounded cursor-pointer"
       >
         {languageToggleText}
       </div>

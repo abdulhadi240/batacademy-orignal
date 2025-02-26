@@ -49,7 +49,7 @@ export default function MobileMenu({ color, locale, languageToggleText, main }) 
           </div>
           {/* Language Toggle and Menu Icon */}
           <div className="flex items-center gap-4">
-            <div className={`${isScrolled ? 'bg-primary' : 'bg-transparent px-2 py-2'}  text-white rounded-md`}>
+            <div className={`${main ? (isScrolled ? "bg-primary text-white" : "bg-transparent px-2 py-2 text-white") : " text-black border-[1px] border-black"}   rounded-md`}>
               <Language languageToggleText={languageToggleText} />
             </div>
             <button
