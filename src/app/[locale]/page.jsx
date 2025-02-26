@@ -7,6 +7,7 @@ import fetchData from '@/actions/server';
 import Design from '../homepage1/components/Design';
 import CustomerCarasoul from '@/components/CustomerCarasoul';
 import Footer from '@/components/Footer';
+import Homepage_Course from '@/components/Homepage-Course';
 
 const SpecializationSection = dynamic(() => import('@/components/SpecializationSection'));
 const Carasoul = dynamic(() => import('@/components/Carasoul'));
@@ -19,6 +20,7 @@ const Team = dynamic(() => import('@/components/Team'));
 
 export const generateMetadata = async ({ params }) => {
   const locale = params.locale || 'en'; // Default to 'en' if no locale is provided
+
 
   const enMetadata = {
     title: "British Academy - Leading in Training & Development",
@@ -73,6 +75,7 @@ export const generateMetadata = async ({ params }) => {
 
 const Page = async ({ params }) => {
   const { locale } = await params;
+  const client = await fetchData('/client')
 
   // Fetch data based on the locale
   const cities = await fetchData(`/city`, locale);
@@ -82,12 +85,13 @@ const Page = async ({ params }) => {
     <><section>
       {/* Hero Section */}
       <Design locale={locale} />
-        <div className="block sm:hidden">
+        <div className="block sm:hidden -mt-10">
           <MobileFilter locale={locale} />
         </div>
 
+<Homepage_Course locale={params.locale}/>
       {/* Search and Main Content */}
-      <div className="container hidden mt-10 sm:block sm:px-4  sm:py-16">
+      <div className="container hidden  sm:block sm:px-4  sm:py-16">
 
         <SectionTitle title={locale === 'en' ? "What is" : "ما هو"} highlight={locale === 'en' ? "BRITISH ACADEMY?" : "الأكاديمية البريطانية؟"} />
         <MainContent locale={locale} />
@@ -98,27 +102,27 @@ const Page = async ({ params }) => {
       */}
 
       {/* Courses by Cities Carousel */}
-      <div className="sm:mt-16">
+      <div className="mt-16">
         <SectionTitle title={locale === 'en' ? "Courses by" : "دورات حسب"} highlight={locale === 'en' ? "Cities" : "المدن"} />
         <Carasoul data={cities} locale={locale} />
       </div>
 
       {/* Training Section */}
-      <div className="mt-32 block">
+      <div className="md:mt-32 block">
         <SectionTitle title={locale === 'en' ? "British Academy" : "الأكاديمية البريطانية"} highlight={locale === 'en' ? "For Training" : "للتدريب"} />
         <Training locale={locale} />
       </div>
       
 
       {/* Request Course Section */}
-      <div className="mt-32">
+      <div className="md:mt-32 mt-16">
         <SectionTitle title={locale === 'en' ? "Request A" : "طلب"} highlight={locale === 'en' ? "Course" : "دورة"} />
         <RequestCourse locale={locale} />
       </div>
       
 
       {/* Latest Publications Section */}
-      <div className="mt-32">
+      <div className="md:mt-32">
         <SectionTitle title={locale === 'en' ? "Latest" : "أحدث"} highlight={locale === 'en' ? "Publication" : "النشر"} />
         <DynamicTabs locale={locale} />
       </div>
@@ -167,7 +171,7 @@ const Page = async ({ params }) => {
 
       <div className="mt-10 md:mt-32 overflow-hidden customer mb-10">
         <SectionTitle title={locale === 'en' ? "Most Of" : "أغلب"} highlight={locale === 'en' ? "Our Customers" : "عملائنا"} />
-        <CustomerCarasoul locale={locale} />
+        <CustomerCarasoul locale={locale} client={client}/>
       </div>
     </section></>
   );

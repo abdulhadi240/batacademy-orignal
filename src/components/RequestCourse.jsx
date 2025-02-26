@@ -63,7 +63,7 @@ const RequestCourse = ({ locale }) => {
         </div>
 
         {/* Decorative Circles */}
-        <div className="absolute top-4 left-4 lg:block">
+        <div className=" hidden md:absolute top-4 left-4 lg:block">
           <div className="grid grid-cols-4 gap-2">
             {Array(20).fill().map((_, idx) => (
               <div key={idx} className="w-1 h-1 bg-white rounded-full"></div>
@@ -71,7 +71,7 @@ const RequestCourse = ({ locale }) => {
           </div>
         </div>
 
-        <div className="absolute bottom-4 right-4 lg:block">
+        <div className="hidden md:absolute bottom-4 right-4 lg:block">
           <div className="grid grid-cols-4 gap-2">
             {Array(20).fill().map((_, idx) => (
               <div key={idx} className="w-1 h-1 bg-white rounded-full"></div>

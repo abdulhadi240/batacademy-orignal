@@ -381,3 +381,14 @@ body {
   top: 4rem; /* Adjust based on where you want the card to stop */
   z-index: 50; /* Ensure the card is on top */
 }
+
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

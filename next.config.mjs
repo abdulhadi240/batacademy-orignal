@@ -4,7 +4,7 @@ const nextConfig = {
         remotePatterns: [
           {
             protocol: 'https',
-            hostname: 'backendbatd.clinstitute.co.uk',
+            hostname: 'batd.website12.help',
             port: '',
           },
           {

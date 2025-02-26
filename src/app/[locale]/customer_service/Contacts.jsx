@@ -6,49 +6,35 @@ import { FaWhatsapp, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
 import ContactCard from "./ContactCard";
 
 export default function Contacts() {
-  // 1. Read the locale from the route (e.g. /en or /ar)
+  // Read the locale from the route
   const params = useParams();
   const locale = params?.locale || "en"; // default to "en" if not provided
 
-  // 2. Define all strings conditionally
-  const labelShareQueries =
-    locale === "ar" ? "شارك استفساراتك معنا" : "Share your queries with us";
-  const headingEmailTeam =
-    locale === "ar" ? "راسل فريقنا" : "Email Our Team";
-  const textSpeakTeam =
-    locale === "ar"
-      ? "تحدث إلى فريقنا الودود."
-      : "Speak to our friendly team.";
-  const respondWithin =
-    locale === "ar"
-      ? "نرد خلال 24 ساعة."
-      : "We respond within 24 hours.";
+  // Conditional RTL styles
+  const rtlClass = locale === "ar" ? "rtl text-right" : "ltr text-left";
 
-  const labelLiveChat =
-    locale === "ar" ? "الدردشة المباشرة في الركن الأيمن" : "Live chat at the right corner";
-  const headingChatWhatsApp =
-    locale === "ar" ? "الدردشة على واتساب" : "Chat On Whatsapp";
+  // Define all strings conditionally
+  const labelShareQueries = locale === "ar" ? "شارك استفساراتك معنا" : "Share your queries with us";
+  const headingEmailTeam = locale === "ar" ? "راسل فريقنا" : "Email Our Team";
+  const textSpeakTeam = locale === "ar" ? "تحدث إلى فريقنا الودود." : "Speak to our friendly team.";
+  const respondWithin = locale === "ar" ? "نرد خلال 24 ساعة." : "We respond within 24 hours.";
+
+  const labelLiveChat = locale === "ar" ? "الدردشة المباشرة في الركن الأيمن" : "Live chat at the right corner";
+  const headingChatWhatsApp = locale === "ar" ? "الدردشة على واتساب" : "Chat On Whatsapp";
   const text24_7 = locale === "ar" ? "متاح 24/7" : "Mon-Sat 24/7";
 
-  const labelLiveTalk =
-    locale === "ar" ? "تحدث مباشرة مع فريقنا" : "Live Talk With Our Team";
-  const headingCallNow =
-    locale === "ar" ? "اتصل الآن" : "Call Now";
+  const labelLiveTalk = locale === "ar" ? "تحدث مباشرة مع فريقنا" : "Live Talk With Our Team";
+  const headingCallNow = locale === "ar" ? "اتصل الآن" : "Call Now";
 
-  const labelVisitOffice =
-    locale === "ar" ? "قم بزيارة مكتبنا" : "Visit our office";
-  const headingVisitUs =
-    locale === "ar" ? "زرنا!" : "Visit us!";
-  const inPersonSupport =
-    locale === "ar"
-      ? "تفضل بزيارتنا للحصول على دعم شخصي."
-      : "Come visit us for in-person support.";
+  const labelVisitOffice = locale === "ar" ? "قم بزيارة مكتبنا" : "Visit our office";
+  const headingVisitUs = locale === "ar" ? "زرنا!" : "Visit us!";
+  const inPersonSupport = locale === "ar" ? "تفضل بزيارتنا للحصول على دعم شخصي." : "Come visit us for in-person support.";
 
   return (
-    <div className="flex justify-center mt-10 sm:mt-20">
+    <div className={`flex justify-center mt-10 sm:mt-20 ${rtlClass}`}>
       <div className="grid grid-cols-1 gap-6 px-4 sm:px-16 lg:px-24 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
-        {/* 1. EMAIL CARD */}
+        {/* EMAIL CARD */}
         <ContactCard
           label={labelShareQueries}
           size={24}
@@ -64,7 +50,7 @@ export default function Contacts() {
           </p>
         </ContactCard>
 
-        {/* 2. WHATSAPP CHAT CARD */}
+        {/* WHATSAPP CHAT CARD */}
         <ContactCard
           label={labelLiveChat}
           size={24}
@@ -75,23 +61,19 @@ export default function Contacts() {
         >
           <div className="text-sm text-gray-600">
             <ul>
-              <li>
-                {locale === "ar" ? "واتساب (EN):" : "WhatsApp (EN):"} 00442035827999
-              </li>
-              <li>
-                {locale === "ar" ? "واتساب (AR):" : "WhatsApp (AR):"} 00447724022466
-              </li>
+              <li>{locale === "ar" ? "واتساب (EN):" : "WhatsApp (EN):"} 00442035827999</li>
+              <li>{locale === "ar" ? "واتساب (AR):" : "WhatsApp (AR):"} 00447724022466</li>
             </ul>
           </div>
         </ContactCard>
 
-        {/* 3. PHONE CALL CARD */}
+        {/* PHONE CALL CARD */}
         <ContactCard
           label={labelLiveTalk}
           size={24}
           Ricons={FaPhoneAlt}
           Heading={headingCallNow}
-          text="344 Grays Inn Rd,  London, England, WC1X 8BP"
+          text="344 Grays Inn Rd, London, England, WC1X 8BP"
           link="./"
         >
           <div className="text-sm text-gray-600">
@@ -102,7 +84,7 @@ export default function Contacts() {
           </div>
         </ContactCard>
 
-        {/* 4. VISIT US CARD */}
+        {/* VISIT US CARD */}
         <ContactCard
           label={labelVisitOffice}
           size={24}

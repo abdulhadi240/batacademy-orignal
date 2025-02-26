@@ -39,7 +39,7 @@ export default function ToggleLangButton({ languageToggleText }) {
   
 
   return (
-    <div className="flex items-center group bg-primary px-2 py-1">
+    <div className="flex items-center group border-[1px] py-2 rounded-sm border-white/70 px-2 ">
       {/* Conditionally rendered image */}
       <div
         className={`${

@@ -202,10 +202,23 @@ const translations = {
   },
 };
 
-export default function AcademyService({ params }) {
+export default async function AcademyService({ params }) {
   const locale = params.locale || 'en';
   const t = translations[locale] || translations['en'];
   const isRTL = locale === 'ar';
+
+  const features = await fetch(`${process.env.BACKEND_URL}/academy-service`,{
+    headers:
+    {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Accept-Language': locale
+
+    }
+  }).then((res)=>res.json())
+
+  console.log(features);
+  
 
   return (
     <div className={isRTL ? 'rtl text-right' : 'ltr text-left'}>
@@ -213,19 +226,8 @@ export default function AcademyService({ params }) {
       <Banner customerServiceHeading={t.heading} />
       <div className="container mx-auto px-4 py-8">
         <Tabs defaultValue="all" className="mb-12">
-          <TabsList className="grid w-full grid-cols-3 mb-8">
-            <TabsTrigger value="all">{t.tabs.all}</TabsTrigger>
-            <TabsTrigger value="academic">{t.tabs.academic}</TabsTrigger>
-            <TabsTrigger value="support">{t.tabs.support}</TabsTrigger>
-          </TabsList>
           <TabsContent value="all">
-            <ServiceCards services={t.services} isRTL={isRTL} />
-          </TabsContent>
-          <TabsContent value="academic">
-            <ServiceCards services={t.services.slice(0, 3)} isRTL={isRTL} />
-          </TabsContent>
-          <TabsContent value="support">
-            <ServiceCards services={t.services.slice(3)} isRTL={isRTL} />
+            <ServiceCards services={features?.data} isRTL={isRTL} />
           </TabsContent>
         </Tabs>
 
@@ -245,12 +247,12 @@ export default function AcademyService({ params }) {
           </div>
         </section>
 
-        <section className="text-center">
+        <section className="text-center bg-primary text-white py-12 px-4 rounded-lg">
           <h2 className="text-3xl font-bold mb-6">{t.getStarted}</h2>
           <p className="mb-8 max-w-2xl mx-auto">{t.description}</p>
           <Link
             href={`/${locale}/apply?type=consultation`}
-            className="text-white bg-primary p-2 rounded-sm"
+            className="bg-white text-primary font-semibold py-3 px-6 rounded-full hover:bg-gray-100 transition-colors duration-300"
           >
             {t.schedule}
           </Link>
@@ -277,29 +279,6 @@ function ServiceCards({ services, isRTL }) {
               {service.description}
             </CardDescription>
           </CardHeader>
-          <CardContent className="flex-grow">
-            <ul
-              className={`space-y-2 ${
-                isRTL ? 'text-right rtl' : 'text-left ltr'
-              }`}
-            >
-              {service.features.map((feature, fIndex) => (
-                <li
-                  key={fIndex}
-                  className={`flex items-center ${
-                    isRTL ? 'flex-row-reverse' : ''
-                  }`}
-                >
-                  <CheckCircleIcon
-                    className={`h-5 w-5 text-green-500 ${
-                      isRTL ? 'ml-2' : 'mr-2'
-                    }`}
-                  />
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
-          </CardContent>
         </Card>
       ))}
     </div>
