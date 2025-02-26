@@ -88,9 +88,9 @@ const Page = async ({ params }) => {
         <div className="block sm:hidden -mt-10">
           <MobileFilter locale={locale} />
         </div>
-
+{/* 
 <Homepage_Course locale={params.locale}/>
-      {/* Search and Main Content */}
+      Search and Main Content */}
       <div className="container hidden  sm:block sm:px-4  sm:py-16">
 
         <SectionTitle title={locale === 'en' ? "What is" : "ما هو"} highlight={locale === 'en' ? "BRITISH ACADEMY?" : "الأكاديمية البريطانية؟"} />
