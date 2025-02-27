@@ -53,7 +53,7 @@ const Design = ({ locale }) => {
             </div>
   
             {/* Search Bar */}
-            <div className="w-full md:w-auto max-w-3xl">
+            <div className="w-full  max-w-2xl">
             <Inputs locale={locale}/>
             </div>
   

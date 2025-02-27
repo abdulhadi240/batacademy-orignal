@@ -96,6 +96,11 @@ const Page = async ({ params }) => {
           <MobileFilter locale={locale} />
         </div>
 
+        <div className="mt-10 md:mt-32 overflow-hidden customer mb-10">
+        <SectionTitle title={locale === 'en' ? "" : "أغلب"} highlight={locale === 'en' ? "Accredited" : "عملائنا"} />
+        <CustomerCarasoul locale={locale} client={client}/>
+      </div>
+
 <Homepage_Course locale={params.locale}/>
      {/*  Search and Main Content */}
       <div className="container hidden  sm:block sm:px-4  sm:py-16">
