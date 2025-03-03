@@ -14,19 +14,19 @@ export default function Home({ locale }) {
   const courses = [
     {
       id: 1,
-      title:
-        "Short professional diploma in journalism ",
+      title: "Short professional diploma in journalism",
       image: "/000.webp",
       location: "LONDON",
       price: 500,
+      dates: ["March 10, 2025", "April 15, 2025", "May 20, 2025"],
     },
     {
       id: 2,
-      title:
-        "Professional Diploma of Accounting and Finance ",
+      title: "Professional Diploma of Accounting and Finance",
       image: "/000.webp",
       location: "LONDON",
       price: 500,
+      dates: ["March 12, 2025", "April 18, 2025", "May 22, 2025"],
     },
     {
       id: 3,
@@ -34,6 +34,7 @@ export default function Home({ locale }) {
       image: "/000.webp",
       location: "LONDON",
       price: 500,
+      dates: ["March 15, 2025", "April 20, 2025", "May 25, 2025"],
     },
     {
       id: 5,
@@ -41,6 +42,7 @@ export default function Home({ locale }) {
       image: "/000.webp",
       location: "LONDON",
       price: 500,
+      dates: ["March 17, 2025", "April 22, 2025", "May 28, 2025"],
     },
     {
       id: 6,
@@ -48,8 +50,10 @@ export default function Home({ locale }) {
       image: "/000.webp",
       location: "LONDON",
       price: 500,
+      dates: ["March 19, 2025", "April 25, 2025", "May 30, 2025"],
     },
   ];
+  
 
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   const isTablet = useMediaQuery("(min-width: 640px)");
@@ -107,7 +111,7 @@ export default function Home({ locale }) {
                 {courses.map((course) => (
                   <CarouselItem
                     key={course.id}
-                    className="pl-2 md:pl-4 basis-1/1 md:basis-1/2 lg:basis-1/4"
+                    className="pl-2 md:pl-4 basis-1/1 md:basis-1/2 lg:basis-1/3"
                   >
                     <div className="p-1">
                       <CourseCard course={course} />
