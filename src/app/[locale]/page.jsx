@@ -8,6 +8,7 @@ import Design from '../homepage1/components/Design';
 import CustomerCarasoul from '@/components/CustomerCarasoul';
 import Footer from '@/components/Footer';
 import Homepage_Course from '@/components/Homepage-Course';
+import { TeamCarasoul } from '@/components/TeamCarasoul';
 
 const SpecializationSection = dynamic(() => import('@/components/SpecializationSection'));
 const Carasoul = dynamic(() => import('@/components/Carasoul'));
@@ -96,14 +97,14 @@ const Page = async ({ params }) => {
           <MobileFilter locale={locale} />
         </div>
 
-        <div className="mt-10 md:mt-32 overflow-hidden customer mb-10">
+
+<Homepage_Course locale={params.locale}/>
+<div className="mt-10  overflow-hidden customer mb-10">
         <SectionTitle title={locale === 'en' ? "" : "أغلب"} highlight={locale === 'en' ? "Accredited" : "عملائنا"} />
         <CustomerCarasoul locale={locale} client={client}/>
       </div>
-
-<Homepage_Course locale={params.locale}/>
      {/*  Search and Main Content */}
-      <div className="container hidden  sm:block sm:px-4  sm:py-16">
+      <div className="container hidden  sm:block sm:px-4 ">
 
         <SectionTitle title={locale === 'en' ? "What is" : "ما هو"} highlight={locale === 'en' ? "BRITISH ACADEMY?" : "الأكاديمية البريطانية؟"} />
         <MainContent locale={locale} />
@@ -120,7 +121,7 @@ const Page = async ({ params }) => {
       </div>
 
       {/* Training Section */}
-      <div className="md:mt-32 block">
+      <div className=" block">
         <SectionTitle title={locale === 'en' ? "British Academy" : "الأكاديمية البريطانية"} highlight={locale === 'en' ? "For Training" : "للتدريب"} />
         <Training locale={locale} />
       </div>
@@ -143,41 +144,7 @@ const Page = async ({ params }) => {
       {/* Team Section */}
       <div className="mt-10 md:mt-32 team">
         <SectionTitle title={locale === 'en' ? "Team" : "الفريق"} highlight={locale === 'en' ? "Work" : "العمل"} />
-        <div className="flex justify-center">
-          <div className="grid grid-cols-2 gap-4 mt-10 overflow-hidden sm:grid-cols-3">
-            {[
-              {
-                image: '/4.webp',
-                name: locale === 'en' ? 'Nattasha Julie' : 'ناتاشا جولي',
-                designation: locale === 'en' ? 'Design, Australia' : 'التصميم، أستراليا',
-                number: '+1 (378) 400-1234',
-                email: 'julie@email.com'
-              },
-              {
-                image: '/Photo.webp',
-                name: locale === 'en' ? 'John Doe' : 'جون دو',
-                designation: locale === 'en' ? 'Developer, USA' : 'مطور، أمريكا',
-                number: '+1 (555) 123-4567',
-                email: 'john@email.com'
-              },
-              {
-                image: '/2.webp',
-                name: locale === 'en' ? 'Jane Smith' : 'جين سميث',
-                designation: locale === 'en' ? 'Marketing, UK' : 'التسويق، المملكة المتحدة',
-                number: '+44 (20) 7000-1234',
-                email: 'jane@email.com'
-              }
-            ].map((teamMember, index) => (
-              <Team
-                key={index}
-                image={teamMember.image}
-                name={teamMember.name}
-                designation={teamMember.designation}
-                number={teamMember.number}
-                email={teamMember.email} />
-            ))}
-          </div>
-        </div>
+        <TeamCarasoul/>
       </div>
       
 

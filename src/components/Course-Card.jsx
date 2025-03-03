@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
+import Link from "next/link"
 
 export default function CourseCard({ course }) {
   return (
@@ -28,7 +29,7 @@ export default function CourseCard({ course }) {
       </div>
 
       <div className="p-2 md:p-4">
-        <h3 className="text-sm font-medium text-slate-800 mb-4  group-hover:text-slate-600 transition-colors duration-200">
+        <h3 className="text-sm font-medium text-slate-800 mb-4 w-48 group-hover:text-slate-600 transition-colors duration-200">
           {course.title}
         </h3>
 
@@ -36,12 +37,14 @@ export default function CourseCard({ course }) {
           <Button className="flex-1 bg-slate-800 hover:bg-slate-700 text-white text-xs rounded py-1 transition-all duration-200 hover:shadow-lg">
             Registration
           </Button>
+          <Link href={'/course'}>
           <Button
             variant="outline"
             className="flex-1 border-slate-800 text-slate-800 hover:bg-slate-100 text-xs rounded py-1 transition-all duration-200 hover:shadow-lg"
           >
             Details
           </Button>
+          </Link>
         </div>
 
         <div className="text-slate-800 font-medium">$ {course.price}</div>

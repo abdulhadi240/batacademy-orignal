@@ -138,10 +138,10 @@ function HeaderSection({ params, main }) {
           <Link href="/special-request" className="hover:underline">
             {specialRequest} |
           </Link>
-          <Link href="/Blog/articles" className="hover:underline">
+          <Link href={`/${params}/Blog`}  className="hover:underline">
             {blog} |
           </Link>
-          <Link href="/FAQ" className="hover:underline">
+          <Link href={`/${params}/FAQ`} className="hover:underline">
             {faq}
           </Link>
           <div className="border-[1px] border-slate-500">
@@ -178,7 +178,7 @@ function HeaderSection({ params, main }) {
           {activeMenu.map((item, index) => (
             <Link
               key={index}
-              href={item.link}
+              href={`/${params}${item.link}`}
               className={`hover:text-[#152765] text-[#6D737A]`}
             >
               {item.name}
@@ -193,14 +193,14 @@ function HeaderSection({ params, main }) {
           }`}
         >
           <Link
-            href={isArabic ? "/ar/sign-in" : "/sign-in"}
+            href={isArabic ? "sign-in" : "sign-in"}
             className="flex items-center text-gray-500 hover:text-blue-900"
           >
             <FaLock className={`${isArabic ? "ml-1" : "mr-1"}`} />
             {login}
           </Link>
           <Link
-            href={isArabic ? "/ar/sign-in" : "/sign-in"}
+            href={isArabic ? "sign-in" : "sign-in"}
             className={` ${isArabic ? 'mr-3' : 'ml-0'} px-4 py-2 text-white bg-blue-900 rounded hover:bg-blue-700`}
           >
             {signUp}

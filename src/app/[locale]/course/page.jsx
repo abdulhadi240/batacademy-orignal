@@ -20,6 +20,7 @@ import fetchData, { GetSpecialization } from "@/actions/server";
 import Content_extend from "@/components/Content_extend";
 import { Suspense } from "react";
 import CourseVideoCard from "@/components/CourseVideoCard";
+import Link from "next/link";
 
 export default async function Page({ params }) {
   const { locale } = await params;
@@ -114,9 +115,11 @@ export default async function Page({ params }) {
                   <Button className="w-full bg-secondary text-white hover:bg-secondary/80 rounded-md py-2 text-sm font-medium">
                     Get In Touch
                   </Button>
-                  <Button className="w-full bg-primary text-white hover:bg-primary/80 rounded-md py-2 text-sm font-medium">
+                  <Link href="register">
+                  <Button className="w-full mt-2 bg-primary text-white hover:bg-primary/80 rounded-md py-2 text-sm font-medium">
                     Register Now
                   </Button>
+                  </Link>
                 </div>
               </div>
             </div>

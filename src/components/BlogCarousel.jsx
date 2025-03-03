@@ -1,5 +1,5 @@
 "use client";
-import ArticleCard from "@/app/Blog/ArticleCard";
+import ArticleCard from "./ArticleCard";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
@@ -16,7 +16,7 @@ const BlogCarousel = ({ data }) => {
   const [offset, setOffset] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const totalDots = Math.ceil(data.data.length / CARDS_PER_DOT);
+  const totalDots = Math.ceil(data?.data?.length / CARDS_PER_DOT);
 
   const shiftLeft = () => {
     if (currentIndex > 0) {

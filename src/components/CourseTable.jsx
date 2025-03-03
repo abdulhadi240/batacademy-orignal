@@ -87,7 +87,7 @@ export default function CourseTable() {
               return (
                 <tr key={index} className="border-t hover:bg-muted/50 transition-colors">
                   <td className="px-4 py-2">
-                    <Link href={`/courses/${courseLink}`} className="text-primary hover:underline">
+                    <Link href={`course`} className="text-primary hover:underline">
                       {course.name}
                     </Link>
                   </td>
@@ -95,10 +95,10 @@ export default function CourseTable() {
                   <td className="px-4 py-2 text-center">
                     <div className="flex justify-center gap-2">
                       <Button variant="outline" asChild>
-                        <Link href={`/courses/${courseLink}`}>Details</Link>
+                        <Link href={`courses`}>Details</Link>
                       </Button>
                       <Button asChild>
-                        <Link href="/register" className='text-white'>Register</Link>
+                        <Link href="register" className='text-white'>Register</Link>
                       </Button>
                     </div>
                   </td>

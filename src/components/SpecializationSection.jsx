@@ -3,7 +3,7 @@ import { useState } from "react";
 import SpecializationCard from "./SpecializationCard";
 
 const SpecializationSection = ({ data, locale }) => {
-  const [selectedMenuItem, setSelectedMenuItem] = useState(data[2].id); // Initially select the first menu item
+  const [selectedMenuItem, setSelectedMenuItem] = useState(data[0].id); // Initially select the first menu item
   const [showAll, setShowAll] = useState(false);
   const [number, setNumber] = useState(6);
 

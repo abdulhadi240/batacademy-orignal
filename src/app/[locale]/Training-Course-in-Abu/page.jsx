@@ -20,7 +20,7 @@ export default function Abudhabi() {
         </ContentSection>
 
 
-        <div className="mt-6">
+        <div className="mt-6 mx-16">
           <CourseTable />
         </div>
         

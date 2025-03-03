@@ -13,9 +13,9 @@ const FaLock = dynamic(() =>
 const menus = {
   en: [
     { name: "Home", link: "/" },
-    { name: "Diploma", link: "/diploma" },
-    { name: "Masters", link: "/masters" },
-    { name: "Training Course", link: "/training-courses/" },
+    { name: "Diploma", link: "/Diploma" },
+    { name: "Masters", link: "/Diploma" },
+    { name: "Training Course", link: "/Diploma" },
     { name: "Cities", link: "/cities" },
     { name: "Consulting", link: "/consulting-services" },
     { name: "How We Are", link: "/Academy-Vision" },
@@ -23,9 +23,9 @@ const menus = {
   ],
   ar: [
     { name: "الرئيسية", link: "/" },
-    { name: "الدبلومة", link: "/diploma" },
-    { name: "الماجستير", link: "/masters" },
-    { name: "دورات تدريبية", link: "/training-courses/" },
+    { name: "الدبلومة", link: "/Diploma" },
+    { name: "الماجستير", link: "/Diploma" },
+    { name: "دورات تدريبية", link: "/Diploma" },
     { name: "المدن", link: "/cities" },
     { name: "الاستشارات", link: "/consulting-services" },
     { name: "من نحن", link: "/Academy-Vision" },

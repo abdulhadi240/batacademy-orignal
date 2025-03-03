@@ -30,7 +30,7 @@ export default function JobDetailsPage({params}) {
                   height={80}
                   className="rounded-lg border p-2"
                 />
-                <Link href={`/${params.locale}/apply?type=job`} size="lg" className="md:hidden text-white bg-primary p-2">
+                <Link href={`apply?type=job`} size="lg" className="md:hidden text-white bg-primary p-2">
                   Apply Now
                 </Link>
               </div>
@@ -58,12 +58,14 @@ export default function JobDetailsPage({params}) {
                   </div>
                 </div>
               </div>
+              <Link href={'apply?type=job'}>
               <Button
                 size="lg"
                 className="hidden md:block flex-shrink-0 text-white"
               >
                 Apply Now
               </Button>
+              </Link>
             </div>
           </div>
         </div>

@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/popover";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const dummyCourses = [
   {
@@ -50,7 +51,8 @@ export default function CoursesList() {
                 key={index}
                 className="border-b border-gray-200 hover:bg-[#f0f5fc] transition-colors"
               >
-                <TableCell className="font-medium p-4">{course.name}</TableCell>
+                <Link href={'course'}>
+                <TableCell className="font-medium p-4">{course.name}</TableCell></Link>
                 <TableCell className="p-4 text-center">
                   <Popover>
                     <PopoverTrigger className="text-gray-500 hover:text-primary">
@@ -81,9 +83,11 @@ export default function CoursesList() {
                 </TableCell>
                 <TableCell className="p-4 text-center font-semibold">{course.price}</TableCell>
                 <TableCell className="p-4 text-center">
+                  <Link href={'register'}>
                   <Button className="bg-primary text-white px-4 py-2 rounded-md">
                     Register
                   </Button>
+                  </Link>
                 </TableCell>
               </TableRow>
             ))}

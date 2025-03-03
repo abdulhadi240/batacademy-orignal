@@ -107,7 +107,7 @@ export default function Home({ locale }) {
                 {courses.map((course) => (
                   <CarouselItem
                     key={course.id}
-                    className="pl-2 md:pl-4 basis-[58.823529411764706%] md:basis-1/2 lg:basis-1/4"
+                    className="pl-2 md:pl-4 basis-1/1 md:basis-1/2 lg:basis-1/4"
                   >
                     <div className="p-1">
                       <CourseCard course={course} />

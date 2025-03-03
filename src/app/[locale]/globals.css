@@ -62,12 +62,13 @@ body {
   justify-content: center;
   gap: 10px;
   margin: 10px;
+  margin-left: 25px;
 }
 
 .flip-card {
   background-color: transparent;
-  width: 200px;
-  height: 280px;
+  width: 300px;
+  height: 400px;
   perspective: 1000px; /* 3D perspective */
 }
 

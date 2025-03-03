@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import useMeasure from "react-use-measure";
-
+import { IoArrowForward } from "react-icons/io5";
 const CARD_WIDTH = 140; // Width of each card
 const MARGIN = 20; // Margin between cards
 const CARD_SIZE = CARD_WIDTH + MARGIN;
@@ -54,7 +54,7 @@ const BlogPostCarousel = ({data}) => {
             {data?.data.map((post, index) => (
               <Link href={`/${post.slug}`}
                 key={index}
-                className="flex-shrink-0"
+                className="flex-shrink-0 border-[1px] bg-primary text-white border-primary rounded-lg hover:scale-105 transition-all"
                 style={{ width: CARD_WIDTH + 50 }}
               >
                 <Image
@@ -64,15 +64,16 @@ const BlogPostCarousel = ({data}) => {
                   alt={post.name}
                   className="rounded-t-lg"
                 />
-                <div className="py-4 text-center">
-                  <h3 className="font-bold">{post.name}</h3>
+                <div className="pt-4 text-center">
+                  <h3 className="font-bold text-white">{post.name}</h3>
                 </div>
+                <div className="text-xs pb-2 text-white gap-2 text-center flex items-center justify-center">View all courses <IoArrowForward /></div>
               </Link>
             ))}
           </motion.div>
         </div>
       </div>
-      {/* Dots */}
+      {/* Dots 
       <div className="flex justify-center items-center md:mt-10 mb-10 gap-1">
         {Array.from({ length: totalDots }).map((_, index) => (
           <div
@@ -83,7 +84,7 @@ const BlogPostCarousel = ({data}) => {
             onClick={() => goToIndex(index)}
           ></div>
         ))}
-      </div>
+      </div>*/}
       <div className="flex justify-center md:justify-end items-end mt-4 md:mr-32">
         {/* Navigation Buttons */}
         <div className="flex items-center gap-4 mb-2">
