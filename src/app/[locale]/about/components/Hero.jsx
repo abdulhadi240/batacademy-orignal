@@ -11,17 +11,17 @@ import  ExploreCard  from './ExploreCards';
 export const exploreWorlds = [
     {
       id: 'world-1',
-      imgUrl: '/hero_about.webp',
+      imgUrl: '/about3.jpg',
       title: 'The Hogwarts',
     },
     {
       id: 'world-2',
-      imgUrl: '/hero_about.webp',
+      imgUrl: '/about2.jpg',
       title: 'The Upside Down',
     },
     {
       id: 'world-3',
-      imgUrl: '/hero_about.webp',
+      imgUrl: '/about3.jpg',
       title: 'Kadirojo Permai',
     },
 

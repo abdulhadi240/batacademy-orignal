@@ -13,7 +13,7 @@ const ExploreCards = ({ id, imgUrl, title, index, active, handleClick }) => (
   >
     <img
       src={imgUrl}
-      alt="planet-04"
+      alt={id}
       className="absolute w-full h-full object-cover rounded-[24px]"
     />
     
