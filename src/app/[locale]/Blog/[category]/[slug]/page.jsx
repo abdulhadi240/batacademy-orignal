@@ -6,11 +6,11 @@ import HeaderSection from "@/components/HeaderSection";
 
 export async function generateMetadata({ params }) {
   const product = await fetch(
-    `${process.env.BACKEND_URL}/blogs/${params.slug}`,
+    `https://batd.website12.help/api/blogs/${params.slug}`,
     {
       headers: {
         "Content-Type": "application/json",
-        "Accept-Language": `${process.env.LOCALE_LANGUAGE}`,
+        "Accept-Language": `${params.locale}`,
 
       },
     }
@@ -55,32 +55,21 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export async function generateStaticParams() {
-  const posts = await fetch(`${process.env.BACKEND_URL}/blogs/`, {
-    headers: {
-      "Content-Type": "application/json",
-      "Accept-Language": `${process.env.LOCALE_LANGUAGE}`,
 
-    },
-  }).then((res) => res.json());
-  return posts.data.map((post) => ({
-    id: post.id,
-  }));
-}
 
 const BlogPost = async ({ params }) => {
-  const data = await fetch(`${process.env.BACKEND_URL}/blogs/${params.slug}`, {
+  const data = await fetch(`https://batd.website12.help/api/blogs/${params.slug}`, {
     headers: {
       "Content-Type": "application/json",
-      "Accept-Language": `${process.env.LOCALE_LANGUAGE}`,
+      "Accept-Language": `${params.locale}`,
 
     },
   }).then((res) => res.json());
 
-  const blogs = await fetch(`${process.env.BACKEND_URL}/blogs/`, {
+  const blogs = await fetch(`https://batd.website12.help/api/blogs/`, {
     headers: {
       "Content-Type": "application/json",
-      "Accept-Language": `${process.env.LOCALE_LANGUAGE}`,
+      "Accept-Language": `${params.locale}`,
 
     },
   }).then((res) => res.json());

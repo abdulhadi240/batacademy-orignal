@@ -11,7 +11,7 @@ export async function generateMetadata({ params }) {
   const locale = params.locale || "en"; // Fallback to English if no locale is provided
 
   const product = await fetch(
-    `${process.env.BACKEND_URL}/blogs/${params.category}/category`,
+    `${process.env.BACKEND_URL}/post-category/${params.category}`,
     {
       headers: {
         "Content-Type": "application/json",
@@ -61,7 +61,7 @@ export async function generateMetadata({ params }) {
 
 export async function generateStaticParams() {
   const locales = ["en", "ar"]; // Supported locales
-  const posts = await fetch(`${process.env.BACKEND_URL}/blogs/`, {
+  const posts = await fetch(`${process.env.BACKEND_URL}/post/`, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -87,7 +87,7 @@ export default async function Page({ params }) {
   const locale = params.locale || "en"; // Determine locale from params
 
   const articles = await fetch(
-    `${process.env.BACKEND_URL}/blogs/${params.category}/category`,
+    `${process.env.BACKEND_URL}/post-category/${params.category}`,
     {
       headers: {
         "Content-Type": "application/json",
