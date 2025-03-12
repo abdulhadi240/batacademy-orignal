@@ -48,13 +48,13 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export async function generateStaticParams() {
+{/**export async function generateStaticParams() {
   const posts = await fetchData('/post','en')
   return posts.data.map((post) => ({
     id: post.id,
   }));
 }
-
+*/}
 const BlogPost = async ({ params }) => {
   const data = await fetchData(`/post/${params.slug}`, params.locale);
   const blogs = await fetchData("/post?page=12", params.locale);
