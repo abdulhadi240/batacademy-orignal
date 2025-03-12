@@ -13,7 +13,7 @@ const Programs = ({ SpecializationCategory, params, data, category, city, specia
   const slug = params
   
   const [coursedata, setCourseData] = useState(data); // Full data
-  const [filteredCourses, setFilteredCourses] = useState(data?.data.data || []); // Filtered data for rendering
+  const [filteredCourses, setFilteredCourses] = useState(data?.data || []); // Filtered data for rendering
   const [searchInput, setSearchInput] = useState(searchParams.get('search') || ''); // Search input
   const [selectedLanguage, setSelectedLanguage] = useState(searchParams.get('language') || '');
   const [selectedMonth, setSelectedMonth] = useState(searchParams.get('month') || '');
@@ -34,7 +34,7 @@ const Programs = ({ SpecializationCategory, params, data, category, city, specia
     router.push(`?${currentParams.toString()}`, { scroll: false })
   };
 
-  useEffect(() => {
+  {/** useEffect(() => {
     const fetchData = async () => {
       // Build query string dynamically, excluding empty parameters
       const params = {
@@ -88,7 +88,7 @@ const Programs = ({ SpecializationCategory, params, data, category, city, specia
       );
       setFilteredCourses(filtered);
     }
-  }, [searchInput, coursedata]);
+  }, [searchInput, coursedata]); */}
 
   const handleSearch = (e) => {
     if (e.key === 'Enter') {
@@ -234,7 +234,7 @@ const Programs = ({ SpecializationCategory, params, data, category, city, specia
       </div>
       <Content_extend categories={SpecializationCategory?.data}>
         <div className="px-5 mt-4">
-        <Courses_List courses={filteredCourses}/>
+        <Courses_List courses={filteredCourses} locale={params}/>
         </div>
         <div className="flex flex-col gap-2 mt-10">
           <h1 className="flex items-center justify-center p-1 text-2xl font-bold text-center md:p-0">

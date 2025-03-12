@@ -16,7 +16,7 @@ const BlogPostCarousel = ({data}) => {
   const [offset, setOffset] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const totalDots = Math.ceil(data?.data?.length / CARDS_PER_DOT);
+  const totalDots = Math.ceil(data?.length / CARDS_PER_DOT);
 
   const shiftLeft = () => {
     if (currentIndex > 0) {
@@ -51,7 +51,7 @@ const BlogPostCarousel = ({data}) => {
             }}
             className="flex gap-5"
           >
-            {data?.data.map((post, index) => (
+            {data?.map((post, index) => (
               <Link href={`/${post.slug}`}
                 key={index}
                 className="flex-shrink-0 border-[1px] bg-primary text-white border-primary rounded-lg hover:scale-105 transition-all"

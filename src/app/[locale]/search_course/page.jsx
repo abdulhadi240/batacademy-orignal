@@ -46,21 +46,26 @@ const page = async ({ params, searchParams }) => {
 
   if (type == 1) coursesUrl = '/diploma-courses';
   else if (type == 2) coursesUrl = '/master-courses';
-  else if (type == 3) coursesUrl = '/diploma-courses';
+  else if (type == 3) coursesUrl = '/course';
 
   const courses = await fetchData(coursesUrl,locale)
-  console.log(courses);
+  const cities = await fetchData('/city',locale)
+  const specializations = await fetchData('/specialization',locale)
+ const category = await fetchData('/category',locale)
+
+ console.log(courses.data.approved);
+ 
   
   return (
     <div>
       <HeaderSection params={locale} />
       <Programs
-        params={null}
+        params={locale}
         data={courses}
-        city={null}
-        specialization={null}
+        city={cities}
+        specialization={specializations}
         SpecializationCategory={null}
-        category={null}
+        category={category}
       />
     </div>
   );

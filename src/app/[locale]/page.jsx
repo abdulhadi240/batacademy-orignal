@@ -75,84 +75,123 @@ export const generateMetadata = async ({ params }) => {
 
 
 const Page = async ({ params }) => {
-  const { locale } = await params;
-  const client = await fetchData('/client')
-  const specialization = await fetch('https://backendbatd.clinstitute.co.uk/api/specializations_courses',{
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept-Language': locale
+  const { locale } = params;
+
+  // Fetch all data in parallel for better performance
+  const [client, specialization, cities, courses, team, accredited] = await Promise.all([
+    fetchData('/client'),
+    fetchData('/home/specializations', locale),
+    fetchData(`/home/cities`, locale),
+    fetchData('/home/courses', locale),
+    fetchData('/home/teams', locale),
+    fetchData('/home/accredited', locale)
+  ]);
+
+  // Translations object for better maintenance
+  const translations = {
+    en: {
+      accredited: "Accredited",
+      ourCustomers: "Our Customers",
+      whatIs: "What is",
+      britishAcademy: "BRITISH ACADEMY?",
+      coursesBy: "Courses by",
+      cities: "Cities",
+      forTraining: "For Training",
+      requestA: "Request A",
+      course: "Course",
+      latest: "Latest",
+      publication: "Publication",
+      team: "Team",
+      work: "Work",
+      mostOf: "Most Of"
+    },
+    ar: {
+      accredited: "أغلب",
+      ourCustomers: "عملائنا",
+      whatIs: "ما هو",
+      britishAcademy: "الأكاديمية البريطانية؟",
+      coursesBy: "دورات حسب",
+      cities: "المدن",
+      forTraining: "للتدريب",
+      requestA: "طلب",
+      course: "دورة",
+      latest: "أحدث",
+      publication: "النشر",
+      team: "الفريق",
+      work: "العمل",
+      mostOf: "أغلب"
     }
-  }).then((res) => res.json());
+  };
 
-  // Fetch data based on the locale
-  const cities = await fetchData(`/city`, locale);
-
+  const t = translations[locale || 'en'];
 
   return (
-    <><section>
+    <section className="min-h-screen">
       {/* Hero Section */}
       <Design locale={locale} />
-        <div className="block sm:hidden -mt-10">
-          <MobileFilter locale={locale} />
-        </div>
-
-
-<Homepage_Course locale={params.locale}/>
-<div className="mt-10  overflow-hidden customer mb-10">
-        <SectionTitle title={locale === 'en' ? "" : "أغلب"} highlight={locale === 'en' ? "Accredited" : "عملائنا"} />
-        <CustomerCarasoul locale={locale} client={client}/>
+      
+      {/* Mobile Filter - Only visible on small screens */}
+      <div className="block sm:hidden -mt-10">
+        <MobileFilter locale={locale} />
       </div>
-     {/*  Search and Main Content */}
-      <div className="container hidden  sm:block sm:px-4 ">
 
-        <SectionTitle title={locale === 'en' ? "What is" : "ما هو"} highlight={locale === 'en' ? "BRITISH ACADEMY?" : "الأكاديمية البريطانية؟"} />
+      {/* Course Section */}
+      <Homepage_Course locale={locale} courses={courses} />
+
+      {/* Accredited Customers Section */}
+      <div className="mt-10 overflow-hidden customer mb-10">
+        <SectionTitle 
+          title={locale === 'en' ? "" : t.accredited} 
+          highlight={locale === 'en' ? t.accredited : t.ourCustomers} 
+        />
+        <CustomerCarasoul locale={locale} accredited client={accredited} />
+      </div>
+
+      {/* Main Content Section - Hidden on mobile */}
+      <div className="container hidden sm:block sm:px-4">
+        <SectionTitle title={t.whatIs} highlight={t.britishAcademy} />
         <MainContent locale={locale} />
       </div>
 
       {/* Specialization Section */}
-      <SpecializationSection data={specialization?.data} locale={locale} />
-      
+      <SpecializationSection data={specialization} locale={locale} />
 
-      {/* Courses by Cities Carousel */}
+      {/* Cities Section */}
       <div className="mt-16">
-        <SectionTitle title={locale === 'en' ? "Courses by" : "دورات حسب"} highlight={locale === 'en' ? "Cities" : "المدن"} />
+        <SectionTitle title={t.coursesBy} highlight={t.cities} />
         <Carasoul data={cities} locale={locale} />
       </div>
 
       {/* Training Section */}
-      <div className=" block">
-        <SectionTitle title={locale === 'en' ? "British Academy" : "الأكاديمية البريطانية"} highlight={locale === 'en' ? "For Training" : "للتدريب"} />
+      <div className="block">
+        <SectionTitle title={locale === 'en' ? "British Academy" : "الأكاديمية البريطانية"} highlight={t.forTraining} />
         <Training locale={locale} />
       </div>
-      
 
       {/* Request Course Section */}
       <div className="md:mt-32 mt-16">
-        <SectionTitle title={locale === 'en' ? "Request A" : "طلب"} highlight={locale === 'en' ? "Course" : "دورة"} />
+        <SectionTitle title={t.requestA} highlight={t.course} />
         <RequestCourse locale={locale} />
       </div>
-      
 
-      {/* Latest Publications Section */}
+      {/* Publications Section */}
       <div className="md:mt-32">
-        <SectionTitle title={locale === 'en' ? "Latest" : "أحدث"} highlight={locale === 'en' ? "Publication" : "النشر"} />
+        <SectionTitle title={t.latest} highlight={t.publication} />
         <DynamicTabs locale={locale} />
       </div>
-      
 
       {/* Team Section */}
       <div className="mt-10 md:mt-32 team">
-        <SectionTitle title={locale === 'en' ? "Team" : "الفريق"} highlight={locale === 'en' ? "Work" : "العمل"} />
-        <TeamCarasoul/>
+        <SectionTitle title={t.team} highlight={t.work} />
+        <TeamCarasoul teamMembers={team} />
       </div>
-      
 
+      {/* Customers Section */}
       <div className="mt-10 md:mt-32 overflow-hidden customer mb-10">
-        <SectionTitle title={locale === 'en' ? "Most Of" : "أغلب"} highlight={locale === 'en' ? "Our Customers" : "عملائنا"} />
-        <CustomerCarasoul locale={locale} client={client}/>
+        <SectionTitle title={t.mostOf} highlight={t.ourCustomers} />
+        <CustomerCarasoul locale={locale} client={client} />
       </div>
-    </section></>
+    </section>
   );
 };
 

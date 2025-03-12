@@ -12,8 +12,12 @@ import {
 import Image from "next/image";
 import HeaderSection from "@/components/HeaderSection";
 import Link from "next/link";
+import fetchData from "@/actions/server";
 
-export default function JobDetailsPage({params}) {
+export default async function JobDetailsPage({params}) {
+  const {locale , job} = params;
+  const job_details = await fetchData(`/job/${job}`,locale)
+  const all_jobs = await fetchData(`/job`,locale)
   return (
     <>
       <HeaderSection params={params.locale}/>
@@ -24,41 +28,41 @@ export default function JobDetailsPage({params}) {
             <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-6">
               <div className="flex items-center gap-4 md:flex-shrink-0">
                 <Image
-                  src="/logo.png"
+                  src={job_details?.company?.image}
                   alt="Google Inc"
                   width={80}
                   height={80}
                   className="rounded-lg border p-2"
                 />
-                <Link href={`apply?type=job`} size="lg" className="md:hidden text-white bg-primary p-2">
+                <Link href={`/${locale}/apply?type=job&id=${job_details.id}`} size="lg" className="md:hidden text-white bg-primary p-2">
                   Apply Now
                 </Link>
               </div>
               <div className="flex-grow">
                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-2">
                   <h1 className="text-xl md:text-2xl font-semibold">
-                    Senior UI Designer
+                    {job_details.name}
                   </h1>
                   <Badge className={"bg-secondary text-white font-thin"}>
-                    Full Time
+                  {job_details.type == 0 ? 'Full Time' : 'Part Time'}
                   </Badge>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 text-muted-foreground text-sm md:text-base">
                   <div className="flex items-center gap-2">
                     <Building2 className="h-4 w-4" />
-                    <span>Google Inc</span>
+                    <span>{job_details.company.name}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <MapPin className="h-4 w-4" />
-                    <span>San Francisco, USA</span>
+                    <span>{job_details.country}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock className="h-4 w-4" />
-                    <span>Posted 2 days ago</span>
+                    <span>{job_details.posted}</span>
                   </div>
                 </div>
               </div>
-              <Link href={'apply?type=job'}>
+              <Link href={`/${locale}/apply?type=job&id=${job_details.id}`}>
               <Button
                 size="lg"
                 className="hidden md:block flex-shrink-0 text-white"
@@ -78,36 +82,17 @@ export default function JobDetailsPage({params}) {
               <Card className="p-6">
                 <h2 className="text-xl font-semibold mb-4">Job Description</h2>
                 <p className="text-sm md:text-base text-muted-foreground mb-6">
-                  We are looking for a Senior UI Designer to join our team. You
-                  will be responsible for delivering the best online user
-                  experience, working with stakeholders to understand
-                  requirements, and converting them into elegant and functional
-                  designs.
+                  {job_details.description}
                 </p>
 
                 <h3 className="font-semibold mb-3">Requirements</h3>
                 <ul className="list-disc list-inside text-muted-foreground space-y-2 mb-6">
-                  <li>5+ years of experience in UI/UX design</li>
-                  <li>Strong portfolio demonstrating UI design skills</li>
-                  <li>
-                    Proficiency in Figma, Sketch, and Adobe Creative Suite
-                  </li>
-                  <li>
-                    Experience with design systems and component libraries
-                  </li>
-                  <li>Excellent communication and collaboration skills</li>
+                {job_details.requirements}
                 </ul>
 
                 <h3 className="font-semibold mb-3">Responsibilities</h3>
                 <ul className="list-disc list-inside text-muted-foreground space-y-2">
-                  <li>
-                    Create user-centered designs by understanding business
-                    requirements
-                  </li>
-                  <li>Develop UI mockups and prototypes</li>
-                  <li>Create original graphic designs</li>
-                  <li>Prepare and present rough drafts to internal teams</li>
-                  <li>Identify and troubleshoot UX problems</li>
+                {job_details.responsibilities}
                 </ul>
               </Card>
 
@@ -115,63 +100,37 @@ export default function JobDetailsPage({params}) {
               <Card className="p-6">
                 <h2 className="text-xl font-semibold mb-4">Similar Jobs</h2>
                 <div className="space-y-4">
-                  {[
-                    {
-                      title: "UX Designer",
-                      company: "Apple",
-                      location: "Cupertino, CA",
-                      salary: "$90k - $120k",
-                      posted: "3 days ago",
-                    },
-                    {
-                      title: "Product Designer",
-                      company: "Facebook",
-                      location: "Menlo Park, CA",
-                      salary: "$100k - $130k",
-                      posted: "1 week ago",
-                    },
-                    {
-                      title: "UI/UX Designer",
-                      company: "Amazon",
-                      location: "Seattle, WA",
-                      salary: "$85k - $115k",
-                      posted: "2 days ago",
-                    },
-                    {
-                      title: "Senior UI Designer",
-                      company: "Microsoft",
-                      location: "Redmond, WA",
-                      salary: "$110k - $140k",
-                      posted: "5 days ago",
-                    },
-                  ].map((job, index) => (
+                {all_jobs?.data?.map((job, index) => (
+                  index < 5 && 
                     <div
                       key={index}
                       className="flex flex-col sm:flex-row sm:items-start gap-3 p-4 hover:bg-gray-50 rounded-lg cursor-pointer"
                     >
                       <Image
-                        src={"/logo.png"}
-                        alt={`${job.company} logo`}
+                        src={job.company.image}
+                        alt={`${job.company.name} logo`}
                         width={48}
                         height={48}
                         className="rounded border p-1"
                       />
                       <div className="flex-grow">
-                        <h3 className="font-semibold">{job.title}</h3>
+                        <h3 className="font-semibold">{job.name}</h3>
                         <div className="text-sm text-muted-foreground flex flex-wrap gap-x-2">
-                          <span>{job.company}</span> •{" "}
-                          <span>{job.location}</span>
+                          <span>{job.company.name}</span> •{" "}
+                          <span>{job.city}</span>
                         </div>
                         <div className="text-sm text-muted-foreground mt-1">
-                          <span>{job.salary}</span> •{" "}
+                          <span>£ {job.salary_min} - £{job.salary_max}</span> •{" "}
                           <span>Posted {job.posted}</span>
                         </div>
                       </div>
                       <Badge className="self-start sm:self-center mt-2 sm:mt-0 bg-secondary text-white font-thin">
-                        Full Time
+                      {job_details.type}
                       </Badge>
                     </div>
+                  
                   ))}
+                  
                 </div>
                 <Button variant="outline" className="w-full mt-4">
                   View All Similar Jobs
@@ -194,7 +153,7 @@ export default function JobDetailsPage({params}) {
                       <p className="text-sm text-muted-foreground">
                         Salary Range
                       </p>
-                      <p className="font-medium">$80k - $100k / year</p>
+                      <p className="font-medium">£{job_details.salary_min} - £{job_details.salary_max} / year</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
@@ -203,7 +162,7 @@ export default function JobDetailsPage({params}) {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Job Type</p>
-                      <p className="font-medium">Full Time</p>
+                      <p className="font-medium">{job_details.type}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
@@ -212,7 +171,7 @@ export default function JobDetailsPage({params}) {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Team Size</p>
-                      <p className="font-medium">15-20 People</p>
+                      <p className="font-medium">{job_details.team_min} People</p>
                     </div>
                   </div>
                 </div>
@@ -222,24 +181,19 @@ export default function JobDetailsPage({params}) {
                 <h2 className="text-xl font-semibold mb-4">About Company</h2>
                 <div className="space-y-4">
                   <p className="text-muted-foreground">
-                    Google is a multinational technology company specializing in
-                    Internet-related services and products, including online
-                    advertising technologies, search engine, cloud computing,
-                    software, and hardware.
+                    {job_details.company.description}
                   </p>
                   <div className="space-y-2">
                     <div className="flex items-center gap-2 text-sm">
-                      <MapPin className="h-4 w-4 text-muted-foreground" />
-                      <span>Mountain View, CA</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm">
                       <Users className="h-4 w-4 text-muted-foreground" />
-                      <span>50,000+ Employees</span>
+                      <span>{job_details.team_min}+ Employees</span>
                     </div>
                   </div>
-                  <Button variant="outline" className="w-full">
+                  <Link href={job_details.company.url} target="_blank">
+                  <Button variant="outline" className="w-full mt-2">
                     View Company Profile
                   </Button>
+                  </Link>
                 </div>
               </Card>
             </div>

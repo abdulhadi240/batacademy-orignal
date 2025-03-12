@@ -1,28 +1,21 @@
 import Image from "next/image";
 import { BiSolidQuoteLeft } from "react-icons/bi";
-import ArticleCard from "../../ArticleCard";
 import Link from "next/link";
 import HeaderSection from "@/components/HeaderSection";
+import ArticleCard from "@/components/ArticleCard";
+import fetchData from "@/actions/server";
+import BlogCarousel from "@/components/BlogCarousel";
 
 export async function generateMetadata({ params }) {
-  const product = await fetch(
-    `${process.env.BACKEND_URL}/blogs/${params.slug}`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        "Accept-Language": `${process.env.LOCALE_LANGUAGE}`,
-
-      },
-    }
-  ).then((res) => res.json());
+  const product =  await fetchData(`/post/${params.slug}`, params.locale);
 
   const title =
-    product?.data?.meta_title || "British Academy for Training & Development";
+    product?.name || "British Academy for Training & Development";
   const description =
-    product?.data?.meta_description ||
+    product?.description ||
     "British Academy for Training & Development";
   const keywords =
-    product?.data?.meta_keywords ||
+    product?.keyword ||
     "British Academy for Training & Development";
 
   return {
@@ -35,7 +28,7 @@ export async function generateMetadata({ params }) {
       site_name: "British Academy for Training & Development",
       description: "British Academy for Training & Development",
       url: `https://client-academy.vercel.app/blogs/${params.slug}`,
-      images: [product?.data[0]?.image],
+      images: [product?.image],
     },
     twitter: {
       site_name: "British Academy for Training & Development",
@@ -56,55 +49,35 @@ export async function generateMetadata({ params }) {
 }
 
 export async function generateStaticParams() {
-  const posts = await fetch(`${process.env.BACKEND_URL}/blogs/`, {
-    headers: {
-      "Content-Type": "application/json",
-      "Accept-Language": `${process.env.LOCALE_LANGUAGE}`,
-
-    },
-  }).then((res) => res.json());
+  const posts = await fetchData('/post','en')
   return posts.data.map((post) => ({
     id: post.id,
   }));
 }
 
 const BlogPost = async ({ params }) => {
-  const data = await fetch(`${process.env.BACKEND_URL}/blogs/${params.slug}`, {
-    headers: {
-      "Content-Type": "application/json",
-      "Accept-Language": `${process.env.LOCALE_LANGUAGE}`,
-
-    },
-  }).then((res) => res.json());
-
-  const blogs = await fetch(`${process.env.BACKEND_URL}/blogs/`, {
-    headers: {
-      "Content-Type": "application/json",
-      "Accept-Language": `${process.env.LOCALE_LANGUAGE}`,
-
-    },
-  }).then((res) => res.json());
-
+  const data = await fetchData(`/post/${params.slug}`, params.locale);
+  const blogs = await fetchData("/post?page=12", params.locale);
   return (
     <>
       <HeaderSection />
-      <div className="p-4 md:mx-12 lg:mx-24 xl:mx-48">
+      <div className="p-4 md:mx-12 ">
         <div className="flex justify-center">
           <Image
-            src={data.data.featured_image}
+            src={'/000.png'}
             alt="hero"
             height={800}
             width={800}
-            className="w-full h-auto rounded-3xl"
+            className="w-full  rounded-3xl"
             priority
           />
         </div>
-        <div className="px-4 py-8 mx-auto max-w-7xl">
+        <div className="md:px-4 md:py-8 pt-8 mx-auto max-w-7xl">
           <div className="flex flex-col md:flex-row">
-            <h1 className="text-2xl md:text-4xl font-bold md:w-[500px]">
-              {data.data.title}
+            <h1 className= {`text-2xl md:text-4xl ${params.locale === 'en' ? 'text-start md:w-[800px]' : 'text-end w-full'} font-bold `}>
+              {data.name}
             </h1>
-            <div className="flex items-center mt-4 md:mt-0 md:ml-4">
+            {/** <div className="flex items-center mt-4 md:mt-0 md:ml-4">
               <div className="relative w-12 h-12">
                 <Image
                   src="/blog1.png"
@@ -119,33 +92,20 @@ const BlogPost = async ({ params }) => {
                 {data.data.author}
               </span>
               <div>- {data.data.published_date}</div>
-            </div>
+            </div>*/}
           </div>
-          <hr className="my-20" />
+          <hr className="md:my-20 my-8" />
           <div
-            className="mx-4 md:mx-10 lg:mx-20"
-            dangerouslySetInnerHTML={{ __html: data.data.content }}
+            className="md:mx-4 "
+            dangerouslySetInnerHTML={{ __html: data.content }}
           ></div>
         </div>
-        <div className="flex justify-between">
+        <div className={`${params.locale === 'en' ? 'flex justify-between' : 'flex justify-end'} `}>
           <h1 className="mt-10 mb-10 text-3xl font-bold tracking-wider">
-            Latest Blog
+          {params.locale === 'en' ? 'Latest Blog' : 'أحدث المدونات'}
           </h1>
         </div>
-        <div className="flex flex-col justify-center gap-4 sm:flex-row">
-          {blogs.data.map((article, index) => (
-         <ArticleCard
-           key={index}
-           title={article.title}
-           category={article.category}
-           date={article.date}
-           description={article.description}
-           imageSrc={article.imageSrc}
-           button_data={article.tags}
-           slug={article.slug} // Pass the slug to ArticleCard
-         />
-       ))} 
-        </div>
+        <BlogCarousel data={blogs.data} blog params={params.locale}/>
       </div>
     </>
   );

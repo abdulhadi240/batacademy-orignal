@@ -10,50 +10,7 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import SectionTitle from "./SectionTitle";
 import CourseCard from "./Course-Card";
 
-export default function Home({ locale }) {
-  const courses = [
-    {
-      id: 1,
-      title: "Short professional diploma in journalism",
-      image: "/000.webp",
-      location: "LONDON",
-      price: 500,
-      dates: ["March 10, 2025", "April 15, 2025", "May 20, 2025"],
-    },
-    {
-      id: 2,
-      title: "Professional Diploma of Accounting and Finance",
-      image: "/000.webp",
-      location: "LONDON",
-      price: 500,
-      dates: ["March 12, 2025", "April 18, 2025", "May 22, 2025"],
-    },
-    {
-      id: 3,
-      title: "Chartered Financial Analyst (CFA) Course",
-      image: "/000.webp",
-      location: "LONDON",
-      price: 500,
-      dates: ["March 15, 2025", "April 20, 2025", "May 25, 2025"],
-    },
-    {
-      id: 5,
-      title: "Advanced Data Science Certificate",
-      image: "/000.webp",
-      location: "LONDON",
-      price: 500,
-      dates: ["March 17, 2025", "April 22, 2025", "May 28, 2025"],
-    },
-    {
-      id: 6,
-      title: "Digital Marketing Professional",
-      image: "/000.webp",
-      location: "LONDON",
-      price: 500,
-      dates: ["March 19, 2025", "April 25, 2025", "May 30, 2025"],
-    },
-  ];
-  
+export default function Home({ locale , courses }) {
 
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   const isTablet = useMediaQuery("(min-width: 640px)");

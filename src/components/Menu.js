@@ -1,9 +1,9 @@
 export const menuEn = [
     { name: "Home", link: "/" },
-    { name: "Diploma", link: "/Diploma" },
-    { name: "Masters", link: "/Diploma" },
-    { name: "Training Course", link: "/Diploma" },
-    { name: "Cities", link: "/Training-Course-in-Abu" },
+    { name: "Diploma", link: "/search_course?type=1" },
+    { name: "Masters", link: "/search_course?type=2" },
+    { name: "Training Course", link: "/search_course?type=2" },
+    { name: "Cities", link: "/show_cities" },
     { name: "Jobs", link: "/job" },
     { name: "Consulting", link: "/consulting-services" },
     { name: "How We Are", link: "/academy-service" },
@@ -12,10 +12,10 @@ export const menuEn = [
   
   export const menuAr = [
     { name: "الرئيسية", link: "/" },
-    { name: "دبلوم", link: "/Diploma" },
-    { name: "ماجستير", link: "/Diploma" },
-    { name: "دورات تدريبية", link: "/Diploma" },
-    { name: "مدن", link: "/Training-Course-in-Abu" },
+    { name: "دبلوم", link: "/search_course?type=1" },
+    { name: "ماجستير", link: "/search_course?type=2"},
+    { name: "دورات تدريبية", link: "/search_course?type=3" },
+    { name: "مدن", link: "/show_cities" },
     { name: "Jobs", link: "/job" },
     { name: "الاستشارات", link: "/consulting-services" },
     { name: "من نحن", link: "/academy-service" },

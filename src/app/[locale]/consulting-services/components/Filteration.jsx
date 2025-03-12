@@ -1,50 +1,31 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from './Card';
 
-const dummyService = [
-  {
-    title: 'Dummy Title',
-    content: 'This is a dummy description for the service.',
-  }
-]
-
-
-
-
-const Filteration = ({ data, category }) => {
+const Filteration = ({ data, category , params}) => {
   const [title, setTitle] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedMonth, setSelectedMonth] = useState('');
   const [filtered, setFiltered] = useState(data?.data);
+
+  useEffect(() => {
+    handleSearch();
+  }, [title, selectedCategory]);
 
   const handleSearch = () => {
     let filteredData = data?.data;
 
-    // Filter by title (case-insensitive partial match)
+    // Title filter (case-insensitive)
     if (title) {
       filteredData = filteredData.filter((service) =>
-        service.title.toLowerCase().includes(title.toLowerCase())
+        service.name.toLowerCase().includes(title.toLowerCase())
       );
     }
 
-    // Filter by category
+    // Category filter (by slug)
     if (selectedCategory) {
       filteredData = filteredData.filter(
-        (service) => service.category === selectedCategory
+        (service) => service.consultancy.slug === selectedCategory
       );
-    }
-
-    // Filter by month (assuming selectedMonth is in "YYYY-MM" format)
-    if (selectedMonth) {
-      filteredData = filteredData?.filter((service) => {
-        const serviceDate = new Date(service.consulting_date.split('-').reverse().join('-'));
-        const [year, month] = selectedMonth.split('-');
-        return (
-          serviceDate.getFullYear() === parseInt(year) &&
-          (serviceDate.getMonth() + 1) === parseInt(month)
-        );
-      });
     }
 
     setFiltered(filteredData);
@@ -52,8 +33,10 @@ const Filteration = ({ data, category }) => {
 
   return (
     <div>
+      {/* Filter Section */}
       <div className="max-w-3xl mx-auto mb-8">
         <div className="grid items-center grid-cols-2 gap-4 sm:flex-row sm:flex">
+          {/* Title Search Input */}
           <input
             type="text"
             value={title}
@@ -61,25 +44,22 @@ const Filteration = ({ data, category }) => {
             placeholder="Search Services"
             className="flex-1 p-3 text-sm border rounded-lg shadow-md"
           />
+
+          {/* Category Dropdown */}
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
             className="flex-1 p-3 border rounded-lg shadow-md"
           >
-            <option value="">Category</option>
-            <option value="Artificial Intelligence">Artificial Intelligence</option>
-            {category?.data.map((cat, index) => (
-              <option key={index} value={cat.slug} className="text-black">
+            <option value="">All Categories</option>
+            {category?.data.map((cat) => (
+              <option key={cat.id} value={cat.slug} className="text-black">
                 {cat.name}
               </option>
             ))}
           </select>
-          <input
-            type="month"
-            value={selectedMonth}
-            onChange={(e) => setSelectedMonth(e.target.value)}
-            className="flex-1 p-3 text-sm border rounded-lg shadow-md"
-          />
+
+          {/* Search Button (optional if using auto filter on input change) */}
           <button
             onClick={handleSearch}
             className="px-10 py-3 text-sm text-center text-white transition rounded-lg sm:px-16 bg-primary hover:bg-primary/70"
@@ -89,26 +69,16 @@ const Filteration = ({ data, category }) => {
         </div>
       </div>
 
-      {/* Services List 
+      {/* Services Grid */}
       <div className="grid grid-cols-1 gap-8 md:mx-28 max-w-7xl sm:grid-cols-2 lg:grid-cols-4">
         {filtered?.map((service, index) => (
           <Card
             key={index}
             number={index + 1}
             slug={service.slug}
-            title={service.title}
+            title={service.name}
             description={service.content}
-          />
-        ))}
-      </div>*/}
-      <div className="grid grid-cols-1 gap-8 md:mx-28 max-w-7xl sm:grid-cols-2 lg:grid-cols-4">
-        {dummyService?.map((service, index) => (
-          <Card
-            key={index}
-            number={index + 1}
-            slug={service.slug || 'consulting_detail'}
-            title={service.title}
-            description={service.content}
+            param={params}
           />
         ))}
       </div>

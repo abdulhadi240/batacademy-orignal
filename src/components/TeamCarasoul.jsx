@@ -9,31 +9,7 @@ import {
 } from "@/components/ui/carousel"
 import Team from "./Team"
 
-export function TeamCarasoul({ locale }) {
-  const teamMembers = [
-    {
-      image: '/4.webp',
-      name: locale === 'en' ? 'Nattasha Julie' : 'ناتاشا جولي',
-      designation: locale === 'en' ? 'Design, Australia' : 'التصميم، أستراليا',
-      number: '+1 (378) 400-1234',
-      email: 'julie@email.com',
-    },
-    {
-      image: '/Photo.webp',
-      name: locale === 'en' ? 'John Doe' : 'جون دو',
-      designation: locale === 'en' ? 'Developer, USA' : 'مطور، أمريكا',
-      number: '+1 (555) 123-4567',
-      email: 'john@email.com',
-    },
-    {
-      image: '/2.webp',
-      name: locale === 'en' ? 'Jane Smith' : 'جين سميث',
-      designation: locale === 'en' ? 'Marketing, UK' : 'التسويق، المملكة المتحدة',
-      number: '+44 (20) 7000-1234',
-      email: 'jane@email.com',
-    },
-  ]
-
+export function TeamCarasoul({ locale , teamMembers }) {
   return (
     <div className="relative w-full mx-auto overflow-hidden">
       <Carousel

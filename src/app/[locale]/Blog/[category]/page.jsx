@@ -11,7 +11,7 @@ export async function generateMetadata({ params }) {
   const locale = params.locale || "en"; // Fallback to English if no locale is provided
 
   const product = await fetch(
-    `${process.env.BACKEND_URL}/post-category/${params.category}`,
+    `${process.env.BACKEND_URL}/blogs/${params.category}/category`,
     {
       headers: {
         "Content-Type": "application/json",
@@ -59,13 +59,35 @@ export async function generateMetadata({ params }) {
   };
 }
 
+export async function generateStaticParams() {
+  const locales = ["en", "ar"]; // Supported locales
+  const posts = await fetch(`${process.env.BACKEND_URL}/blogs/`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => res.json());
+
+  // Check if `posts.data` is an array and generate paths correctly
+  if (Array.isArray(posts?.data)) {
+    return posts.data.flatMap((post) =>
+      post.categories.flatMap((category) =>
+        locales.map((locale) => ({
+          locale,
+          category: category.slug, // Use the slug from each category
+        }))
+      )
+    );
+  }
+
+  return []; // Return an empty array if posts data is not iterable
+}
 
 // Main Page Component with SSR
 export default async function Page({ params }) {
   const locale = params.locale || "en"; // Determine locale from params
 
   const articles = await fetch(
-    `${process.env.BACKEND_URL}/post-category/${params.category}`,
+    `${process.env.BACKEND_URL}/blogs/${params.category}/category`,
     {
       headers: {
         "Content-Type": "application/json",
@@ -88,15 +110,16 @@ export default async function Page({ params }) {
         </p>
         <div className="flex justify-center">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {articles?.data?.data.map((article, index) => (
+            {articles?.data?.map((article, index) => (
               <ArticleCard
                 key={index}
-                title={article.name}
-                category={params.category }
+                title={article.title}
+                category={article.category}
                 date={article.published_date}
                 description={article.content}
-                imageSrc={article.image}
-                button_data={article.tags || ['Latest', 'Trending']}                slug={article.slug}
+                imageSrc={article.featured_image}
+                button_data={article.tags}
+                slug={article.slug}
                 params={params.category}
               />
             ))}

@@ -23,8 +23,11 @@ import CourseVideoCard from "@/components/CourseVideoCard";
 import Link from "next/link";
 
 export default async function Page({ params }) {
-  const { locale } = await params;
+  const { locale , slug , course } = await params;
 
+  const courseDetail = await fetchData(`/course/${course}`, locale);
+  console.log(courseDetail);
+  
   const course_carasoul = await fetchData(
     `${process.env.BACKEND_URL}/courses`,
     locale
@@ -51,8 +54,8 @@ export default async function Page({ params }) {
           <div className="container relative h-full flex flex-col justify-center gap-6 text-white">
             <div className="grid sm:grid-cols-[1fr,auto] gap-8 items-start mx-10 ">
               <div className="space-y-5">
-                <h1 className="text-4xl text-center md:mt-10 md:text-start md:text-4xl lg:text-4xl font-bold">
-                  Advanced Financial Accounting
+                <h1 className="text-4xl text-center max-w-2xl md:mt-10 md:text-start md:text-4xl lg:text-4xl font-bold">
+                  {courseDetail.name}
                 </h1>
                 <div className="flex flex-wrap gap-4 justify-center sm:justify-start">
                   <span className="items-center hidden md:block rounded-md bg-secondary md:px-4 md:py-2 px-2 py-1 text-sm">
@@ -195,7 +198,7 @@ export default async function Page({ params }) {
               </p>
             </TabsContent>
             <TabsContent value="date">
-              <Dates />
+              <Dates dates={courseDetail.dates}/>
             </TabsContent>
             <TabsContent value="cost">
               <p className="text-muted-foreground mx-2">

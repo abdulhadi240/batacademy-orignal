@@ -12,29 +12,11 @@ import {
 import { Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const Dates = () => {
+const Dates = ({dates}) => {
   const router = useRouter();
-  const [date, setDate] = useState();
+  const [date, setDate] = useState(dates);
   const [open, setOpen] = useState(false);
   const [loadingIndex, setLoadingIndex] = useState(null);
-
-  const summary = {
-    slug: "dummy-course",
-    available_dates: [
-      { date: "2025-01-15" },
-      { date: "2025-01-20" },
-      { date: "2025-01-25" },
-      { date: "2025-02-01" },
-      { date: "2025-01-20" },
-      { date: null },
-    ],
-    available_cities: [
-      { name: "New York" },
-      { name: "Los Angeles" },
-      { name: "Chicago" },
-      { name: "Houston" },
-    ],
-  };
 
   const [selectedCities, setSelectedCities] = useState(
     Array(summary.available_dates.length).fill("")

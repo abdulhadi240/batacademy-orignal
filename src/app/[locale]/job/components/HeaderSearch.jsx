@@ -4,7 +4,7 @@ import { IoIosSearch } from "react-icons/io";
 import { CiLocationOn } from "react-icons/ci";
 const HeaderSearch = () => {
   return (
-    <div className="bg-[#F1F2F499]  md:p-4">
+    <div className="bg-[#F1F2F499] w-screen md:p-4">
       <div className="flex justify-between md:px-10 ">
         <div className="flex flex-col md:p-8 text-start">
           <h1 className="p-1 mt-2 text-2xl font-semibold text-center md:text-4xl md:text-start md:max-w-9/12 ">

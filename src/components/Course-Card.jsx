@@ -14,12 +14,12 @@ export default function CourseCard({ course }) {
     >
       <div className="relative h-40 group">
         <div className="absolute top-2 right-2 bg-white/80 text-xs font-medium px-2 py-1 rounded z-10">
-          {course.location}
+        £ {course.price}
         </div>
         <div className="relative h-full overflow-hidden">
           <Image
-            src={course.image || "/placeholder.svg"}
-            alt={course.title}
+            src={course.image}
+            alt={course.name}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-110"
           />
@@ -29,17 +29,18 @@ export default function CourseCard({ course }) {
 
       <div className="p-2 md:p-4">
         <h3 className="text-sm font-medium line-clamp-1 text-slate-800 mb-2 group-hover:text-slate-600 transition-colors duration-200">
-          {course.title}
+          {course.name}
         </h3>
 
         {/* Dates Section with Icons */}
         <div className="flex flex-wrap gap-2 mb-3">
           {course.dates.map((date, index) => (
             <div key={index} className="flex items-center text-xs text-slate-600 bg-slate-100 px-2 py-1 rounded-md">
-              {date}
+              {date.course_date}
             </div>
           ))}
         </div>
+        
 
         <div className="flex gap-2 mb-3 justify-between">
           <Button className=" bg-slate-800 px-8 hover:bg-slate-700 text-white text-xs rounded py-1 transition-all duration-200 hover:shadow-lg">

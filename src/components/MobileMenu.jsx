@@ -132,28 +132,28 @@ export default function MobileMenu({ color, locale, languageToggleText, main }) 
               {locale === "ar" ? "الرئيسية" : "Home"}
             </Link>
             <Link
-              href={`${locale}/search_course/training-courses/`}
+              href={`${locale}/search_course?type=1`}
               className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >
               {locale === "ar" ? "دورات تدريبية" : "Training Courses"}
             </Link>
             <Link
-              href={`${locale}/search_course/diploma/`}
+              href={`${locale}/search_course?type=2`}
               className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >
               {locale === "ar" ? "الدبلومة" : "Diploma"}
             </Link>
             <Link
-              href={`${locale}/search_course/masters`}
+              href={`${locale}/search_course?type=3`}
               className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >
               {locale === "ar" ? "الماجستير" : "Masters"}
             </Link>
             <Link
-              href={`${locale}/cities`}
+              href={`${locale}/show_cities`}
               className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >
