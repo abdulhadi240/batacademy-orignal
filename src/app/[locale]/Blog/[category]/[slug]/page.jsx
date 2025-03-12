@@ -6,7 +6,7 @@ import HeaderSection from "@/components/HeaderSection";
 
 export async function generateMetadata({ params }) {
   const product = await fetch(
-    `https://batd.website12.help/api/blogs/${params.slug}`,
+    `https://batd.website12.help/api/post/${params.slug}`,
     {
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +58,7 @@ export async function generateMetadata({ params }) {
 
 
 const BlogPost = async ({ params }) => {
-  const data = await fetch(`https://batd.website12.help/api/blogs/${params.slug}`, {
+  const data = await fetch(`https://batd.website12.help/api/post/${params.slug}`, {
     headers: {
       "Content-Type": "application/json",
       "Accept-Language": `${params.locale}`,
@@ -66,7 +66,7 @@ const BlogPost = async ({ params }) => {
     },
   }).then((res) => res.json());
 
-  const blogs = await fetch(`https://batd.website12.help/api/blogs/`, {
+  const blogs = await fetch(`https://batd.website12.help/api/post/`, {
     headers: {
       "Content-Type": "application/json",
       "Accept-Language": `${params.locale}`,
