@@ -48,7 +48,7 @@ const page = async ({ params }) => {
                         <div className="mt-6 mx-16">
                             <CourseTable
                                 courses={getCityCourses.data}
-                                locale={locale}
+                                params={params}
                                 city={slug} />
                         </div>
                     </section>
