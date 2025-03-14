@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import HeaderSection from "@/components/HeaderSection";
+import { toast } from "react-toastify";
 
 export default function Page({ params }) {
   const searchParams = useSearchParams();
@@ -78,17 +79,17 @@ export default function Page({ params }) {
         });
   
         if (response.ok) {
-          console.log("Application submitted successfully");
+          toast.success("Application submitted successfully");
           // Optionally: Show a success message or redirect the user
           // e.g., alert("Application submitted!");
           // or reset form: setName(""); setEmail(""); setPhone(""); setResume(null); setMessage("");
         } else {
-          console.error("Failed to submit application:", response.statusText);
+          toast.error("Failed to submit application:", response.statusText);
           // Optionally: Show an error message to the user
           // e.g., alert("Failed to submit application. Please try again.");
         }
       } catch (error) {
-        console.error("Error submitting application:", error);
+        toast.error("Error submitting application:", error);
         // Optionally: Show a network error message
         // e.g., alert("Network error. Please check your connection and try again.");
       }
