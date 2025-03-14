@@ -23,7 +23,9 @@ export default function Page({ params , article , categoryData }) {
 
   useEffect(() => {
     const fetchContent = async () => {
-      const articlesData = await fetchData(`/post-category/${params.id}?page=${page}`, locale);
+      const articlesData = await fetchData(`/post?page=${page}`, locale);
+      console.log(articlesData);
+      
 
       setArticles(articlesData?.data || []);
       setPaginationData({

@@ -38,6 +38,7 @@ export default function Page({ params }) {
   const [company, setCompany] = useState("");
   const [consultationType, setConsultationType] = useState("");
   const [preferredDate, setPreferredDate] = useState("");
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (type === "board" || type === "team") {
@@ -68,16 +69,19 @@ export default function Page({ params }) {
       formData.append("cv", resume);
       formData.append("cover_letter", message);
       formData.append("company_job_id", id);
-  
+
+      setLoading(true)
       try {
         const response = await fetch("https://batd.website12.help/api/job/store", {
           method: "POST",
           headers: {
-            "Accept-Language": params.locale,
+            "Accept": "application/json",
           },
           body: formData,
         });
-  
+        setLoading(false)
+
+
         if (response.ok) {
           toast.success("Application submitted successfully");
           // Optionally: Show a success message or redirect the user
@@ -361,8 +365,10 @@ export default function Page({ params }) {
                 required
               />
             </div>
-            <Button type="submit" className="w-full text-white">
-              {isArabic ? "إرسال الطلب" : "Submit Application"}
+            <Button type="submit" className="w-full text-white" disabled={loading}>
+              {loading
+                ? (isArabic ? "جارٍ الإرسال..." : "Submitting...")
+                : (isArabic ? "إرسال الطلب" : "Submit Application")}
             </Button>
           </form>
         );

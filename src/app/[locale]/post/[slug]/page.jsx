@@ -64,7 +64,7 @@ const BlogPost = async ({ params }) => {
       <div className="p-4 md:mx-12 ">
         <div className="flex justify-center">
           <Image
-            src={'/000.png'}
+            src={data.image}
             alt="hero"
             height={800}
             width={800}

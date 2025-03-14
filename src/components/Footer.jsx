@@ -65,7 +65,7 @@ export default function Footer({ params }) {
             <h3 className="mb-2 font-bold text-gray-800">{aboutHeading}</h3>
             <ul className="space-y-1 text-sm text-gray-600">
               <li><Link href={`/${params.locale}/about`}>{aboutUs}</Link></li>
-              <li><Link href={`/${params.locale}/blog`}>{blog}</Link></li>
+              <li><Link href={`/${params.locale}/taxonomy/blog`}>{blog}</Link></li>
               <li><Link href={`/${params.locale}/board_of_advisors`}>{boardOfAdvisor}</Link></li>
             </ul>
           </div>
