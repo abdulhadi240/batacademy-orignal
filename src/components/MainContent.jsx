@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ServiceCard from "./ServiceCard";
+import Link from "next/link";
 
 // components/MainContent.js
 const MainContent = ({ locale }) => {
@@ -26,9 +27,9 @@ const MainContent = ({ locale }) => {
               : "الخطة التدريبية السنوية لدورات وبرامج الأكاديمية البريطانية"}
           </p>
         </div>
-        <button className="px-4 py-2 mt-3 text-sm text-white bg-[#111F51] rounded-lg">
+        <Link href={`/${locale}/plan`} className="px-4 py-2 mt-3 text-sm text-white bg-[#111F51] rounded-lg">
           {locale === "en" ? "Go to Plan" : "اذهب إلى الخطة"}
-        </button>
+        </Link>
       </div>
 
       {/* Right Column - Service List */}

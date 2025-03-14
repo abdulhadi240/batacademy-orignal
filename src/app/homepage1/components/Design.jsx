@@ -77,7 +77,7 @@ const Design = ({ locale }) => {
                 {t.exploreButton}
               </Link>
               <Link
-                href={"/diploma"}
+                href={"/search_course?type=1"}
                 className="px-20  py-3 text-center text-xs font-bold text-white uppercase rounded-full bg-secondary hover:bg-primary hover:bg-opacity-90 transition-all"
               >
                 {t.catalogueButton}
