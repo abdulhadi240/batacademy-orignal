@@ -251,7 +251,7 @@ export default async function AcademyService({ params }) {
           <h2 className="text-3xl font-bold mb-6">{t.getStarted}</h2>
           <p className="mb-8 max-w-2xl mx-auto">{t.description}</p>
           <Link
-            href={`/${locale}/apply?type=consultation`}
+            href={`/${locale}/contact_us`}
             className="bg-white text-primary font-semibold py-3 px-6 rounded-full hover:bg-gray-100 transition-colors duration-300"
           >
             {t.schedule}

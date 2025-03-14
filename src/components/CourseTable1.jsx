@@ -7,8 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-export default function CourseTable({ courses, params ,city }) {
+export default function CourseTable({ courses, params ,city ,cities }) {
   const [searchTerm, setSearchTerm] = useState('');
+  const [all_courses , setAll_Courses] = useState(courses)
 
   const isArabic = params.locale === 'ar';
   const directionStyle = isArabic ? { direction: 'rtl', textAlign: 'right' } : { direction: 'ltr', textAlign: 'left' };
@@ -36,18 +37,31 @@ export default function CourseTable({ courses, params ,city }) {
             </tr>
           </thead>
           <tbody>
-            {courses.map((course, index) => (
+            {all_courses.map((course, index) => (
               <tr key={index} className="border-t hover:bg-muted/50 transition-colors">
-                <td className="px-4 py-2">
-                  <Link href={`/${params.locale}/${params.slug}/${params.category}/${params.specialization}/${course.slug}`} className="text-primary hover:underline">
+                <td className="px-4 py-2 text-sm">
+                  {cities ? (
+                    <Link href={`/${params.locale}/course_details/${course.id}/${course.slug}`} className="text-primary hover:underline">
                     {course.name}
                   </Link>
+                  ) : (
+                    <Link href={`/${params.locale}/${params.slug}/${params.category}/${params.specialization}/${course.slug}`} className="text-primary hover:underline">
+                    {course.name}
+                  </Link>
+                  )}
+                  
                 </td>
-                <td className="px-4 py-2 text-muted-foreground">{city}</td>
+                <td className="px-4 py-2 text-muted-foreground text-sm">{city}</td>
                 <td className="px-4 py-2 text-center">
                   <div className="flex justify-center gap-2">
                     <Button variant="outline" asChild>
-                      <Link href={`/${params.locale}/${params.slug}/${params.category}/${params.specialization}/${course.slug}`}>{isArabic ? "التفاصيل" : "Details"}</Link>
+                      {cities ? (
+                      <Link href={`/${params.locale}/course_details/${course.id}/${course.slug}`}>{isArabic ? "التفاصيل" : "Details"}</Link>
+
+                      ) : (
+                        <Link href={`/${params.locale}/${params.slug}/${params.category}/${params.specialization}/${course.slug}`}>{isArabic ? "التفاصيل" : "Details"}</Link>
+
+                      )}
                     </Button>
                     <Button asChild>
                       <Link href= {`/${params.locale}/register?course=${course.slug}`} className='text-white'>{isArabic ? "سجل" : "Register"}</Link>
@@ -62,7 +76,7 @@ export default function CourseTable({ courses, params ,city }) {
 
       {/* Mobile Cards */}
       <div className="md:hidden space-y-4">
-        {courses.map((course, index) => (
+        {all_courses.map((course, index) => (
           <Card key={index}>
             <CardHeader>
               <CardTitle className="text-lg">

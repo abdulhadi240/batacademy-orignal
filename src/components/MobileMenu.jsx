@@ -107,14 +107,14 @@ export default function MobileMenu({ color, locale, languageToggleText, main }) 
           {/* Login/Signup Buttons */}
           <div className="flex justify-around mb-6">
             <Link
-              href="/login"
+              href={`/${locale}/sign-in`}
               className="flex items-center px-4 py-2 border border-gray-300 text-gray-700 text-sm rounded hover:bg-gray-200"
               onClick={toggleMenu}
             >
               Login
             </Link>
             <Link
-              href="/signup"
+              href={`/${locale}/sign-up`}
               className="flex items-center px-4 py-2 bg-primary text-white text-sm rounded hover:bg-primary-dark"
               onClick={toggleMenu}
             >
@@ -125,63 +125,63 @@ export default function MobileMenu({ color, locale, languageToggleText, main }) 
           {/* Navigation Links */}
           <nav className="space-y-4 text-sm">
             <Link
-              href={`${locale}/`}
+              href={`/${locale}/`}
               className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >
               {locale === "ar" ? "الرئيسية" : "Home"}
             </Link>
             <Link
-              href={`${locale}/search_course?type=1`}
+              href={`/${locale}/search_course?type=1`}
               className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >
               {locale === "ar" ? "دورات تدريبية" : "Training Courses"}
             </Link>
             <Link
-              href={`${locale}/search_course?type=2`}
+              href={`/${locale}/search_course?type=2`}
               className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >
               {locale === "ar" ? "الدبلومة" : "Diploma"}
             </Link>
             <Link
-              href={`${locale}/search_course?type=3`}
+              href={`/${locale}/search_course?type=3`}
               className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >
               {locale === "ar" ? "الماجستير" : "Masters"}
             </Link>
             <Link
-              href={`${locale}/show_cities`}
+              href={`/${locale}/show_cities`}
               className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >
               {locale === "ar" ? "المدن" : "Cities"}
             </Link>
             <Link
-              href={`${locale}/consulting-services`}
+              href={`/${locale}/consulting-services`}
               className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >
               {locale === "ar" ? "الاستشارات" : "Consulting"}
             </Link>
             <Link
-              href={`${locale}/Academy-Vision`}
+              href={`/${locale}/academy_vision`}
               className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >
               {locale === "ar" ? "من نحن" : "How We Are"}
             </Link>
             <Link
-              href={`${locale}/plan`}
+              href={`/${locale}/plan`}
               className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >
               {locale === "ar" ? "الخطة" : "Plan"}
             </Link>
             <Link
-              href={`${locale}/contact`}
+              href={`/${locale}/contact_us`}
               className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >

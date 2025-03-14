@@ -31,7 +31,7 @@ const Card = ({ number, title, description , slug , param }) => {
       <div className='text-xs'>
         <p className="mb-4 text-center text-gray-600 line-clamp-3" dangerouslySetInnerHTML={{ __html: description }}></p>
       </div>
-      <Link href={`/${param}/consulting-services/${slug}`} className="px-4 py-2 text-xs text-black transition border-2 rounded group-hover:bg-primary group-hover:text-white border-primary hover:bg-blue-700">
+      <Link href={`/${param}/consulting_services/${slug}`} className="px-4 py-2 text-xs text-black transition border-2 rounded group-hover:bg-primary group-hover:text-white border-primary hover:bg-blue-700">
         More Details
       </Link>
     </div>

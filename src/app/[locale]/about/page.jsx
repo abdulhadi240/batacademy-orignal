@@ -14,9 +14,7 @@ const benefits = [
 ];
 
 
-export default function ConsultingPage({params}) {
-  console.log(params.locale);
-  
+export default function ConsultingPage({params}) {  
   return (
     <>
       <HeaderSection params={params.locale}/>

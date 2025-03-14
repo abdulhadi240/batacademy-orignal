@@ -14,7 +14,7 @@ export default async function RootLayout({ children , params }) {
         className={`antialiased text-black dark:text-white`}
       >
         {children}
-        <Footer params={params.locale}/>
+        <Footer params={params}/>
         <ToastContainer  />
       </body>
       </AuthProvider>

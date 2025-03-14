@@ -84,7 +84,7 @@ const SpecializationSection = ({ data, locale }) => {
             {/* Center - Grid of Cards */}
             <div className="hidden gap-5 mt-2 sm:grid sm:grid-cols-2 md:grid-cols-4">
               {selectedItem.specializations.map((title, index) => (
-                <SpecializationCard key={index} title={title} />
+                <SpecializationCard key={index} title={title} locale={locale}/>
               ))}
             </div>
 
@@ -110,7 +110,7 @@ const SpecializationSection = ({ data, locale }) => {
           <div className="flex justify-center">
             <div className="flex flex-wrap justify-center gap-4 mt-10 md:hidden">
               {selectedItem?.specializations.map((title, index) => (
-                <SpecializationCard key={index} title={title} />
+                <SpecializationCard key={index} title={title} locale={locale}/>
               ))}
             </div>
           </div>

@@ -5,12 +5,12 @@ import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import Link from "next/link"
 
-export default function CourseCard({ course }) {
+export default function CourseCard({ course , locale }) {
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300 }}
-      className="bg-white rounded-lg w-64 overflow-hidden shadow-sm h-full transform-gpu"
+      className="bg-white rounded-lg w-72 overflow-hidden shadow-sm h-full transform-gpu"
     >
       <div className="relative h-40 group">
         <div className="absolute top-2 right-2 bg-white/80 text-xs font-medium px-2 py-1 rounded z-10">
@@ -43,15 +43,17 @@ export default function CourseCard({ course }) {
         
 
         <div className="flex gap-2 mb-3 justify-between">
-          <Button className=" bg-slate-800 px-8 hover:bg-slate-700 text-white text-xs rounded py-1 transition-all duration-200 hover:shadow-lg">
-            Register
+          <Link href={`/${locale}/register?course=${course.slug}`}>
+          <Button className=" bg-slate-800 px-10 hover:bg-slate-700 text-white text-xs rounded py-1 transition-all duration-200 hover:shadow-lg">
+            {locale === 'en' ? 'Register' : 'يسجل'}
           </Button>
-          <Link href={'/course'}>
+          </Link>
+          <Link href={`/${locale}/course_details/${course.id}/${course.slug}`}>
             <Button
               variant="outline"
-              className=" border-slate-800 px-8 text-slate-800 hover:bg-slate-100 text-xs rounded py-1 transition-all duration-200 hover:shadow-lg"
+              className=" border-slate-800 px-10 text-slate-800 hover:bg-slate-100 text-xs rounded py-1 transition-all duration-200 hover:shadow-lg"
             >
-              Details
+            {locale === 'en' ? 'Details' : 'تفاصيل'}
             </Button>
           </Link>
         </div>

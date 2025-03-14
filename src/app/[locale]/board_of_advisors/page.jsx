@@ -110,7 +110,7 @@ export default async function BoardOfAdvisers({ params }) {
       : "We're always looking to expand our network of education experts. If you're passionate about shaping the future of education and have expertise to share, we'd love to hear from you."}
   </p>
   <Link
-    href={`/${locale}/apply?type=job`}
+    href={`/${locale}/contact_us`}
     className="bg-white text-primary font-semibold py-3 px-6 rounded-full hover:bg-gray-100 transition-colors duration-300"
   >
     {isArabic ? "قدم للانضمام" : "Apply To Join"}

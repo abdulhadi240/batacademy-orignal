@@ -4,11 +4,11 @@ import SectionTitle from '@/components/SectionTitle';
 import MainContent from '@/components/MainContent';
 import MobileFilter from '@/components/MobileFilter';
 import fetchData from '@/actions/server';
-import Design from '../homepage1/components/Design';
 import CustomerCarasoul from '@/components/CustomerCarasoul';
 import Footer from '@/components/Footer';
 import Homepage_Course from '@/components/Homepage-Course';
 import { TeamCarasoul } from '@/components/TeamCarasoul';
+import Design from '../homepage1/components/Design';
 
 const SpecializationSection = dynamic(() => import('@/components/SpecializationSection'));
 const Carasoul = dynamic(() => import('@/components/Carasoul'));

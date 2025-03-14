@@ -35,21 +35,21 @@ const Filteration = ({ data, category , params}) => {
     <div>
       {/* Filter Section */}
       <div className="max-w-3xl mx-auto mb-8">
-        <div className="grid items-center grid-cols-2 gap-4 sm:flex-row sm:flex">
+        <div className="items-center gap-4 flex-row flex">
           {/* Title Search Input */}
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Search Services"
-            className="flex-1 p-3 text-sm border rounded-lg shadow-md"
+            className="flex-1 p-3 w-full text-sm border rounded-lg shadow-md"
           />
 
           {/* Category Dropdown */}
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="flex-1 p-3 border rounded-lg shadow-md"
+            className="flex-1 p-3 hidden md:block border rounded-lg shadow-md"
           >
             <option value="">All Categories</option>
             {category?.data.map((cat) => (
@@ -62,7 +62,7 @@ const Filteration = ({ data, category , params}) => {
           {/* Search Button (optional if using auto filter on input change) */}
           <button
             onClick={handleSearch}
-            className="px-10 py-3 text-sm text-center text-white transition rounded-lg sm:px-16 bg-primary hover:bg-primary/70"
+            className="px-10 py-3 hidden md:block text-sm text-center text-white transition rounded-lg sm:px-16 bg-primary hover:bg-primary/70"
           >
             Search
           </button>

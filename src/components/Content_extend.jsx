@@ -22,7 +22,7 @@ const Content_extend = ({ children, categories, params }) => {
     <div className="flex justify-center md:justify-normal">
       <div className="md:p-4 md:block hidden md:w-auto">
         <div className="w-full md:w-64 h-auto p-3 shadow-md">
-          <h1 className="mb-4 text-sm">All Category</h1>
+          <h1 className={`mb-4 text-sm ${params === 'en' ? '' : 'text-end '}`}>{params === 'en' ? 'All Category' : 'جميع الفئات'}</h1>
           {category?.map((item, index) => {
             return (
               index > 0 && (
@@ -38,7 +38,7 @@ const Content_extend = ({ children, categories, params }) => {
                       <div className="icon">
                         <BiCategory size={20} />
                       </div>
-                      <div className="text-xs font-semibold name">{item.name}</div>
+                      <div className="text-xs font-semibold name line-clamp-2">{item.name}</div>
                     </div>
                     <div className="icon">
                       {openIndex === index ? <IoIosArrowDown /> : <IoIosArrowForward />}
@@ -52,36 +52,21 @@ const Content_extend = ({ children, categories, params }) => {
                   >
                     {openIndex === index && (
                       <div className="mt-2 ml-8">
-                        {item.categories?.map((data, i) => {
+                        {item.specialization?.map((data, i) => {
                           return (
-                            <div
-                              onClick={() => {
-                                window.open(`/diploma?category=${data?.slug}`, '_blank');
-                              }}
+                            <Link href={`/${params}/search_course?type=1&specialization=${data.id}&category=${item.id}`}
+                              
                               key={i}
                               className="flex gap-2 hover:bg-secondary cursor-pointer p-2 hover:text-white items-center mb-2 text-xs"
                             >
                               <FaRegBookmark />
                               {data.name}
-                            </div>
+                            </Link>
                           );
                         })}
                       </div>
                     )}
                   </div>
-                </div>
-              )
-            );
-          })}
-        </div>
-        <div className="w-full md:w-64 h-auto p-3 mt-10 shadow-md">
-          <h1 className="mb-4 text-sm font-bold">Category</h1>
-          {category?.map((item, index) => {
-            return (
-              index > 0 && (
-                <div key={index} className="flex items-center justify-between p-2">
-                  <div className="text-sm">{item.name}</div>
-                  <div className="w-auto h-auto p-1 border-[1px] text-sm text-black/50">{item.number_of_courses}</div>
                 </div>
               )
             );

@@ -17,9 +17,9 @@ const menus = {
     { name: "Masters", link: "/search_course?type=2" },
     { name: "Training Course", link: "/search_course?type=3" },
     { name: "Cities", link: "/show_cities" },
-    { name: "Consulting", link: "/consulting-services" },
-    { name: "How We Are", link: "/Academy-Vision" },
-    { name: "Contact Us", link: "/contact" },
+    { name: "Consulting", link: "/consulting_services" },
+    { name: "How We Are", link: "/academy_vision" },
+    { name: "Contact Us", link: "/contact_us" },
   ],
   ar: [
     { name: "الرئيسية", link: "/" },
@@ -27,9 +27,9 @@ const menus = {
     { name: "الماجستير", link: "/search_course?type=2" },
     { name: "دورات تدريبية", link: "/search_course?type=3" },
     { name: "المدن", link: "/show_cities" },
-    { name: "الاستشارات", link: "/consulting-services" },
-    { name: "من نحن", link: "/Academy-Vision" },
-    { name: "تواصل معنا", link: "/contact" },
+    { name: "الاستشارات", link: "/consulting_services" },
+    { name: "من نحن", link: "/academy_vision" },
+    { name: "تواصل معنا", link: "/contact_us" },
   ],
 };
 

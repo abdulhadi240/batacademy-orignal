@@ -6,7 +6,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 
 // Import both English and Arabic menus
-import { menuEn, menuAr } from "./Menu";
+import { menuEn, menuAr } from "./Menus";
 import MobileMenu from "./MobileMenu";
 import Language from "./Language";
 
@@ -70,14 +70,14 @@ function HeaderSection({ params, main }) {
 
       {/* Top Bar (Non-Fixed, Always LTR) */}
       <div
-        className="hidden sm:flex md:mb-20 items-center justify-between p-2 text-white"
+        className="hidden sm:flex md:mb-20 items-center justify-between p-2  text-white"
         style={{
           background:
             "linear-gradient(55deg, rgb(30, 58, 138) 40%, rgb(185, 28, 28) 30%)",
         }}
       >
         {/* Social Media & Contact Info */}
-        <div className="flex items-center gap-16 text-sm">
+        <div className="flex items-center gap-16 text-sm pb-2">
           <div className="flex gap-2">
             <Link
               href="https://www.facebook.com"
@@ -126,7 +126,7 @@ function HeaderSection({ params, main }) {
               <FaPhoneAlt />
               <span>(406) 555-0120</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 mr-2">
               <FaEnvelope />
               <span>info@btadacademy.org.uk</span>
             </div>
@@ -135,16 +135,16 @@ function HeaderSection({ params, main }) {
 
         {/* Quick Links */}
         <div className="flex items-center gap-2 text-sm">
-          <Link href="/special-request" className="hover:underline">
+          <Link href={`/${params}/registerInternalCourse`} className="hover:underline">
             {specialRequest} |
           </Link>
-          <Link href={`/${params}/Blog`}  className="hover:underline">
+          <Link href={`/${params}/taxonomy/blog`}  className="hover:underline">
             {blog} |
           </Link>
-          <Link href={`/${params}/FAQ`} className="hover:underline">
+          <Link href={`/${params}/faq`} className="hover:underline">
             {faq}
           </Link>
-          <div className="border-[1px] border-slate-500">
+          <div className="">
             <Language languageToggleText={languageToggleText} params={params} />
           </div>
         </div>

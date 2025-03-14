@@ -1,8 +1,3 @@
-// pages/index.js
-import fetchData from "@/actions/server";
-import ArticleCard from "@/components/ArticleCard";
-import HeaderSection from "@/components/HeaderSection";
-
 export const revalidate = 60; // Revalidate data every 60 seconds
 
 export const dynamicParams = true;
@@ -12,7 +7,7 @@ export async function generateMetadata({ params }) {
   const locale = params.locale || "en"; // Fallback to English if no locale is provided
 
   const product = await fetch(
-    `${process.env.BACKEND_URL}/post`,
+    `${process.env.BACKEND_URL}/post-category/${params.id}`,
     {
       headers: {
         "Content-Type": "application/json",
@@ -83,40 +78,16 @@ export async function generateStaticParams() {
   return []; // Return an empty array if posts data is not iterable
 }
 
-// Main Page Component with SSR
-export default async function Page({ params }) {
-  const locale = params.locale || "en"; // Determine locale from params
-  const article_details = await fetchData(`/post-category/${params.id}`, locale);
+
+import React from 'react'
+import Category from './Category';
+import fetchData from '@/actions/server';
+
+const page = async ({params}) => {
+  const data = await fetchData(`/post-category/${params.id}` , params.locale)
   return (
-    <>
-      <HeaderSection />
-      <div className="px-4 py-8 mx-auto max-w-7xl">
-        <h1 className="mb-8 text-4xl font-bold text-center dark:text-white uppercase">
-          {article_details?.name}
-        </h1>
-        <p className="mb-8 text-center text-gray-500">
-          {locale === "ar"
-            ? "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت."
-            : "Lorem ipsum dolor sit amet consectetur adipiscing elit interdum ullamcorper et pharetra sem."}
-        </p>
-        <div className="flex justify-center">
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {article_details?.posts?.data.map((article, index) => (
-              <ArticleCard
-                key={index}
-                title={article.name}
-                category={article.category}
-                date={article.published_date}
-                description={article.description}
-                imageSrc={article.image}
-                button_data={article.category}
-                slug={article.slug}
-                params={locale}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    </>
-  );
+    <div><Category params={params} data={data}/></div>
+  )
 }
+
+export default page

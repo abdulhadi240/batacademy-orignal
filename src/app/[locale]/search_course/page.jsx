@@ -2,6 +2,7 @@ import fetchData from '@/actions/server';
 import HeaderSection from '@/components/HeaderSection';
 import Programs from '@/components/Programs';
 import React from 'react';
+import NotFound from '../not-found';
 
 export async function generateMetadata({ params, searchParams }) {
   const { locale } = params;
@@ -39,23 +40,23 @@ export async function generateStaticParams() {
 const page = async ({ params, searchParams }) => {
   const { locale } = params;
   const type = searchParams?.type;
+
+  if (!["1", "2", "3"].includes(type)) {
+    <NotFound/>
+  }
+
   let coursesUrl = '';
 
-  console.log(type);
-  
+  if (type == "1") coursesUrl = '/diploma-courses';
+  else if (type == "2") coursesUrl = '/master-courses';
+  else if (type == "3") coursesUrl = '/course';
 
-  if (type == 1) coursesUrl = '/diploma-courses';
-  else if (type == 2) coursesUrl = '/master-courses';
-  else if (type == 3) coursesUrl = '/course';
+  const courses = await fetchData(coursesUrl, locale);
+  const cities = await fetchData('/city', locale);
+  const specializations = await fetchData('/specialization', locale);
+  const category = await fetchData('/category', locale);
+  const specialization_category = await fetchData('/list/category', locale);
 
-  const courses = await fetchData(coursesUrl,locale)
-  const cities = await fetchData('/city',locale)
-  const specializations = await fetchData('/specialization',locale)
- const category = await fetchData('/category',locale)
-
- console.log(courses.data.approved);
- 
-  
   return (
     <div>
       <HeaderSection params={locale} />
@@ -64,8 +65,9 @@ const page = async ({ params, searchParams }) => {
         data={courses}
         city={cities}
         specialization={specializations}
-        SpecializationCategory={null}
+        SpecializationCategory={specialization_category}
         category={category}
+        coursesUrl={type}
       />
     </div>
   );

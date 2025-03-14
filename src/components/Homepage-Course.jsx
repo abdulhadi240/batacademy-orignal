@@ -12,7 +12,7 @@ import CourseCard from "./Course-Card";
 
 export default function Home({ locale , courses }) {
 
-  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const isDesktop = useMediaQuery("(min-width: 1124px)");
   const isTablet = useMediaQuery("(min-width: 640px)");
 
   // Adjust slides per view based on screen size
@@ -46,11 +46,8 @@ export default function Home({ locale , courses }) {
                 </div>
               </div>
               <p className="text-slate-600 hidden md:block text-sm leading-relaxed max-w-sm mx-auto lg:mx-0">
-                The British Academy for Training and Development differs from
-                other companies operating in the same field because it is a
-                British-European company with excellence and there are
-                specialized cadres with great practical and scientific
-                experience
+                {locale === 'en' ? 'The British Academy for Training and Development differs from other companies operating in the same field because it is a British-European company with excellence and there are specialized cadres with great practical and scientific experience' : 'تختلف الأكاديمية البريطانية للتدريب والتطوير عن غيرها من الشركات العاملة في نفس المجال، فهي شركة بريطانية أوروبية متميزة، وتضم كوادر متخصصة ذات خبرة عملية وعلمية واسعة.'}
+
               </p>
             </div>
           </div>
@@ -71,7 +68,7 @@ export default function Home({ locale , courses }) {
                     className="pl-2 md:pl-4 basis-1/1 md:basis-1/2 lg:basis-1/3"
                   >
                     <div className="p-1">
-                      <CourseCard course={course} />
+                      <CourseCard course={course} locale={locale}/>
                     </div>
                   </CarouselItem>
                 ))}

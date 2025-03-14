@@ -60,7 +60,7 @@ const BlogPost = async ({ params }) => {
   const blogs = await fetchData("/post?page=12", params.locale);
   return (
     <>
-      <HeaderSection />
+      <HeaderSection params={params.locale}/>
       <div className="p-4 md:mx-12 ">
         <div className="flex justify-center">
           <Image

@@ -11,7 +11,7 @@ const MARGIN = 20; // Margin between cards
 const CARD_SIZE = CARD_WIDTH + MARGIN;
 const CARDS_PER_DOT = 2; // Number of cards per dot
 
-const BlogPostCarousel = ({data}) => {
+const BlogPostCarousel = ({data , locale}) => {
   const [ref, { width }] = useMeasure();
   const [offset, setOffset] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -52,7 +52,7 @@ const BlogPostCarousel = ({data}) => {
             className="flex gap-5"
           >
             {data?.map((post, index) => (
-              <Link href={`/${post.slug}`}
+              <Link href={`/${locale}/${post.slug}`}
                 key={index}
                 className="flex-shrink-0 border-[1px] bg-primary text-white border-primary rounded-lg hover:scale-105 transition-all"
                 style={{ width: CARD_WIDTH + 50 }}

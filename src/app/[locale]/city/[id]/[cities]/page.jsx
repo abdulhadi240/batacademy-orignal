@@ -21,7 +21,7 @@ export default async function Page({ params }) {
             <main className="container mx-auto px-4 py-8">
                 <HeroSection data={getCityDetails.banner_computer} />
 
-                <div className="mt-6 mx-16">
+                <div className="mt-6 md:mx-16">
                     <CourseTable
                         cities={allCities.data}
                         specializations={allSpecialization.data}

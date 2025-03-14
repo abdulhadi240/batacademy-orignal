@@ -14,14 +14,58 @@ import HeaderSection from "@/components/HeaderSection";
 import Link from "next/link";
 import fetchData from "@/actions/server";
 
-export default async function JobDetailsPage({params}) {
-  const {locale , job} = params;
-  const job_details = await fetchData(`/job/${job}`,locale)
-  const all_jobs = await fetchData(`/job`,locale)
+// Translation Helper
+const translations = {
+  en: {
+    apply_now: "Apply Now",
+    full_time: "Full Time",
+    part_time: "Part Time",
+    job_description: "Job Description",
+    requirements: "Requirements",
+    responsibilities: "Responsibilities",
+    similar_jobs: "Similar Jobs",
+    view_all_jobs: "View All Similar Jobs",
+    job_overview: "Job Overview",
+    salary_range: "Salary Range",
+    job_type: "Job Type",
+    team_size: "Team Size",
+    about_company: "About Company",
+    employees: "Employees",
+    view_company: "View Company Profile",
+  },
+  ar: {
+    apply_now: "قدم الآن",
+    full_time: "دوام كامل",
+    part_time: "دوام جزئي",
+    job_description: "وصف الوظيفة",
+    requirements: "المتطلبات",
+    responsibilities: "المسؤوليات",
+    similar_jobs: "وظائف مشابهة",
+    view_all_jobs: "عرض جميع الوظائف المشابهة",
+    job_overview: "نظرة عامة على الوظيفة",
+    salary_range: "نطاق الراتب",
+    job_type: "نوع الوظيفة",
+    team_size: "حجم الفريق",
+    about_company: "عن الشركة",
+    employees: "الموظفين",
+    view_company: "عرض ملف الشركة",
+  },
+};
+
+const t = (key, locale) => translations[locale]?.[key] || key;
+
+export default async function JobDetailsPage({ params }) {
+  const { locale, job } = params;
+  const job_details = await fetchData(`/job/${job}`, locale);
+  const all_jobs = await fetchData(`/job`, locale);
+
   return (
     <>
-      <HeaderSection params={params.locale}/>
-      <div className="min-h-screen bg-gray-50">
+      <HeaderSection params={params.locale} />
+      <div
+        className="min-h-screen bg-gray-50"
+        dir={locale === "ar" ? "rtl" : "ltr"}
+      >
         {/* Header Section */}
         <div className="bg-white border-b">
           <div className="container mx-auto px-4 py-6 md:py-8">
@@ -29,13 +73,17 @@ export default async function JobDetailsPage({params}) {
               <div className="flex items-center gap-4 md:flex-shrink-0">
                 <Image
                   src={job_details?.company?.image}
-                  alt="Google Inc"
+                  alt={job_details?.company?.name}
                   width={80}
                   height={80}
                   className="rounded-lg border p-2"
                 />
-                <Link href={`/${locale}/apply?type=job&id=${job_details.id}`} size="lg" className="md:hidden text-white bg-primary p-2">
-                  Apply Now
+                <Link
+                  href={`/${locale}/apply?type=job&id=${job_details.id}`}
+                  size="lg"
+                  className="md:hidden text-white bg-primary p-2"
+                >
+                  {t("apply_now", locale)}
                 </Link>
               </div>
               <div className="flex-grow">
@@ -44,31 +92,16 @@ export default async function JobDetailsPage({params}) {
                     {job_details.name}
                   </h1>
                   <Badge className={"bg-secondary text-white font-thin"}>
-                  {job_details.type == 0 ? 'Full Time' : 'Part Time'}
+                    {job_details.type == 0
+                      ? t("full_time", locale)
+                      : t("part_time", locale)}
                   </Badge>
-                </div>
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 text-muted-foreground text-sm md:text-base">
-                  <div className="flex items-center gap-2">
-                    <Building2 className="h-4 w-4" />
-                    <span>{job_details.company.name}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="h-4 w-4" />
-                    <span>{job_details.country}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Clock className="h-4 w-4" />
-                    <span>{job_details.posted}</span>
-                  </div>
                 </div>
               </div>
               <Link href={`/${locale}/apply?type=job&id=${job_details.id}`}>
-              <Button
-                size="lg"
-                className="hidden md:block flex-shrink-0 text-white"
-              >
-                Apply Now
-              </Button>
+                <Button size="lg" className="hidden md:block text-white">
+                  {t("apply_now", locale)}
+                </Button>
               </Link>
             </div>
           </div>
@@ -80,60 +113,35 @@ export default async function JobDetailsPage({params}) {
             {/* Left Column - Job Details */}
             <div className="lg:col-span-2 space-y-6 md:space-y-8">
               <Card className="p-6">
-                <h2 className="text-xl font-semibold mb-4">Job Description</h2>
+                <h2 className="text-xl font-semibold mb-4">
+                  {t("job_description", locale)}
+                </h2>
                 <p className="text-sm md:text-base text-muted-foreground mb-6">
                   {job_details.description}
                 </p>
 
-                <h3 className="font-semibold mb-3">Requirements</h3>
+                <h3 className="font-semibold mb-3">
+                  {t("requirements", locale)}
+                </h3>
                 <ul className="list-disc list-inside text-muted-foreground space-y-2 mb-6">
-                {job_details.requirements}
+                  {job_details.requirements}
                 </ul>
 
-                <h3 className="font-semibold mb-3">Responsibilities</h3>
+                <h3 className="font-semibold mb-3">
+                  {t("responsibilities", locale)}
+                </h3>
                 <ul className="list-disc list-inside text-muted-foreground space-y-2">
-                {job_details.responsibilities}
+                  {job_details.responsibilities}
                 </ul>
               </Card>
 
               {/* Similar Jobs */}
               <Card className="p-6">
-                <h2 className="text-xl font-semibold mb-4">Similar Jobs</h2>
-                <div className="space-y-4">
-                {all_jobs?.data?.map((job, index) => (
-                  index < 5 && 
-                    <div
-                      key={index}
-                      className="flex flex-col sm:flex-row sm:items-start gap-3 p-4 hover:bg-gray-50 rounded-lg cursor-pointer"
-                    >
-                      <Image
-                        src={job.company.image}
-                        alt={`${job.company.name} logo`}
-                        width={48}
-                        height={48}
-                        className="rounded border p-1"
-                      />
-                      <div className="flex-grow">
-                        <h3 className="font-semibold">{job.name}</h3>
-                        <div className="text-sm text-muted-foreground flex flex-wrap gap-x-2">
-                          <span>{job.company.name}</span> •{" "}
-                          <span>{job.city}</span>
-                        </div>
-                        <div className="text-sm text-muted-foreground mt-1">
-                          <span>£ {job.salary_min} - £{job.salary_max}</span> •{" "}
-                          <span>Posted {job.posted}</span>
-                        </div>
-                      </div>
-                      <Badge className="self-start sm:self-center mt-2 sm:mt-0 bg-secondary text-white font-thin">
-                      {job_details.type}
-                      </Badge>
-                    </div>
-                  
-                  ))}
-                  
-                </div>
+                <h2 className="text-xl font-semibold mb-4">
+                  {t("similar_jobs", locale)}
+                </h2>
                 <Button variant="outline" className="w-full mt-4">
-                  View All Similar Jobs
+                  {t("view_all_jobs", locale)}
                 </Button>
               </Card>
             </div>
@@ -142,7 +150,7 @@ export default async function JobDetailsPage({params}) {
             <div className="space-y-6">
               <Card className="p-4 md:p-6">
                 <h2 className="text-lg md:text-xl font-semibold mb-4">
-                  Job Overview
+                  {t("job_overview", locale)}
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
                   <div className="flex items-center gap-3">
@@ -151,9 +159,12 @@ export default async function JobDetailsPage({params}) {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">
-                        Salary Range
+                        {t("salary_range", locale)}
                       </p>
-                      <p className="font-medium">£{job_details.salary_min} - £{job_details.salary_max} / year</p>
+                      <p className="font-medium">
+                        £{job_details.salary_min} - £{job_details.salary_max} /{" "}
+                        {t("year", locale)}
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
@@ -161,24 +172,19 @@ export default async function JobDetailsPage({params}) {
                       <Briefcase className="h-5 w-5 text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">Job Type</p>
+                      <p className="text-sm text-muted-foreground">
+                        {t("job_type", locale)}
+                      </p>
                       <p className="font-medium">{job_details.type}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="bg-primary/10 p-2 rounded-lg">
-                      <Users className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Team Size</p>
-                      <p className="font-medium">{job_details.team_min} People</p>
                     </div>
                   </div>
                 </div>
               </Card>
 
               <Card className="p-6">
-                <h2 className="text-xl font-semibold mb-4">About Company</h2>
+                <h2 className="text-xl font-semibold mb-4">
+                  {t("about_company", locale)}
+                </h2>
                 <div className="space-y-4">
                   <p className="text-muted-foreground">
                     {job_details.company.description}
@@ -186,13 +192,15 @@ export default async function JobDetailsPage({params}) {
                   <div className="space-y-2">
                     <div className="flex items-center gap-2 text-sm">
                       <Users className="h-4 w-4 text-muted-foreground" />
-                      <span>{job_details.team_min}+ Employees</span>
+                      <span>
+                        {job_details.team_min}+ {t("employees", locale)}
+                      </span>
                     </div>
                   </div>
                   <Link href={job_details.company.url} target="_blank">
-                  <Button variant="outline" className="w-full mt-2">
-                    View Company Profile
-                  </Button>
+                    <Button variant="outline" className="w-full mt-2">
+                      {t("view_company", locale)}
+                    </Button>
                   </Link>
                 </div>
               </Card>

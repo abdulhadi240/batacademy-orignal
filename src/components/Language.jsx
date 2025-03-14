@@ -39,11 +39,11 @@ export default function ToggleLangButton({ languageToggleText }) {
   
 
   return (
-    <div className="flex items-center group border-[1px] py-2 rounded-sm border-white/70 px-2 ">
+    <div className="flex items-center group border-[1px] py-2 rounded-sm  px-2 ">
       {/* Conditionally rendered image */}
       <div
         className={`${
-          isArabic ? "w-[30px] h-[30px] -mb-2" : "h-auto w-auto"
+          isArabic ? "w-[30px] h-[20px] " : "h-auto w-auto"
         } flex-shrink-0`}
       >
         <Image

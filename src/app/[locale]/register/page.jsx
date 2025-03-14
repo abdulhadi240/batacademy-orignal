@@ -31,10 +31,12 @@ export default function Page({params}) {
   const [address, setAddress] = useState("");
   const [country, setCountry] = useState("");
   const [loading, setLoading] = useState(false)
-  const [constantId, setConstantId] = useState("6"); // Default constant value
-  const [numberOfAttendees, setNumberOfAttendees] = useState("1"); // Default for individual
+  const [constantId, setConstantId] = useState(""); // Default constant value
+  const [numberOfAttendees, setNumberOfAttendees] = useState(""); // Default for individual
+  const [allmember , setAllMember] = useState([])
+  const [allweek , SetAllWeek] = useState([])
  const [cities , setCities] = useState(null)
-  console.log(detail)
+  console.log(numberOfAttendees , constantId)
 
   // Regex for valid phone number format (allowing + and digits only)
   const phoneRegex = /^[+]?[0-9]{10,15}$/; // Valid phone number
@@ -67,9 +69,6 @@ export default function Page({params}) {
 
   const handleParticipantTypeChange = (type) => {
     setParticipantType(type);
-    if (type === "Person") {
-      setNumberOfAttendees("1");
-    }
   };
   const handleInputChange = (index, field, value) => {
     const updatedParticipants = [...participants];
@@ -127,7 +126,21 @@ export default function Page({params}) {
       setCountries(Countries);
     }
 
+    const fetchMember = async () => {
+      const members = await fetchData("/constant/members",locale)
+      setAllMember(members);
+    }
+
+    const fetchWeek = async () => {
+      const weeks = await fetchData("/constant/weeks",locale)
+      SetAllWeek(weeks);
+      console.log(weeks);
+      
+    }
+
     fetchCountries();
+    fetchMember()
+    fetchWeek()
   }, []);
 
   const handleSubmit = async (e) => {
@@ -158,7 +171,7 @@ export default function Page({params}) {
     formData.append("mobile", mobile || "");
     formData.append("company_name", company || "");
     formData.append("address", address || "");
-    formData.append("country_id", 12 || "12");
+    formData.append("country_id", country || "");
     formData.append("is_company", is_company);
 
     // Append participants only if it's a company
@@ -194,7 +207,7 @@ export default function Page({params}) {
       console.log("Response Data:", responseData.status);
 
       // Handle success based on `status`
-      if (responseData.status === "success") {
+      if (responseData.status === 201) {
         setModal(true);
         setSuccess(true);
         console.log(responseData.message); // Log success message
@@ -291,45 +304,25 @@ export default function Page({params}) {
                 </select>
               </div>
 
-              {/* Number of Attendees */}
+
               <div>
-                <label className="block text-sm font-medium mb-2">Number of Attendees</label>
-                <select
-                  value={numberOfAttendees}
-                  required
-                  onChange={(e) => setNumberOfAttendees(e.target.value)}
-                  disabled={participantType === "Person"}
-                  className="w-full border border-gray-300 rounded-lg p-2"
-                >
-                  <option value={1}>1</option>
-                  <option value={2}>2</option>
-                  <option value={3}>3+</option>
-                </select>
-              </div>
-
-              {/* Constant ID (Hidden Input) */}
-              <input
-                type="hidden"
-                value={constantId}
-                onChange={(e) => setConstantId(e.target.value)}
-              />
-
-              {/*<div>
                 <label className="block text-sm font-medium mb-2">
                   Number of Attendees
                 </label>
                 <select
-                  value={attendees}
+                  value={numberOfAttendees}
                   required
-                  onChange={(e) => setAttendees(e.target.value)}
+                  onChange={(e) => setNumberOfAttendees(e.target.value)}
                   className="w-full border border-gray-300 rounded-lg p-2"
                 >
-                  <option>Select Participant</option>
-                  <option>1</option>
-                  <option>2 - 3</option>
-                  <option>3+</option>
+                  <option value={''}>Select Attendees</option>
+                  {allmember.map((data,index)=>{
+                    return(
+                      <option key={index} value={data.id}>{data.name}</option>
+                    )
+                  })}
                 </select>
-              </div>*/}
+              </div>
 
               <div>
                 <label className="block text-sm font-medium mb-2">
@@ -341,9 +334,13 @@ export default function Page({params}) {
                   onChange={(e) => setConstantId(e.target.value)}
                   className="w-full border border-gray-300 rounded-lg p-2"
                 >
-                  <option value={'1'}>1 Week</option>
-                  <option value={'2'}>2 Weeks</option>
-                  <option value={'3'}>3 Weeks</option>
+                 <option value={''}>Select Duration</option>
+
+                  {allweek?.map((data,index)=>{
+                    return(
+                      <option key={index} value={data.id}>{data.name}</option>
+                    )
+                  })}
                 </select>
               </div>
 

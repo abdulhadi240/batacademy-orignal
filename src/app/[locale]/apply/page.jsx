@@ -48,7 +48,7 @@ export default function Page({ params }) {
   }, [type, router]);
 
   // Handle form submission based on type (position removed from job application)
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (type === "board" || type === "team") {
       const data = { name, email, expertise, linkedin, motivation };
@@ -59,9 +59,39 @@ export default function Page({ params }) {
       console.log("Consultation Request:", data);
       // In a real app, send data to a server here
     } else {
-      const data = { name, email, phone, id , resume, message }; // Position removed
-      console.log("Job Application:", data);
-      // In a real app, send data to a server here, e.g., using FormData for the resume
+      // Job application
+      const formData = new FormData();
+      formData.append("full_name", name);
+      formData.append("email", email);
+      formData.append("phone_number", phone);
+      formData.append("cv", resume);
+      formData.append("cover_letter", message);
+      formData.append("company_job_id", id);
+  
+      try {
+        const response = await fetch("https://batd.website12.help/api/job/store", {
+          method: "POST",
+          headers: {
+            "Accept-Language": params.locale,
+          },
+          body: formData,
+        });
+  
+        if (response.ok) {
+          console.log("Application submitted successfully");
+          // Optionally: Show a success message or redirect the user
+          // e.g., alert("Application submitted!");
+          // or reset form: setName(""); setEmail(""); setPhone(""); setResume(null); setMessage("");
+        } else {
+          console.error("Failed to submit application:", response.statusText);
+          // Optionally: Show an error message to the user
+          // e.g., alert("Failed to submit application. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error submitting application:", error);
+        // Optionally: Show a network error message
+        // e.g., alert("Network error. Please check your connection and try again.");
+      }
     }
   };
 
