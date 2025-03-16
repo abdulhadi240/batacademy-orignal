@@ -71,13 +71,13 @@ const Design = ({ locale }) => {
             {/* Call-to-Action Buttons */}
             <div className="flex flex-col gap-4 mt-12 md:flex-row">
               <Link
-                href={"/"}
+                href={`/${locale}/`}
                 className="px-20 py-3 text-xs text-center font-bold text-white uppercase rounded-full bg-secondary hover:bg-primary hover:bg-opacity-90 transition-all"
               >
                 {t.exploreButton}
               </Link>
               <Link
-                href={"/search_course?type=1"}
+                href={`/${locale}/search_course?type=1`}
                 className="px-20  py-3 text-center text-xs font-bold text-white uppercase rounded-full bg-secondary hover:bg-primary hover:bg-opacity-90 transition-all"
               >
                 {t.catalogueButton}
