@@ -11,14 +11,14 @@ const translations = {
   en: {
     heading: "Developing People To Improve Performance",
     subheading: "The world's most trusted training partner for improving knowledge, skills, and capabilities.",
-    exploreButton: "Register Now",
+    exploreButton: "Training Venues",
     catalogueButton: "View All Courses",
     stats: ["million attendees", "advisors", "organisations", "courses"],
   },
   ar: {
     heading: "تطوير الأفراد لتحسين الأداء",
     subheading: "الشريك التدريبي الأكثر ثقة في العالم لتحسين المعرفة والمهارات والقدرات.",
-    exploreButton: "استكشف الخطة المميزة",
+    exploreButton: "أماكن التدريب",
     catalogueButton: "عرض كتالوج الدورات",
     stats: ["مليون مشارك", "مستشار", "منظمة", "دورة"],
   },
@@ -71,7 +71,7 @@ const Design = ({ locale }) => {
             {/* Call-to-Action Buttons */}
             <div className="flex flex-col gap-4 mt-12 md:flex-row">
               <Link
-                href={`/${locale}/`}
+                href={`/${locale}/show_cities`}
                 className="px-20 py-3 text-xs text-center font-bold text-white uppercase rounded-full bg-secondary hover:bg-primary hover:bg-opacity-90 transition-all"
               >
                 {t.exploreButton}
