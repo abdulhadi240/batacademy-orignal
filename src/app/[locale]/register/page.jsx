@@ -207,7 +207,7 @@ export default function Page({params}) {
       console.log("Response Data:", responseData.status);
 
       // Handle success based on `status`
-      if (responseData.status === 201) {
+      if (responseData.status == true) {
         setModal(true);
         setSuccess(true);
         console.log(responseData.message); // Log success message
@@ -641,7 +641,7 @@ export default function Page({params}) {
                   Close
                 </button>
                 <Link
-                  href="/diploma"
+                  href={`${params.locale}/search_course?type=1`}
                   className="w-full sm:w-1/2 text-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/70 transition-colors text-sm sm:text-base"
                 >
                   Discover New Courses

@@ -9,6 +9,7 @@ import dynamic from "next/dynamic";
 import { menuEn, menuAr } from "./Menus";
 import MobileMenu from "./MobileMenu";
 import Language from "./Language";
+import { useAuth } from "./context/AuthContext";
 
 // Dynamic icon imports
 const FaFacebookF = dynamic(() =>
@@ -46,8 +47,7 @@ function HeaderSection({ params, main }) {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
+  }, [])
   const isArabic = params === "ar";
   const activeMenu = isArabic ? menuAr : menuEn;
   const specialRequest = isArabic ? "طلب خاص" : "Special Request";
@@ -57,13 +57,26 @@ function HeaderSection({ params, main }) {
   const signUp = isArabic ? "تسجيل" : "Sign up";
   const languageToggleText = isArabic ? "English" : "العربية";
 
+  
+    // Auth logic
+    const { user, isAuthenticated, logout } = useAuth();
+    console.log(user);
+    
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const getInitials = (name) =>
+      name
+        .split(" ")
+        .map((n) => n[0])
+        .join("");
+
+
   return (
     <div>
       {/* Mobile Menu */}
       <header className="md:hidden">
         <MobileMenu
           color={main ? (isScrolled ? "black" : "white") : "black"}
-          locale={params}
+          params={params}
           languageToggleText={languageToggleText}
         />
       </header>
@@ -186,26 +199,54 @@ function HeaderSection({ params, main }) {
           ))}
         </div>
 
-        {/* Login and Sign Up */}
-        <div
-          className={`flex items-center ${
-            isArabic ? "flex-row-reverse space-x-reverse" : "space-x-4"
-          }`}
-        >
-          <Link
-            href={isArabic ? "sign-in" : "sign-in"}
-            className="flex items-center text-gray-500 hover:text-blue-900"
-          >
-            <FaLock className={`${isArabic ? "ml-1" : "mr-1"}`} />
-            {login}
-          </Link>
-          <Link
-            href={isArabic ? "sign-in" : "sign-in"}
-            className={` ${isArabic ? 'mr-3' : 'ml-0'} px-4 py-2 text-white bg-blue-900 rounded hover:bg-blue-700`}
-          >
-            {signUp}
-          </Link>
-        </div>
+         {/* Auth Section: Show user dropdown if authenticated; otherwise, show Login and Sign Up */}
+         {isAuthenticated && user ? (
+              <div className="relative">
+                <button
+                  className="w-10 h-10 flex items-center justify-center bg-secondary text-sm text-white font-bold rounded-full focus:outline-none"
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                >
+                  {getInitials(user.data.full_name)}
+                </button>
+
+                {dropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg">
+                    <div className="p-3 border-b text-gray-700">{user.name}</div>
+                    <Link
+                      href={`/${params}/profile`}
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    >
+                      Profile
+                    </Link>
+                    <button
+                      onClick={logout}
+                      className="block w-full text-left px-4 py-2 bg-primary text-white"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="flex items-center space-x-4">
+                <Link
+                  href={`/${params}/sign-in`}
+                  className={`flex items-center hover:text-blue-900 text-primary ${
+                    isScrolled ? "text-sm text-black" : "text-md text-primary"
+                  } transition-all`}
+                >
+                  <FaLock className="mr-1" />
+                  {params === "en" ? "Login" : "تسجيل الدخول"}
+                </Link>
+                <Link href={`/${params}/sign-up`}
+                  className={`px-4 py-2 rounded ${
+                    isScrolled ? "bg-primary text-white text-sm" : "bg-secondary text-white text-md"
+                  } transition-all`}
+                >
+                  {params === "en" ? "Sign Up" : "سجل"}
+                </Link>
+              </div>
+            )}
       </nav>
     </div>
   );

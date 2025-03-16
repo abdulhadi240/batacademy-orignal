@@ -4,10 +4,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { MdMenu } from "react-icons/md";
 import Language from "./Language";
+import { useAuth } from "./context/AuthContext"; // added auth hook
 
 export default function MobileMenu({ color, locale, languageToggleText, main }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  // Auth logic
+  const { user, isAuthenticated, logout } = useAuth();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const getInitials = (name) =>
+    name.split(" ").map((n) => n[0]).join("");
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -47,11 +54,44 @@ export default function MobileMenu({ color, locale, languageToggleText, main }) 
               priority
             />
           </div>
-          {/* Language Toggle and Menu Icon */}
+          {/* Right Side: Language Toggle, Auth Block, and Menu Icon */}
           <div className="flex items-center gap-4">
-            <div className={`${main ? (isScrolled ? "bg-primary text-white" : "bg-transparent px-2 py-2 text-white") : " text-black border-[1px] border-black"}   rounded-md`}>
+            <div className={`${main ? (isScrolled ? "bg-primary text-white" : "bg-transparent px-2 py-2 text-white") : " text-black border-[1px] border-black"} rounded-md`}>
               <Language languageToggleText={languageToggleText} />
             </div>
+            {isAuthenticated && user ? (
+              <div className="flex gap-3 items-center">
+                <div className="items-center relative">
+                  <button
+                    className="w-10 h-10 flex items-center justify-center bg-secondary text-white font-bold rounded-full text-sm focus:outline-none"
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                  >
+                    {getInitials(user.data.full_name)}
+                  </button>
+                  {dropdownOpen && (
+                    <div className="absolute right-0 mt-2 w-56 md:w-auto z-9999 bg-white border rounded shadow-lg text-sm">
+                      <div className="p-3 border-b text-gray-700">
+                        {user.data.full_name}
+                      </div>
+                      <Link
+                        href="/account"
+                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                      >
+                        Profile
+                      </Link>
+                      <button
+                        onClick={logout}
+                        className="block w-full text-left px-4 py-2 text-white bg-primary"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <></>
+            )}
             <button
               onClick={toggleMenu}
               aria-label="Toggle menu"
@@ -105,6 +145,7 @@ export default function MobileMenu({ color, locale, languageToggleText, main }) 
           </div>
 
           {/* Login/Signup Buttons */}
+          {!isAuthenticated && !user && (
           <div className="flex justify-around mb-6">
             <Link
               href={`/${locale}/sign-in`}
@@ -121,6 +162,7 @@ export default function MobileMenu({ color, locale, languageToggleText, main }) 
               Sign Up
             </Link>
           </div>
+          )}
 
           {/* Navigation Links */}
           <nav className="space-y-4 text-sm">

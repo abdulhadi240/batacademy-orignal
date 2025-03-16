@@ -5,11 +5,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider } from "@/components/context/AuthContext";
 
 export default async function RootLayout({ children , params }) {
-  const locale = await params
+  const {locale} =  params
   const direction = locale === 'ar' ? 'rtl' : 'ltr';
   return (
     <html lang={locale} dir={direction}>
-    <AuthProvider>
+    <AuthProvider locale={locale}>
       <body
         className={`antialiased text-black dark:text-white`}
       >

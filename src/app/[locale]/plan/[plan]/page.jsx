@@ -15,7 +15,7 @@ const page = async ({params}) => {
             The Most Prominent Courses That We Offer In Our Academy Share With
             Us To Get Better
           </h1>
-          <Link href={`${locale}/plan`}><div className="flex justify-center">
+          <Link href={`/${params.locale}/plan`}><div className="flex justify-center">
             <div className="py-2  px-7 shadow-2xl text-sm font-light rounded-md brightness-125 bg-[#111F51] text-white">
               Show Plan
             </div>

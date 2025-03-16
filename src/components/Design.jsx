@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
-import Header from "./Header";
 import Inputs from "./Inputs";
+import Header from "@/app/homepage1/components/Header";
 
 const Design = ({
   search,

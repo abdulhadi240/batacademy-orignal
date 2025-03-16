@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 const AuthContext = createContext(null);
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children , locale }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      fetch(`https://backendbatd.clinstitute.co.uk/api/user`, {
+      fetch(`https://batd.website12.help/api/member/profile`, {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((res) => res.json())
@@ -30,24 +30,23 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const login = async (username, password, language) => {
+  const login = async (email, password) => {
     const formData = new FormData();
-    formData.append("username", username);
+    formData.append("email", email);
     formData.append("password", password);
-    formData.append("locale", language);
-
     try {
-      const res = await fetch(`https://backendbatd.clinstitute.co.uk/api/login`, {
+      const res = await fetch(`https://batd.website12.help/api/member/login`, {
         method: "POST",
         body: formData,
       });
 
       const data = await res.json();
-      if (data.token) {
-        localStorage.setItem("token", data.token);
+      if (data.data.token) {
+        localStorage.setItem("token", data.data.token);
         setIsAuthenticated(true);
         setUser(data.user);
-        router.push("/");
+        setTimeout(() => {
+          router.push(`/${locale}/`);}, 100);
       } else {
         throw new Error("Invalid login");
       }
@@ -60,7 +59,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
     setUser(null);
     setIsAuthenticated(false);
-    router.push("/sign-in");
+    router.push(`/${locale}/sign-in`);
   };
 
   return (
