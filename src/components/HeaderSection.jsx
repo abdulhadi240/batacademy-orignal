@@ -75,7 +75,7 @@ function HeaderSection({ params, main }) {
       <header className="md:hidden">
         <MobileMenu
           color={main ? (isScrolled ? "black" : "white") : "black"}
-          params={params}
+          locale={params.locale}
           languageToggleText={languageToggleText}
         />
       </header>
