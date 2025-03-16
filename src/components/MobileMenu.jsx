@@ -202,7 +202,7 @@ export default function MobileMenu({ color, locale, languageToggleText, main }) 
               {locale === "ar" ? "المدن" : "Cities"}
             </Link>
             <Link
-              href={`/${locale}/consulting-services`}
+              href={`/${locale}/consulting_services`}
               className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >
