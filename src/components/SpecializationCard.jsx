@@ -4,7 +4,7 @@ import { HiMiniSquare3Stack3D } from "react-icons/hi2";
 
 const SpecializationCard = ({ title , locale}) => {
   return (
-    <Link href={`${locale}/search_course?type=1&specialization=${title.id}`} className="flex flex-col  items-center justify-center text-center bg-white group-hover:transition-colors rounded-lg group shadow-md sm:w-40 w-32  h-32 hover:bg-[#152765] hover:text-white"> {/* Reduced padding */}
+    <Link href={`${locale}/search_course?type=1&specialization=${title.id}`} className="flex flex-col  items-center justify-center text-center bg-white group-hover:transition-colors rounded-lg group shadow-md sm:w-40 w-36 h-36 hover:bg-[#152765] hover:text-white"> {/* Reduced padding */}
       <div className="flex items-center justify-center"> {/* Reduced margin */}
         <div className="flex items-center justify-center p-2   bg-[#152765] rounded-full"> {/* Adjusted icon container size */}
           <span className="hidden text-lg font-bold sm:block">

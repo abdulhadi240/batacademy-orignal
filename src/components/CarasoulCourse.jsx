@@ -15,7 +15,7 @@ const CarasoulCourse = ({ data , carasoul}) => {
   const [ref, { width }] = useMeasure();
   const [offset, setOffset] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const totalDots = Math.ceil(data?.data.length / CARDS_PER_DOT);
+  const totalDots = Math.ceil(data?.length / CARDS_PER_DOT);
   const shiftLeft = () => {
     if (currentIndex > 0) {
       setCurrentIndex((prev) => prev - 1);
@@ -49,7 +49,7 @@ const CarasoulCourse = ({ data , carasoul}) => {
             }}
             className="flex gap-5 "
           >
-            {data?.data.map((article, index) => (
+            {data?.map((article, index) => (
               <div
                 key={index}
                 className="flex-shrink-0"

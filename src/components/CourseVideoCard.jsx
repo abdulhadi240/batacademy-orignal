@@ -1,11 +1,11 @@
 import React from "react";
 
-const CourseVideoCard = () => {
+const CourseVideoCard = ({video , locale}) => {
   return (
     <div className=" bg-white overflow-hidden">
       {/* Card Title */}
       <div className="px-6 py-4">
-        <h2 className="text-xl font-semibold text-black">Course Video</h2>
+        <h2 className="text-xl font-semibold text-black">{locale === 'en' ? "Course Video" : "فيديو الدورة"}</h2>
       </div>
 
       {/* Video Section */}
@@ -13,7 +13,7 @@ const CourseVideoCard = () => {
         <div className="relative">
           <iframe
             className="w-full h-64 rounded-lg"
-            src="https://www.youtube.com/embed/xSlh9TYJnjA"
+            src={video}
             title="Course Video"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

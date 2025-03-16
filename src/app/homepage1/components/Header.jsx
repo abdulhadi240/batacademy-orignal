@@ -19,7 +19,7 @@ const menus = {
     { name: "Training Course", link: "/search_course?type=3" },
     { name: "Cities", link: "/show_cities" },
     { name: "Consulting", link: "/consulting_services" },
-    { name: "How We Are", link: "/academy_vision" },
+    { name: "How We Are", link: "/academy_service" },
     { name: "Contact Us", link: "/contact_us" },
   ],
   ar: [
@@ -29,7 +29,7 @@ const menus = {
     { name: "دورات تدريبية", link: "/search_course?type=3" },
     { name: "المدن", link: "/show_cities" },
     { name: "الاستشارات", link: "/consulting_services" },
-    { name: "من نحن", link: "/academy_vision" },
+    { name: "من نحن", link: "/academy_service" },
     { name: "تواصل معنا", link: "/contact_us" },
   ],
 };

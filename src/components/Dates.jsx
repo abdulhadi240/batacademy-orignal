@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { BiCalendarEvent } from "react-icons/bi";
-import Link from "next/link";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
@@ -11,32 +10,53 @@ import {
 } from "@/components/ui/popover";
 import { Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
-const Dates = ({dates}) => {
+const Dates = ({ dates, locale, course }) => {
   const router = useRouter();
-  const [date, setDate] = useState(dates);
+  const [customDate, setCustomDate] = useState(null);
   const [open, setOpen] = useState(false);
   const [loadingIndex, setLoadingIndex] = useState(null);
+  const [isCustomDateLoading, setIsCustomDateLoading] = useState(false);
 
-  const [selectedCities, setSelectedCities] = useState(
-    Array(summary.available_dates.length).fill("")
-  );
-
-  const handleCityChange = (index, value) => {
-    const updatedCities = [...selectedCities];
-    updatedCities[index] = value;
-    setSelectedCities(updatedCities);
+  const handleRegister = (courseDate, index) => {
+    setLoadingIndex(index);
+    setTimeout(() => {
+      router.push(`/${locale}/register?course=${course}&date=${courseDate}`);
+    }, 1000);
   };
 
-  const handleRegister = (date, city, index) => {
-    if (!city) {
-      alert("Please select a city first!");
-      return;
-    }
-    setLoadingIndex(index); // Set the loading state
+
+  const handleCustomDateRegister = () => {
+    if (!customDate) return;
+
+    setIsCustomDateLoading(true);
+
+    const formattedDate = customDate.toISOString().split('T')[0];
+
     setTimeout(() => {
-      router.push(`/register?course=${summary.slug}&date=${date}&city=${city}`);
-    }, 1000); // Simulate a short delay for the loader
+      router.push(`/${locale}/register?course=${course}&date=${formattedDate}`);
+    }, 1000);
+  };
+
+  // Format date function
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  // Format custom date for display
+  const formatCustomDate = (date) => {
+    if (!date) return "";
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
   };
 
   return (
@@ -44,85 +64,107 @@ const Dates = ({dates}) => {
       <div className="flex justify-center md:max-w-[840px] my-6">
         <div className="flex md:justify-start justify-center">
           <div className="flex flex-wrap md:justify-start justify-center gap-4 mt-6">
-            {summary?.available_dates.map((item, index) =>
-              item.date == null ? (
-                <Popover open={open} onOpenChange={setOpen} key={index}>
-                  <PopoverTrigger asChild>
-                    <button
-                      className={cn(
-                        "md:mx-3 md:w-56 w-48 h-auto p-2 sm:p-0 md:ml-3 flex flex-col items-center text-center justify-center gap-3 rounded-md border-2 border-dotted cursor-pointer",
-                        "hover:border-primary/70 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50"
-                      )}
-                    >
-                      <div className="w-8 h-8 rounded-full border border-dashed border-primary/50 flex items-center justify-center">
-                        <Plus className="w-4 h-4 text-primary/70" />
-                      </div>
-                      <span className="text-sm text-primary/70">
-                        {date ? date.toLocaleDateString() : "Add a new date"}
-                      </span>
-                    </button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="center">
-                    <Calendar
-                      mode="single"
-                      className="text-black"
-                      selected={date}
-                      onSelect={(newDate) => {
-                        setDate(newDate);
-                        setOpen(false);
-                      }}
-                      initialFocus
-                      styles={{
-                        day: {
-                          selected: 'bg-primary text-white font-bold', // Apply white text and other styling for the selected day
-                        },
-                        today: 'text-primary font-semibold', // Optional: Add styles for today's date
-                      }}
-                    />
-                  </PopoverContent>
-                </Popover>
-              ) : (
+            {/* Check if dates array exists and has items */}
+            {dates && dates?.length > 0 ? (
+              dates?.map((item, index) => (
                 <div
                   key={index}
-                  className="h-auto px-2 py-4 md:mx-3 max-w-52 md:max-w-72 flex flex-col gap-3 rounded-md bg-[#e2f0ff]"
+                  className="h-auto px-4 py-4 md:mx-3 w-48 md:w-56 flex flex-col gap-3 rounded-md bg-[#e2f0ff]"
                 >
                   <div className="flex items-center gap-2">
-                    <BiCalendarEvent />
-                    <h1 className="text-sm text-primary">{item.date}</h1>
+                    <BiCalendarEvent className="text-primary" />
+                    <h1 className="text-sm text-primary">{formatDate(item.course_date)}</h1>
                   </div>
-                  <div className="flex gap-2 button">
-                    <div>
-                      <select
-                        name="place"
-                        className="px-2 md:text-sm max-w-24 text-xs md:max-w-32 rounded-md h-9 bg-white"
-                        value={selectedCities[index]}
-                        onChange={(e) =>
-                          handleCityChange(index, e.target.value)
-                        }
-                      >
-                        <option value="">Select City</option>
-                        {summary.available_cities.map((city, i) => (
-                          <option key={i} value={city.name}>
-                            {city.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    <button
-                      onClick={() =>
-                        handleRegister(item.date, selectedCities[index], index)
-                      }
-                      className="px-4 text-sm max-w-20 md:max-w-32 text-center text-white rounded-md items-center flex bg-primary"
+                  <div className="flex justify-center">
+                    <Link href={`/${locale}/register?course=${course}&date=${item.course_date}`}
+                      onClick={() => handleRegister(item.course_date, index)}
+                      className="px-4 py-2 w-full text-sm text-white rounded-md items-center flex justify-center bg-primary hover:bg-primary/80"
                     >
                       {loadingIndex === index ? (
                         <span className="loader w-4 h-4 border-2 border-t-transparent border-white rounded-full animate-spin"></span>
                       ) : (
                         "Register"
                       )}
-                    </button>
+                    </Link>
                   </div>
                 </div>
-              )
+              ))
+            ) : (
+              <div className="text-center py-4 text-gray-500">
+                No scheduled dates available for this course. Please select a custom date below.
+              </div>
+            )}
+
+            {/* Custom date selection */}
+            {!customDate ? (
+              <Popover open={open} onOpenChange={setOpen}>
+                <PopoverTrigger asChild>
+                  <button
+                    className={cn(
+                      "md:mx-3 md:w-56 w-48 h-auto p-4 sm:p-4 md:ml-3 flex flex-col items-center text-center justify-center gap-3 rounded-md border-2 border-dotted cursor-pointer",
+                      "hover:border-primary/70 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50"
+                    )}
+                  >
+                    <div className="w-8 h-8 rounded-full border border-dashed border-primary/50 flex items-center justify-center">
+                      <Plus className="w-4 h-4 text-primary/70" />
+                    </div>
+                    <span className="text-sm text-primary/70">
+                      Request Custom Date
+                    </span>
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="center">
+                  <Calendar
+                    mode="single"
+                    className="text-black"
+                    selected={customDate}
+                    onSelect={(newDate) => {
+                      setCustomDate(newDate);
+                      setOpen(false);
+                    }}
+                    initialFocus
+                    disabled={(date) => date < new Date()} // Disable past dates
+                    styles={{
+                      day: {
+                        selected: 'bg-primary text-white font-bold',
+                      },
+                      today: 'text-primary font-semibold',
+                    }}
+                  />
+                </PopoverContent>
+              </Popover>
+            ) : (
+              // Display selected custom date with register button
+              <div className="h-auto px-4 py-4 md:mx-3 w-48 md:w-56 flex flex-col gap-3 rounded-md bg-[#f0fff0]">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <BiCalendarEvent className="text-green-600" />
+                    <h1 className="text-sm text-green-600">Custom Date</h1>
+                  </div>
+                  <button
+                    onClick={() => setCustomDate(null)}
+                    className="text-xs text-gray-500 hover:text-gray-700"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <p className="text-sm font-medium text-center">
+                  {formatCustomDate(customDate)}
+                </p>
+                <div className="flex justify-center">
+                  <Link href={`/${locale}/register?course=${course}&date=${customDate.toISOString().split('T')[0]}`}
+                    onClick={handleCustomDateRegister}
+                    className="px-4 py-2 w-full text-sm text-white rounded-md items-center flex justify-center bg-green-600 hover:bg-green-700"
+                  >
+                    {isCustomDateLoading ? (
+                      <span className="loader w-4 h-4 border-2 border-t-transparent border-white rounded-full animate-spin"></span>
+                    ) : (
+                      "Register"
+                    )}
+                  </Link>
+
+                </div>
+              </div>
             )}
           </div>
         </div>

@@ -74,7 +74,7 @@ export default function MobileMenu({ color, locale, languageToggleText, main }) 
                         {user.data.full_name}
                       </div>
                       <Link
-                        href="/account"
+                        href={`/${locale}/profile`}
                         className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                       >
                         Profile
@@ -209,7 +209,7 @@ export default function MobileMenu({ color, locale, languageToggleText, main }) 
               {locale === "ar" ? "الاستشارات" : "Consulting"}
             </Link>
             <Link
-              href={`/${locale}/academy_vision`}
+              href={`/${locale}/academy_service`}
               className="block text-gray-700 hover:text-gray-900"
               onClick={toggleMenu}
             >

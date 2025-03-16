@@ -47,7 +47,8 @@ function HeaderSection({ params, main }) {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [])
+  }, []);
+
   const isArabic = params === "ar";
   const activeMenu = isArabic ? menuAr : menuEn;
   const specialRequest = isArabic ? "طلب خاص" : "Special Request";
@@ -57,18 +58,16 @@ function HeaderSection({ params, main }) {
   const signUp = isArabic ? "تسجيل" : "Sign up";
   const languageToggleText = isArabic ? "English" : "العربية";
 
-  
-    // Auth logic
-    const { user, isAuthenticated, logout } = useAuth();
-    console.log(user);
-    
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    const getInitials = (name) =>
-      name
-        .split(" ")
-        .map((n) => n[0])
-        .join("");
+  // Auth logic
+  const { user, isAuthenticated, logout } = useAuth();
+  console.log(user);
 
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const getInitials = (name) =>
+    name
+      .split(" ")
+      .map((n) => n[0])
+      .join("");
 
   return (
     <div>
@@ -83,7 +82,7 @@ function HeaderSection({ params, main }) {
 
       {/* Top Bar (Non-Fixed, Always LTR) */}
       <div
-        className="hidden sm:flex md:mb-20 items-center justify-between p-2  text-white"
+        className="hidden sm:flex md:mb-20 items-center justify-between p-2 text-white"
         style={{
           background:
             "linear-gradient(55deg, rgb(30, 58, 138) 40%, rgb(185, 28, 28) 30%)",
@@ -148,26 +147,29 @@ function HeaderSection({ params, main }) {
 
         {/* Quick Links */}
         <div className="flex items-center gap-2 text-sm">
-          <Link href={`/${params}/registerInternalCourse`} className="hover:underline">
+          <Link
+            href={`/${params}/registerInternalCourse`}
+            className="hover:underline"
+          >
             {specialRequest} |
           </Link>
-          <Link href={`/${params}/taxonomy/blog`}  className="hover:underline">
+          <Link href={`/${params}/taxonomy/blog`} className="hover:underline">
             {blog} |
           </Link>
           <Link href={`/${params}/faq`} className="hover:underline">
             {faq}
           </Link>
-          <div className="">
+          <div>
             <Language languageToggleText={languageToggleText} params={params} />
           </div>
         </div>
       </div>
 
-      {/* Main Navigation (RTL for Arabic, LTR for English) */}
+      {/* Main Navigation (Fixed Header) */}
       <nav
-        className={`hidden  p-4 shadow-md bg-gray-50 fixed z-50 w-full transition-all duration-300 ${
+        className={`hidden p-4 shadow-md bg-gray-50 fixed z-50 w-full transition-all duration-300 ${
           isScrolled ? "top-0 shadow-lg" : "top-[44px]"
-        } ${isArabic ? "rtl text-right sm:flex flex-row-reverse items-center justify-between" : "ltr text-left sm:flex items-center justify-between"}`}
+        } ltr text-left sm:flex items-center justify-between`}
       >
         {/* Logo */}
         <div className="flex items-center">
@@ -192,61 +194,64 @@ function HeaderSection({ params, main }) {
             <Link
               key={index}
               href={`/${params}${item.link}`}
-              className={`hover:text-[#152765] text-[#6D737A]`}
+              className="hover:text-[#152765] text-[#6D737A]"
             >
               {item.name}
             </Link>
           ))}
         </div>
 
-         {/* Auth Section: Show user dropdown if authenticated; otherwise, show Login and Sign Up */}
-         {isAuthenticated && user ? (
-              <div className="relative">
-                <button
-                  className="w-10 h-10 flex items-center justify-center bg-secondary text-sm text-white font-bold rounded-full focus:outline-none"
-                  onClick={() => setDropdownOpen(!dropdownOpen)}
-                >
-                  {getInitials(user.data.full_name)}
-                </button>
+        {/* Auth Section */}
+        {isAuthenticated && user ? (
+          <div className="relative">
+            <button
+              className="w-10 h-10 flex items-center justify-center bg-secondary text-sm text-white font-bold rounded-full focus:outline-none"
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+            >
+              {getInitials(user.data.full_name)}
+            </button>
 
-                {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg">
-                    <div className="p-3 border-b text-gray-700">{user.name}</div>
-                    <Link
-                      href={`/${params}/profile`}
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                    >
-                      Profile
-                    </Link>
-                    <button
-                      onClick={logout}
-                      className="block w-full text-left px-4 py-2 bg-primary text-white"
-                    >
-                      Logout
-                    </button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="flex items-center space-x-4">
+            {dropdownOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg">
+                <div className="p-3 border-b text-gray-700">{user.name}</div>
                 <Link
-                  href={`/${params}/sign-in`}
-                  className={`flex items-center hover:text-blue-900 text-primary ${
-                    isScrolled ? "text-sm text-black" : "text-md text-primary"
-                  } transition-all`}
+                  href={`/${params}/profile`}
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                 >
-                  <FaLock className="mr-1" />
-                  {params === "en" ? "Login" : "تسجيل الدخول"}
+                  Profile
                 </Link>
-                <Link href={`/${params}/sign-up`}
-                  className={`px-4 py-2 rounded ${
-                    isScrolled ? "bg-primary text-white text-sm" : "bg-secondary text-white text-md"
-                  } transition-all`}
+                <button
+                  onClick={logout}
+                  className="block w-full text-left px-4 py-2 bg-primary text-white"
                 >
-                  {params === "en" ? "Sign Up" : "سجل"}
-                </Link>
+                  Logout
+                </button>
               </div>
             )}
+          </div>
+        ) : (
+          <div className="flex items-center gap-3 space-x-4">
+            <Link
+              href={`/${params}/sign-in`}
+              className={`flex items-center hover:text-blue-900 text-primary ${
+                isScrolled ? "text-sm text-black" : "text-md text-primary"
+              } transition-all`}
+            >
+              <FaLock className={params === 'en' ? 'mr-1':'ml-1'} />
+              {params === "en" ? "Login" : "تسجيل الدخول"}
+            </Link>
+            <Link
+              href={`/${params}/sign-up`}
+              className={`px-4 py-2 rounded ${
+                isScrolled
+                  ? "bg-primary text-white text-sm"
+                  : "bg-secondary text-white text-md"
+              } transition-all`}
+            >
+              {params === "en" ? "Sign Up" : "سجل"}
+            </Link>
+          </div>
+        )}
       </nav>
     </div>
   );
