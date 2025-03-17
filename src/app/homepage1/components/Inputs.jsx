@@ -17,7 +17,7 @@ const Inputs = ({locale}) => {
             value={searchQuery} 
             onChange={(e) => setSearchQuery(e.target.value)} 
           />
-          <Link href={`/diploma?search=${searchQuery}`} >
+          <Link href={`/${locale}/search_course?type=1`} >
             <div className="flex items-center justify-center h-10 w-10 text-white rounded-full bg-primary">
               <FaSearch size={14}/>
             </div>

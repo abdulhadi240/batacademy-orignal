@@ -42,7 +42,7 @@ export default async function Page({ params }) {
       <HeaderSection params={locale} />
       <div className="min-h-screen" dir={isArabic ? "rtl" : "ltr"}>
         {/* Hero Section with Course Info */}
-        <section className="relative h-[500px] md:h-[300px]">
+        <section className="relative h-[600px] md:h-[300px]">
           <div className="absolute inset-0 bg-gradient-to-r from-slate-900/10 to-slate-900/50">
           <div
             className="absolute inset-0 bg-cover bg-center"
@@ -50,9 +50,9 @@ export default async function Page({ params }) {
           />
           </div>
           <div className="container relative h-full flex flex-col justify-center gap-6 text-white">
-            <div className="grid sm:grid-cols-[1fr,auto] gap-8 items-start mx-10">
+            <div className="grid sm:grid-cols-[1fr,auto] gap-8 items-start mx-5 md:mx-10">
               <div className="space-y-5">
-                <h1 className="text-4xl text-center md:mt-10 md:text-start md:text-4xl lg:text-4xl font-bold">
+                <h1 className="text-3xl text-center md:mt-10 md:text-start md:text-4xl lg:text-4xl font-bold">
                   {courseDetail.name}
                 </h1>
                 <div className="flex flex-wrap gap-4 justify-center sm:justify-start">
